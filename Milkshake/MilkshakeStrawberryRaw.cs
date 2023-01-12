@@ -45,7 +45,7 @@ namespace KitchenDrinksMod.Items
             {
                 Process = Refs.Shake,
                 Result = Refs.MilkshakeStrawberry,
-                Duration = 0.75f
+                Duration = 1
             }
         };
 

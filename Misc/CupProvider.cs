@@ -1,5 +1,6 @@
 ﻿using KitchenData;
 using KitchenDrinksMod.Registry;
+using KitchenDrinksMod.Utils;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +27,19 @@ namespace KitchenDrinksMod.Appliances
 
         public override void OnRegister(GameDataObject gdo)
         {
-            gdo.name = "Source - Cups";
+            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter", MaterialHelpers.GetMaterialArray("Wood 4 - Painted"));
+            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter Doors", MaterialHelpers.GetMaterialArray("Wood 4 - Painted"));
+            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter Surface", MaterialHelpers.GetMaterialArray("Wood - Default"));
+            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter Top", MaterialHelpers.GetMaterialArray("Wood - Default"));
+            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Handles", MaterialHelpers.GetMaterialArray("Knob"));
+            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Handles", MaterialHelpers.GetMaterialArray("Knob"));
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, $"Cups/CupStack{i}/Cup{j}/Model/Cup", MaterialHelpers.GetMaterialArray("Cup Base"));
+                }
+            }
         }
     }
 }

@@ -13,6 +13,10 @@ using KitchenDrinksMod.Appliances;
 using KitchenDrinksMod.Utils;
 using Unity.Collections;
 using KitchenDrinksMod.Processes;
+using TMPro;
+using System.Collections.Generic;
+using KitchenLib.References;
+using KitchenData;
 
 // Namespace should have "Kitchen" in the beginning
 namespace KitchenDrinksMod
@@ -67,6 +71,7 @@ namespace KitchenDrinksMod
             AddGameDataObject<MilkshakeStrawberryRaw>();
             AddGameDataObject<ShakeProcess>();
             AddSubProcess<ShakeApplianceProcess>();
+            AddSubProcess<ShakeApplianceProcessFast>();
 
             LogInfo("Done loading game data.");
         }
@@ -87,12 +92,19 @@ namespace KitchenDrinksMod
             LogInfo("Done creating materials.");
         }
 
+        private void AddProcessIcons()
+        {
+            // TODO: this currently isn't working. Need to find a way to give TMP more than one font for the process icons
+            var spriteAsset = Bundle.LoadAsset<TMP_SpriteAsset>("Process Icons");
+            TMP_Settings.defaultSpriteAsset.fallbackSpriteAssets.Add(spriteAsset);
+        }
+
         /// <summary>
         /// This entity query and modifications are only used to test my starting dish easier.
         /// </summary>
         protected override void OnUpdate()
         {
-            if (!DEBUG_MODE) return;
+            if (!DEBUG_MODE || true) return;
 
             if (Refs.MilkshakeDish == null) return;
 
@@ -116,13 +128,39 @@ namespace KitchenDrinksMod
 
             AddMaterials();
 
+            AddProcessIcons();
+
             Events.BuildGameDataEvent += delegate (object s, BuildGameDataEventArgs args)
             {
                 ModRegistry.HandleBuildGameDataEvent(args);
 
-                Refs.Counter.Processes.Add(Refs.ShakeApplianceProcess);
-                // TODO: add this process to the other "counters"
-                // TODO: add this to the mixers to go very fast
+                List<int> slowAppliances = new()
+                {
+                    ApplianceReferences.Countertop,
+                    ApplianceReferences.CoffeeTable,
+                    ApplianceReferences.TableLarge,
+                    ApplianceReferences.TableBasicCloth,
+                    ApplianceReferences.TableFancyCloth,
+                    ApplianceReferences.TableCheapMetal,
+                    ApplianceReferences.SourceOil,
+                    ApplianceReferences.Workstation
+                };
+                foreach (var appliance in slowAppliances)
+                {
+                    Refs.Find<Appliance>(appliance).Processes.Add(Refs.ShakeApplianceProcess);
+                }
+
+                List<int> fastAppliances = new()
+                {
+                    ApplianceReferences.Mixer,
+                    ApplianceReferences.MixerHeated,
+                    ApplianceReferences.MixerRapid,
+                    ApplianceReferences.MixerPusher,
+                };
+                foreach (var appliance in fastAppliances)
+                {
+                    Refs.Find<Appliance>(appliance).Processes.Add(Refs.ShakeApplianceProcessFast);
+                }
             };
         }
 

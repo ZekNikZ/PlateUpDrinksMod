@@ -14,7 +14,7 @@ namespace KitchenDrinksMod
         public static GameObject MilkshakeChocolateRaw => FindModPrefab("Milkshake Chocolate Raw");
         public static GameObject MilkshakeStrawberryRaw => FindModPrefab("Milkshake Strawberry Raw");
         public static GameObject Cup => FindModPrefab("Cup");
-        public static GameObject CupProvider => FindAppliancePrefab(ApplianceReferences.SourceApple);
+        public static GameObject CupProvider => FindModPrefab("Cup Provider");
 
         private static GameObject FindAppliancePrefab(int id)
         {

@@ -12,7 +12,6 @@ namespace KitchenDrinksMod.Items
         public override GameObject Prefab => Prefabs.MilkshakeChocolate;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
-        public override bool IsMergeableSide => true;
 
         public override void OnRegister(GameDataObject gameDataObject)
         {

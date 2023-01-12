@@ -37,14 +37,15 @@ namespace KitchenDrinksMod
         public static Dish MilkshakeDish => Find<Dish, MilkshakeDish>();
         public static Process Shake => Find<Process, ShakeProcess>();
         public static ApplianceProcesses ShakeApplianceProcess => FindApplianceProcess<ShakeApplianceProcess>();
+        public static ApplianceProcesses ShakeApplianceProcessFast => FindApplianceProcess<ShakeApplianceProcessFast>();
         #endregion
 
-        private static T Find<T>(int id) where T : GameDataObject
+        internal static T Find<T>(int id) where T : GameDataObject
         {
             return (T)GDOUtils.GetExistingGDO(id) ?? (T)GDOUtils.GetCustomGameDataObject(id)?.GameDataObject;
         }
 
-        private static T Find<T, C>() where T : GameDataObject where C : CustomGameDataObject
+        internal static T Find<T, C>() where T : GameDataObject where C : CustomGameDataObject
         {
             return (T)GDOUtils.GetCustomGameDataObject<C>()?.GameDataObject;
         }

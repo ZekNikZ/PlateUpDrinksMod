@@ -7,6 +7,6 @@ namespace KitchenDrinksMod.Processes
     {
         public override string UniqueName => "Shake";
         public override Process Process => Refs.Shake;
-        public override float Speed => 1f;
+        public override float Speed => 0.75f;
     }
 }
