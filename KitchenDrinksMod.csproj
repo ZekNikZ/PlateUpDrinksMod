@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+		<Configurations>Workshop</Configurations>
+		<AssemblyName>$(MSBuildProjectName)-$(Configuration)</AssemblyName>
+		<LangVersion>latest</LangVersion>
+		<NoWarn>CS0114</NoWarn>
+	</PropertyGroup>
+	
+	<!-- Absolute Path to PlateUp.exe   e.g: C:\\Program Files (x86)\\Steam\\SteamLibrary\\steamapps\\common\\PlateUp\\PlateUp -->
+	<PropertyGroup>
+		<PlateUpGameFolder>C:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp</PlateUpGameFolder>
+	</PropertyGroup>
+  
+	<ItemGroup>
+		<PackageReference Include="Yariazen.PlateUp.ModBuildUtilities" Version="1.4.5" />
+	
+		<Reference Include="KitchenLib">
+			<HintPath>$(PlateUpGameFolder)\Mods\KitchenLib\KitchenLib-Workshop.dll</HintPath>
+		</Reference>
+
+		<Reference Include="0Harmony">
+			<HintPath>$(PlateUpGameFolder)\Mods\KitchenUnityExplorer\0Harmony.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+  
+	<Target Name="Deploy" AfterTargets="Build" Condition="$(EnableModDeployLocal) == 'true'">
+		<Message Text="$(GameData)" />
+	</Target>
+</Project>
