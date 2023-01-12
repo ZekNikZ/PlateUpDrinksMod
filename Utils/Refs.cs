@@ -2,9 +2,11 @@
 using KitchenDrinksMod.Appliances;
 using KitchenDrinksMod.Dishes;
 using KitchenDrinksMod.Items;
+using KitchenDrinksMod.Processes;
 using KitchenLib.Customs;
 using KitchenLib.References;
 using KitchenLib.Utils;
+using static KitchenData.Appliance;
 
 namespace KitchenDrinksMod
 {
@@ -15,7 +17,7 @@ namespace KitchenDrinksMod
         public static Item IceCreamChocolate => Find<Item>(ItemReferences.IceCreamChocolate);
         public static Item IceCreamStrawberry => Find<Item>(ItemReferences.IceCreamStrawberry);
         public static Item IceCreamServing => Find<Item>(ItemReferences.IceCreamServing);
-        public static Process Shake => Find<Process>(ProcessReferences.Chop);
+        public static Appliance Counter => Find<Appliance>(ApplianceReferences.Countertop);
         #endregion
 
         #region IngredientLib References
@@ -33,6 +35,8 @@ namespace KitchenDrinksMod
         public static Item MilkshakeStrawberry => Find<Item, MilkshakeStrawberry>();
         public static ItemGroup MilkshakeStrawberryRaw => Find<ItemGroup, MilkshakeStrawberryRaw>();
         public static Dish MilkshakeDish => Find<Dish, MilkshakeDish>();
+        public static Process Shake => Find<Process, ShakeProcess>();
+        public static ApplianceProcesses ShakeApplianceProcess => FindApplianceProcess<ShakeApplianceProcess>();
         #endregion
 
         private static T Find<T>(int id) where T : GameDataObject
@@ -43,6 +47,12 @@ namespace KitchenDrinksMod
         private static T Find<T, C>() where T : GameDataObject where C : CustomGameDataObject
         {
             return (T)GDOUtils.GetCustomGameDataObject<C>()?.GameDataObject;
+        }
+
+        private static ApplianceProcesses FindApplianceProcess<C>() where C : CustomSubProcess
+        {
+            ((CustomApplianceProccess)CustomSubProcess.GetSubProcess<C>()).Convert(out var process);
+            return process;
         }
     }
 }

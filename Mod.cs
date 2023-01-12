@@ -12,6 +12,7 @@ using KitchenDrinksMod.Dishes;
 using KitchenDrinksMod.Appliances;
 using KitchenDrinksMod.Utils;
 using Unity.Collections;
+using KitchenDrinksMod.Processes;
 
 // Namespace should have "Kitchen" in the beginning
 namespace KitchenDrinksMod
@@ -64,6 +65,8 @@ namespace KitchenDrinksMod
             AddGameDataObject<MilkshakeVanillaRaw>();
             AddGameDataObject<MilkshakeChocolateRaw>();
             AddGameDataObject<MilkshakeStrawberryRaw>();
+            AddGameDataObject<ShakeProcess>();
+            AddSubProcess<ShakeApplianceProcess>();
 
             LogInfo("Done loading game data.");
         }
@@ -116,6 +119,10 @@ namespace KitchenDrinksMod
             Events.BuildGameDataEvent += delegate (object s, BuildGameDataEventArgs args)
             {
                 ModRegistry.HandleBuildGameDataEvent(args);
+
+                Refs.Counter.Processes.Add(Refs.ShakeApplianceProcess);
+                // TODO: add this process to the other "counters"
+                // TODO: add this to the mixers to go very fast
             };
         }
 
