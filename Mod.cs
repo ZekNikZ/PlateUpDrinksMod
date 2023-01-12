@@ -104,7 +104,7 @@ namespace KitchenDrinksMod
         /// </summary>
         protected override void OnUpdate()
         {
-            if (!DEBUG_MODE || true) return;
+            if (!DEBUG_MODE) return;
 
             if (Refs.MilkshakeDish == null) return;
 

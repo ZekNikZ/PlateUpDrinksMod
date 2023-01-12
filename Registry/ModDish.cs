@@ -30,7 +30,7 @@ namespace KitchenDrinksMod.Dishes
         {
             Dish dish = gameDataObject as Dish;
             ModRegistry.AddLocalisedRecipe(this, dish);
-            
+
             if (Type == DishType.Base)
             {
                 ModRegistry.AddBaseDish(dish);

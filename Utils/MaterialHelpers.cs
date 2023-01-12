@@ -61,7 +61,7 @@ namespace KitchenDrinksMod.Utils
 
         public static Material[] GetMaterialArray(params string[] materials)
         {
-            List<Material> materialList = new List<Material>();
+            List<Material> materialList = new();
             foreach (string matName in materials)
             {
                 string formatted = $"DrinksMod - \"{matName}\"";
@@ -80,8 +80,10 @@ namespace KitchenDrinksMod.Utils
 
         public static Material CreateFlat(string name, Color color, float shininess = 0, float overlayScale = 10)
         {
-            Material mat = new Material(Shader.Find("Simple Flat"));
-            mat.name = $"DrinksMod - \"{name}\"";
+            Material mat = new(Shader.Find("Simple Flat"))
+            {
+                name = $"DrinksMod - \"{name}\""
+            };
             mat.SetColor("_Color0", color);
             mat.SetFloat("_Shininess", shininess);
             mat.SetFloat("_OverlayScale", overlayScale);
@@ -94,8 +96,10 @@ namespace KitchenDrinksMod.Utils
 
         public static Material CreateTransparent(string name, Color color)
         {
-            Material mat = new Material(Shader.Find("Simple Transparent"));
-            mat.name = $"DrinksMod - \"{name}\"";
+            Material mat = new(Shader.Find("Simple Transparent"))
+            {
+                name = $"DrinksMod - \"{name}\""
+            };
             mat.SetColor("_Color", color);
             return mat;
         }

@@ -6,7 +6,6 @@ using KitchenDrinksMod.Processes;
 using KitchenLib.Customs;
 using KitchenLib.References;
 using KitchenLib.Utils;
-using static KitchenData.Appliance;
 
 namespace KitchenDrinksMod
 {
@@ -36,8 +35,8 @@ namespace KitchenDrinksMod
         public static ItemGroup MilkshakeStrawberryRaw => Find<ItemGroup, MilkshakeStrawberryRaw>();
         public static Dish MilkshakeDish => Find<Dish, MilkshakeDish>();
         public static Process Shake => Find<Process, ShakeProcess>();
-        public static ApplianceProcesses ShakeApplianceProcess => FindApplianceProcess<ShakeApplianceProcess>();
-        public static ApplianceProcesses ShakeApplianceProcessFast => FindApplianceProcess<ShakeApplianceProcessFast>();
+        public static Appliance.ApplianceProcesses ShakeApplianceProcess => FindApplianceProcess<ShakeApplianceProcess>();
+        public static Appliance.ApplianceProcesses ShakeApplianceProcessFast => FindApplianceProcess<ShakeApplianceProcessFast>();
         #endregion
 
         internal static T Find<T>(int id) where T : GameDataObject
@@ -47,10 +46,10 @@ namespace KitchenDrinksMod
 
         internal static T Find<T, C>() where T : GameDataObject where C : CustomGameDataObject
         {
-            return (T)GDOUtils.GetCustomGameDataObject<C>()?.GameDataObject;
+            return GDOUtils.GetCastedGDO<T, C>();
         }
 
-        private static ApplianceProcesses FindApplianceProcess<C>() where C : CustomSubProcess
+        private static Appliance.ApplianceProcesses FindApplianceProcess<C>() where C : CustomSubProcess
         {
             ((CustomApplianceProccess)CustomSubProcess.GetSubProcess<C>()).Convert(out var process);
             return process;

@@ -1,5 +1,4 @@
 ﻿using KitchenData;
-using KitchenLib.References;
 using KitchenLib.Utils;
 using UnityEngine;
 
@@ -16,7 +15,7 @@ namespace KitchenDrinksMod
         public static GameObject Cup => FindModPrefab("Cup");
         public static GameObject CupProvider => FindModPrefab("Cup Provider");
 
-        private static GameObject FindAppliancePrefab(int id)
+        private static GameObject FindExistingAppliancePrefab(int id)
         {
             return ((Appliance)GDOUtils.GetExistingGDO(id)).Prefab;
         }

@@ -76,7 +76,7 @@ namespace KitchenDrinksMod.Registry
                 });
                 Mod.LogInfo($"Registered base dish {dish.Name} ({dish.ID})");
 
-                next_dish: { }
+            next_dish: { }
             }
 
             existing.Dispose();

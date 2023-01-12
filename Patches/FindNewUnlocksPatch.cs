@@ -12,7 +12,7 @@ namespace KitchenDrinksMod.Patches
     public static class FindNewUnlocksPatch
     {
         public static bool IsFirst = true;
-        public static UnlockOptions Options => new UnlockOptions()
+        public static UnlockOptions Options => new()
         {
             Unlock1 = Refs.MilkshakeDish,
             Unlock2 = Refs.MilkshakeDish

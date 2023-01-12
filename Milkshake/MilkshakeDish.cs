@@ -22,7 +22,7 @@ namespace KitchenDrinksMod.Dishes
 
         public override bool IsUnlockable => true;
 
-        public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
+        public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Small;
 
         public override HashSet<Item> MinimumIngredients => new()
         {
