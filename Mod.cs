@@ -31,7 +31,7 @@ namespace KitchenDrinksMod
         public const string MOD_VERSION = "0.1.0";
         public const string MOD_AUTHOR = "ZekNikZ";
         public const string MOD_GAMEVERSION = ">=1.1.1";
-        public const bool DEBUG_MODE = true;
+        public const bool DEBUG_MODE = false;
         // Game version this mod is designed for in semver
         // e.g. ">=1.1.1" current and all future
         // e.g. ">=1.1.1 <=1.2.3" for all from/until
@@ -62,6 +62,9 @@ namespace KitchenDrinksMod
             AddGameDataObject<CupProvider>();
 
             // Milkshakes
+            AddGameDataObject<ShakeProcess>();
+            AddSubProcess<ShakeApplianceProcess>();
+            AddSubProcess<ShakeApplianceProcessFast>();
             AddGameDataObject<MilkshakeDish>();
             AddGameDataObject<MilkshakeVanilla>();
             AddGameDataObject<MilkshakeChocolate>();
@@ -69,9 +72,6 @@ namespace KitchenDrinksMod
             AddGameDataObject<MilkshakeVanillaRaw>();
             AddGameDataObject<MilkshakeChocolateRaw>();
             AddGameDataObject<MilkshakeStrawberryRaw>();
-            AddGameDataObject<ShakeProcess>();
-            AddSubProcess<ShakeApplianceProcess>();
-            AddSubProcess<ShakeApplianceProcessFast>();
 
             LogInfo("Done loading game data.");
         }

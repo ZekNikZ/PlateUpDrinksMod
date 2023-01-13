@@ -13,6 +13,7 @@ namespace KitchenDrinksMod.Dishes
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
         public override GameObject DisplayPrefab => Prefabs.MilkshakeChocolate;
         public override GameObject IconPrefab => Prefabs.MilkshakeChocolate;
+        public override float SelectionBias => 1;
 
         public override List<string> StartingNameSet => new()
         {
@@ -22,13 +23,11 @@ namespace KitchenDrinksMod.Dishes
 
         public override bool IsUnlockable => true;
 
-        public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Small;
+        public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
 
         public override HashSet<Item> MinimumIngredients => new()
         {
             Refs.IceCreamVanilla,
-            Refs.IceCreamChocolate,
-            Refs.IceCreamStrawberry,
             Refs.Milk,
             Refs.Cup
         };
@@ -59,12 +58,12 @@ namespace KitchenDrinksMod.Dishes
 
         public override IDictionary<Locale, string> LocalisedRecipe => new Dictionary<Locale, string>
         {
-            { Locale.English, "Add ice cream and milk to cup and stir." }
+            { Locale.English, "Add ice cream and milk to cup and shake" }
         };
 
         public override IDictionary<Locale, UnlockInfo> LocalisedInfo => new Dictionary<Locale, UnlockInfo>
         {
-            { Locale.English, LocalisationUtils.CreateUnlockInfo("Milkshake", "Milkshake description", "Milkshake flavor text") }
+            { Locale.English, LocalisationUtils.CreateUnlockInfo("Milkshake", "Adds milkshakes as a dessert", "Offers three flavours of milkshake as a dessert") }
         };
     }
 }
