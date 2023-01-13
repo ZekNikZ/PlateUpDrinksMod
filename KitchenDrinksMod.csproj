@@ -11,10 +11,13 @@
 	<!-- Absolute Path to PlateUp.exe   e.g: C:\\Program Files (x86)\\Steam\\SteamLibrary\\steamapps\\common\\PlateUp\\PlateUp -->
 	<PropertyGroup>
 		<PlateUpGameFolder>C:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp</PlateUpGameFolder>
+		<WorkshopDir>$(ProjectDir)content</WorkshopDir>
+		<EnableAssetBundleDeploy>true</EnableAssetBundleDeploy>
+		<AssetBundlePath>$(ProjectDir)content\mod.assets</AssetBundlePath>
 	</PropertyGroup>
   
 	<ItemGroup>
-		<PackageReference Include="Yariazen.PlateUp.ModBuildUtilities" Version="1.4.5" />
+		<PackageReference Include="Yariazen.PlateUp.ModBuildUtilities" Version="1.5.6" />
 	
 		<Reference Include="KitchenLib">
 			<HintPath>$(PlateUpGameFolder)\Mods\KitchenLib\KitchenLib-Workshop.dll</HintPath>
@@ -24,8 +27,8 @@
 			<HintPath>$(PlateUpGameFolder)\Mods\KitchenUnityExplorer\0Harmony.dll</HintPath>
 		</Reference>
 	</ItemGroup>
-  
-	<Target Name="Deploy" AfterTargets="Build" Condition="$(EnableModDeployLocal) == 'true'">
-		<Message Text="$(GameData)" />
+
+	<Target Name="BundleWorkshop" AfterTargets="Build" Condition="$(EnableModDeployLocal) == 'true'">
+		<Copy SourceFiles="$(TargetDir)$(MSBuildProjectName)-$(Configuration).dll" DestinationFolder="$(WorkshopDir)" />
 	</Target>
 </Project>
