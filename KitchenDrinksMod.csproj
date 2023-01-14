@@ -2,8 +2,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net472</TargetFramework>
-		<Configurations>Workshop</Configurations>
-		<AssemblyName>$(MSBuildProjectName)-$(Configuration)</AssemblyName>
+		<Configurations>Release;Debug;Upload</Configurations>
+		<AssemblyName>$(MSBuildProjectName)-Workshop</AssemblyName>
 		<LangVersion>latest</LangVersion>
 		<NoWarn>CS0114</NoWarn>
 	</PropertyGroup>
@@ -15,6 +15,20 @@
 		<EnableAssetBundleDeploy>true</EnableAssetBundleDeploy>
 		<AssetBundlePath>$(ProjectDir)content\mod.assets</AssetBundlePath>
 	</PropertyGroup>
+	
+	<ItemGroup>
+	  <Compile Remove="content\**" />
+	  <Compile Remove="UnityProject\**" />
+	  <EmbeddedResource Remove="content\**" />
+	  <EmbeddedResource Remove="UnityProject\**" />
+	  <None Remove="content\**" />
+	  <None Remove="UnityProject\**" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <None Remove="plateup_mod_metadata.json" />
+	  <None Remove="Thumbnail.png" />
+	</ItemGroup>
   
 	<ItemGroup>
 		<PackageReference Include="Yariazen.PlateUp.ModBuildUtilities" Version="1.5.6" />
@@ -29,6 +43,7 @@
 	</ItemGroup>
 
 	<Target Name="BundleWorkshop" AfterTargets="Build" Condition="$(EnableModDeployLocal) == 'true'">
-		<Copy SourceFiles="$(TargetDir)$(MSBuildProjectName)-$(Configuration).dll" DestinationFolder="$(WorkshopDir)" />
+		<Copy SourceFiles="$(TargetDir)$(MSBuildProjectName)-Workshop.dll" DestinationFolder="$(WorkshopDir)" />
+		<Exec Condition="'$(Configuration)' == 'Upload'" Command="start &quot;$(GamePath)\PlateUp_Data\ModUploader.exe&quot;" WorkingDirectory="$(ProjectDir)"/>
 	</Target>
 </Project>

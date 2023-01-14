@@ -7,11 +7,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KitchenDrinksMod", "Kitchen
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Workshop|Any CPU = Workshop|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Upload|Any CPU = Upload|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{611A560E-1DB2-4801-83E8-8CF484D44DBA}.Workshop|Any CPU.ActiveCfg = Workshop|Any CPU
-		{611A560E-1DB2-4801-83E8-8CF484D44DBA}.Workshop|Any CPU.Build.0 = Workshop|Any CPU
+		{611A560E-1DB2-4801-83E8-8CF484D44DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{611A560E-1DB2-4801-83E8-8CF484D44DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{611A560E-1DB2-4801-83E8-8CF484D44DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{611A560E-1DB2-4801-83E8-8CF484D44DBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{611A560E-1DB2-4801-83E8-8CF484D44DBA}.Upload|Any CPU.ActiveCfg = Upload|Any CPU
+		{611A560E-1DB2-4801-83E8-8CF484D44DBA}.Upload|Any CPU.Build.0 = Upload|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
