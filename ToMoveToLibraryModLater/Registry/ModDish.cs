@@ -1,9 +1,9 @@
 ﻿using KitchenData;
-using KitchenDrinksMod.Registry;
+using KitchenDrinksMod.ToMoveToLibraryModLater.Registry;
 using KitchenLib.Customs;
 using System.Collections.Generic;
 
-namespace KitchenDrinksMod.Dishes
+namespace KitchenDrinksMod.ToMoveToLibraryModLater.Dishes
 {
     public abstract class ModDish : CustomDish, ILocalisedRecipeHolder
     {

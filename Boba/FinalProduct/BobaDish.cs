@@ -1,0 +1,64 @@
+﻿using KitchenData;
+using KitchenDrinksMod.ToMoveToLibraryModLater.Dishes;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace KitchenDrinksMod.Boba
+{
+    public class BobaDish : ModDish
+    {
+        public override string UniqueNameID => "Boba Dish";
+        public override DishType Type => DishType.Base;
+        public override CardType CardType => CardType.Default;
+        public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
+        public override GameObject DisplayPrefab => Prefabs.CookedBobaPot;
+        public override GameObject IconPrefab => Prefabs.CookedBobaPot;
+        public override float SelectionBias => 1;
+
+        public override List<string> StartingNameSet => new()
+        {
+            "Boba Tea"
+        };
+
+        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
+
+        public override bool IsUnlockable => true;
+
+        public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
+
+        public override HashSet<Item> MinimumIngredients => new()
+        {
+            Refs.Pot,
+            Refs.UncookedBoba,
+            Refs.Cup,
+            Refs.BlackTea,
+            Refs.Water,
+            Refs.Milk
+        };
+
+        public override HashSet<Process> RequiredProcesses => new()
+        {
+            Refs.Cook
+        };
+
+        public override List<Dish.MenuItem> ResultingMenuItems => new()
+        {
+            new Dish.MenuItem()
+            {
+                Item = Refs.CookedBobaPot,
+                Phase = MenuPhase.Main
+            }
+        };
+
+        public override IDictionary<Locale, string> LocalisedRecipe => new Dictionary<Locale, string>
+        {
+            { Locale.English, "Add boba pearls to water in pot and cook. Combine cooked boba with appropriate tea and milk" }
+        };
+
+        public override IDictionary<Locale, UnlockInfo> LocalisedInfo => new Dictionary<Locale, UnlockInfo>
+        {
+            { Locale.English, LocalisationUtils.CreateUnlockInfo("Boba Tea", "Adds boba teas as a main", "Offers three types of boba teas to enjoy") }
+        };
+    }
+}

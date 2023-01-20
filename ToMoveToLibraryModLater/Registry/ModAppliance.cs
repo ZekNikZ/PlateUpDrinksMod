@@ -2,11 +2,11 @@
 using KitchenLib.Customs;
 using System.Collections.Generic;
 
-namespace KitchenDrinksMod.Registry
+namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
 {
     public abstract class ModAppliance : CustomAppliance
     {
-        public virtual IDictionary<Locale, ApplianceInfo> LocalisedInfo { get; }
+        public virtual IDictionary<Locale, ApplianceInfo> LocalisedInfo { get; private set; }
 
         public override LocalisationObject<ApplianceInfo> Info
         {
@@ -23,9 +23,14 @@ namespace KitchenDrinksMod.Registry
             }
         }
 
+        public virtual List<VariableApplianceProcess> VariableApplianceProcesses { get; private set; }
+
         public override void OnRegister(GameDataObject gameDataObject)
         {
-            Appliance appliance = gameDataObject as Appliance;
+            if (VariableApplianceProcesses != null)
+            {
+                ModRegistry.AddVariableApplianceProcesses(this);
+            }
         }
     }
 }

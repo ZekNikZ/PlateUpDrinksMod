@@ -77,20 +77,6 @@ namespace KitchenDrinksMod.Items
                         Item = Refs.IceCreamVanilla
                     }
                 };
-
-                ComponentLabels = new()
-                {
-                    new ColourBlindLabel()
-                    {
-                        Item = Refs.MilkIngredient,
-                        Text = "M"
-                    },
-                    new ColourBlindLabel()
-                    {
-                        Item = Refs.IceCreamVanilla,
-                        Text = "V"
-                    },
-                };
             }
         }
 

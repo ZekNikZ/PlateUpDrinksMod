@@ -6,7 +6,6 @@ using System.Reflection;
 using Unity.Entities;
 using UnityEngine;
 using System.Linq;
-using KitchenDrinksMod.Registry;
 using KitchenDrinksMod.Items;
 using KitchenDrinksMod.Dishes;
 using KitchenDrinksMod.Appliances;
@@ -17,6 +16,12 @@ using TMPro;
 using System.Collections.Generic;
 using KitchenLib.References;
 using KitchenData;
+using KitchenDrinksMod.Boba;
+using KitchenLib.Customs;
+using KitchenDrinksMod.Boba.Teas;
+using KitchenDrinksMod.Boba.Processes;
+using KitchenDrinksMod.ToMoveToLibraryModLater.Registry;
+using HarmonyLib;
 
 // Namespace should have "Kitchen" in the beginning
 namespace KitchenDrinksMod
@@ -47,6 +52,31 @@ namespace KitchenDrinksMod
 
         public Mod() : base(MOD_GUID, MOD_NAME, MOD_AUTHOR, MOD_VERSION, MOD_GAMEVERSION, Assembly.GetExecutingAssembly()) { }
 
+        public struct Test
+        {
+            public int X;
+
+            public void Run()
+            {
+                LogInfo("Test struct Run()");
+            }
+        }
+
+        [HarmonyPatch(typeof(Test), "Run")]
+        class TestPatch
+        {
+            static bool Prefix(ref Test __instance)
+            {
+                LogInfo($"Test struct Prefix() = {__instance.X}");
+
+                return true;
+            }
+            static void Postfix(ref Test __instance)
+            {
+                LogInfo($"Test struct Postfix() = {__instance.X}");
+            }
+        }
+
         protected override void Initialise()
         {
             base.Initialise();
@@ -56,6 +86,12 @@ namespace KitchenDrinksMod
 
             MenuItemQuery = GetEntityQuery(new QueryHelper()
                 .All(typeof(CDishChoice)));
+
+            var x = new Test()
+            {
+                X = 2
+            };
+            x.Run();
         }
 
         private void AddGameData()
@@ -78,6 +114,24 @@ namespace KitchenDrinksMod
             AddGameDataObject<MilkshakeStrawberryRaw>();
             AddGameDataObject<MilkshakeDish>();
 
+            // Boba
+            AddGameDataObject<DispenseBlackTea>();
+            AddGameDataObject<DispenseMatchaTea>();
+            AddGameDataObject<DispenseTaroTea>();
+            AddSubProcess<DispenseBlackTeaApplianceProcess>();
+            AddSubProcess<DispenseMatchaTeaApplianceProcess>();
+            AddSubProcess<DispenseTaroTeaApplianceProcess>();
+            AddGameDataObject<TeaProvider>();
+            AddGameDataObject<BobaProvider>();
+            AddGameDataObject<UncookedBoba>();
+            AddGameDataObject<CookedBoba>();
+            AddGameDataObject<UncookedBobaPot>();
+            AddGameDataObject<CookedBobaPot>();
+            AddGameDataObject<BobaDish>();
+            AddGameDataObject<BlackTea>();
+            AddGameDataObject<MatchaTea>();
+            AddGameDataObject<TaroTea>();
+
             LogInfo("Done loading game data.");
         }
 
@@ -93,6 +147,15 @@ namespace KitchenDrinksMod
             AddMaterial(MaterialHelpers.CreateFlat("Vanilla", 0xFFF16D));
             AddMaterial(MaterialHelpers.CreateFlat("Chocolate", 0x622300));
             AddMaterial(MaterialHelpers.CreateFlat("Strawberry", 0xFF044E));
+
+            foreach (var asset in Bundle.LoadAllAssets<TextAsset>())
+            {
+                if (asset.name.StartsWith("mat"))
+                {
+                    LogInfo($"Loading material from {asset.name}.json");
+                    AddMaterial(CustomMaterials.LoadMaterialFromJson(asset.text));
+                }
+            }
 
             LogInfo("Done creating materials.");
         }

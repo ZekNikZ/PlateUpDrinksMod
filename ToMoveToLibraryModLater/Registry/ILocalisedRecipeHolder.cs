@@ -1,7 +1,7 @@
 ﻿using KitchenData;
 using System.Collections.Generic;
 
-namespace KitchenDrinksMod.Registry
+namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
 {
     public interface ILocalisedRecipeHolder
     {

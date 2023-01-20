@@ -2,7 +2,7 @@
 using KitchenLib.Customs;
 using System.Collections.Generic;
 
-namespace KitchenDrinksMod.Processes
+namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
 {
     public abstract class ModProcess : CustomProcess
     {

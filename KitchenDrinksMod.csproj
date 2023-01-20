@@ -31,10 +31,11 @@
 	</ItemGroup>
   
 	<ItemGroup>
+		<PackageReference Include="MessagePack.Annotations" Version="2.4.59" />
 		<PackageReference Include="Yariazen.PlateUp.ModBuildUtilities" Version="1.5.6" />
 	
 		<Reference Include="KitchenLib">
-			<HintPath>$(PlateUpGameFolder)\Mods\KitchenLib\KitchenLib-Workshop.dll</HintPath>
+			<HintPath>$(PlateUpGameFolder)\Mods\KitchenLib\content\KitchenLib-Workshop.dll</HintPath>
 		</Reference>
 
 		<Reference Include="0Harmony">
@@ -44,6 +45,6 @@
 
 	<Target Name="BundleWorkshop" AfterTargets="Build" Condition="$(EnableModDeployLocal) == 'true'">
 		<Copy SourceFiles="$(TargetDir)$(MSBuildProjectName)-Workshop.dll" DestinationFolder="$(WorkshopDir)" />
-		<Exec Condition="'$(Configuration)' == 'Upload'" Command="start &quot;$(GamePath)\PlateUp_Data\ModUploader.exe&quot;" WorkingDirectory="$(ProjectDir)"/>
+		<Exec Condition="'$(Configuration)' == 'Upload'" Command="start &quot;$(GamePath)\PlateUp_Data\ModUploader.exe&quot;" WorkingDirectory="$(ProjectDir)" />
 	</Target>
 </Project>

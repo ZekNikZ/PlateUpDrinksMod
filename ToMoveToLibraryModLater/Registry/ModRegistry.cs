@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Entities;
 
-namespace KitchenDrinksMod.Registry
+namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
 {
     [UpdateBefore(typeof(GrantUpgrades))]
     internal class ModRegistry : GenericSystemBase
@@ -15,6 +15,9 @@ namespace KitchenDrinksMod.Registry
 
         private static readonly List<Tuple<ILocalisedRecipeHolder, Dish>> RecipeHolders = new();
         private static readonly List<Dish> BaseDishes = new();
+        private static readonly List<ModAppliance> VariableAppliances = new();
+
+        public static readonly Dictionary<int, List<VariableApplianceProcess>> VariableApplianceProcesses = new();
 
         private static bool GameDataBuilt = false;
 
@@ -26,6 +29,11 @@ namespace KitchenDrinksMod.Registry
         public static void AddBaseDish(Dish dish)
         {
             BaseDishes.Add(dish);
+        }
+
+        public static void AddVariableApplianceProcesses(ModAppliance appliance)
+        {
+            VariableAppliances.Add(appliance);
         }
 
         public static void HandleBuildGameDataEvent(BuildGameDataEventArgs args)
@@ -43,6 +51,13 @@ namespace KitchenDrinksMod.Registry
                     args.gamedata.GlobalLocalisation.Recipes.Info.Get(entry.Key).Text.Add(holder.Item2, entry.Value);
                     Mod.LogInfo($"Registered recipe \"{entry.Key}\" localization entry for dish {holder.Item2.Name} ({holder.Item2.ID}): \"{entry.Value}\"");
                 }
+            }
+
+            // Variable processes
+            foreach (var appliance in VariableAppliances)
+            {
+                VariableApplianceProcesses.Add(appliance.ID, appliance.VariableApplianceProcesses);
+                Mod.LogInfo($"Registered variable processes for appliance \"{appliance.UniqueNameID}\"");
             }
 
             Mod.LogInfo("Done building additional game data.");

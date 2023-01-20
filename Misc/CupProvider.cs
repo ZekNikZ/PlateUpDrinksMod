@@ -1,5 +1,5 @@
 ﻿using KitchenData;
-using KitchenDrinksMod.Registry;
+using KitchenDrinksMod.ToMoveToLibraryModLater.Registry;
 using KitchenDrinksMod.Utils;
 using KitchenLib.Utils;
 using System.Collections.Generic;
