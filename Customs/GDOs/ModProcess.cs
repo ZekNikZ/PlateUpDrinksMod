@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace KitchenDrinksMod.Customs
 {
-    public abstract class ModProcess : CustomProcess
+    public abstract class ModProcess : CustomProcess, IModGDO
     {
         public abstract override string UniqueNameID { get; }
         public virtual IDictionary<Locale, ProcessInfo> LocalisedInfo { get; }

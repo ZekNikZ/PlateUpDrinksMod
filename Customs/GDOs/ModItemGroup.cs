@@ -3,7 +3,7 @@ using KitchenLib.Customs;
 
 namespace KitchenDrinksMod.Customs
 {
-    public abstract class ModItemGroup : CustomItemGroup
+    public abstract class ModItemGroup : CustomItemGroup, IModGDO
     {
         public abstract override string UniqueNameID { get; }
         public override ItemCategory ItemCategory => ItemCategory.Generic;

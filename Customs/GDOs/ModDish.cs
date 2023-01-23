@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace KitchenDrinksMod.Customs
 {
-    public abstract class ModDish : CustomDish
+    public abstract class ModDish : CustomDish, IModGDO
     {
         public abstract override string UniqueNameID { get; }
         public abstract override DishType Type { get; }

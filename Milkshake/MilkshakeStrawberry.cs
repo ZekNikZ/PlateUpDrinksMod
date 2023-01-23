@@ -8,7 +8,7 @@ namespace KitchenDrinksMod.Milkshakes
 {
     public class MilkshakeStrawberry : CustomItem
     {
-        public override string UniqueNameID => "Milkshake - Strawberry";
+        public override string UniqueNameID => "Milkshake - Strawberry - Serving";
         public override GameObject Prefab => Prefabs.MilkshakeStrawberry;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;

@@ -55,42 +55,66 @@ namespace KitchenDrinksMod
         {
             LogInfo("Attempting to register game data...");
 
-            // Cups
-            AddGameDataObject<Cup>();
-            AddGameDataObject<CupProvider>();
+            MethodInfo mAddGameDataObject = typeof(BaseMod).GetMethod(nameof(BaseMod.AddGameDataObject));
+            MethodInfo mAddSubProcess = typeof(BaseMod).GetMethod(nameof(BaseMod.AddSubProcess));
+            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+            {
+                if (type.IsAbstract)
+                {
+                    continue;
+                }
 
-            // Milkshakes
-            AddGameDataObject<ShakeProcess>();
-            AddSubProcess<ShakeApplianceProcess>();
-            AddSubProcess<ShakeApplianceProcessFast>();
-            AddGameDataObject<MilkshakeVanilla>();
-            AddGameDataObject<MilkshakeChocolate>();
-            AddGameDataObject<MilkshakeStrawberry>();
-            AddGameDataObject<MilkshakeVanillaRaw>();
-            AddGameDataObject<MilkshakeChocolateRaw>();
-            AddGameDataObject<MilkshakeStrawberryRaw>();
-            AddGameDataObject<MilkshakeDish>();
+                if (typeof(IModGDO).IsAssignableFrom(type))
+                {
+                    LogInfo($"Found custom GDO of type {type.Name}");
+                    MethodInfo generic = mAddGameDataObject.MakeGenericMethod(type);
+                    generic.Invoke(this, null);
+                }
 
-            // Boba
-            AddGameDataObject<DispenseBlackTea>();
-            AddGameDataObject<DispenseMatchaTea>();
-            AddGameDataObject<DispenseTaroTea>();
-            AddSubProcess<DispenseBlackTeaApplianceProcess>();
-            AddSubProcess<DispenseMatchaTeaApplianceProcess>();
-            AddSubProcess<DispenseTaroTeaApplianceProcess>();
-            AddGameDataObject<BobaTeaProvider>();
-            AddGameDataObject<BobaProvider>();
-            AddGameDataObject<UncookedBoba>();
-            AddGameDataObject<CookedBoba>();
-            AddGameDataObject<UncookedBobaPot>();
-            AddGameDataObject<CookedBobaPot>();
-            AddGameDataObject<BobaDish>();
-            AddGameDataObject<BlackBobaTea>();
-            AddGameDataObject<MatchaBobaTea>();
-            AddGameDataObject<TaroBobaTea>();
-            AddGameDataObject<ServedBlackBobaTea>();
-            AddGameDataObject<ServedMatchaBobaTea>();
-            AddGameDataObject<ServedTaroBobaTea>();
+                if (typeof(IModProcess).IsAssignableFrom(type))
+                {
+                    LogInfo($"Found sub process of type {type.Name}");
+                    MethodInfo generic = mAddSubProcess.MakeGenericMethod(type);
+                    generic.Invoke(this, null);
+                }
+            }
+
+            //// Cups
+            //AddGameDataObject<Cup>();
+            //AddGameDataObject<CupProvider>();
+
+            //// Milkshakes
+            //AddGameDataObject<ShakeProcess>();
+            //AddSubProcess<ShakeApplianceProcess>();
+            //AddSubProcess<ShakeApplianceProcessFast>();
+            //AddGameDataObject<MilkshakeVanilla>();
+            //AddGameDataObject<MilkshakeChocolate>();
+            //AddGameDataObject<MilkshakeStrawberry>();
+            //AddGameDataObject<MilkshakeVanillaRaw>();
+            //AddGameDataObject<MilkshakeChocolateRaw>();
+            //AddGameDataObject<MilkshakeStrawberryRaw>();
+            //AddGameDataObject<MilkshakeDish>();
+
+            //// Boba
+            //AddGameDataObject<DispenseBlackTea>();
+            //AddGameDataObject<DispenseMatchaTea>();
+            //AddGameDataObject<DispenseTaroTea>();
+            //AddSubProcess<DispenseBlackTeaApplianceProcess>();
+            //AddSubProcess<DispenseMatchaTeaApplianceProcess>();
+            //AddSubProcess<DispenseTaroTeaApplianceProcess>();
+            //AddGameDataObject<BobaTeaProvider>();
+            //AddGameDataObject<BobaProvider>();
+            //AddGameDataObject<UncookedBoba>();
+            //AddGameDataObject<CookedBoba>();
+            //AddGameDataObject<UncookedBobaPot>();
+            //AddGameDataObject<CookedBobaPot>();
+            //AddGameDataObject<BobaDish>();
+            //AddGameDataObject<BlackBobaTea>();
+            //AddGameDataObject<MatchaBobaTea>();
+            //AddGameDataObject<TaroBobaTea>();
+            //AddGameDataObject<ServedBlackBobaTea>();
+            //AddGameDataObject<ServedMatchaBobaTea>();
+            //AddGameDataObject<ServedTaroBobaTea>();
 
             LogInfo("Done loading game data.");
         }
@@ -209,13 +233,13 @@ namespace KitchenDrinksMod
                 }
             };
         }
-#region Logging
+        #region Logging
         public static void LogInfo(string _log) { Debug.Log($"[{MOD_NAME}] " + _log); }
         public static void LogWarning(string _log) { Debug.LogWarning($"[{MOD_NAME}] " + _log); }
         public static void LogError(string _log) { Debug.LogError($"[{MOD_NAME}] " + _log); }
         public static void LogInfo(object _log) { LogInfo(_log.ToString()); }
         public static void LogWarning(object _log) { LogWarning(_log.ToString()); }
         public static void LogError(object _log) { LogError(_log.ToString()); }
-#endregion
+        #endregion
     }
 }

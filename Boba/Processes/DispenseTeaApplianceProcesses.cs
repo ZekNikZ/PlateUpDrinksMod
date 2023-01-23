@@ -1,5 +1,4 @@
-﻿using KitchenData;
-using KitchenLib.Customs;
+﻿using KitchenDrinksMod.Customs;
 
 namespace KitchenDrinksMod.Boba
 {
@@ -18,11 +17,10 @@ namespace KitchenDrinksMod.Boba
         protected override string Name => "Taro";
     }
 
-    public abstract class DispenseTeaApplianceProcess<T> : CustomApplianceProccess where T : DispenseTeaProcess
+    public abstract class DispenseTeaApplianceProcess<T> : ModApplianceProcess<T> where T : DispenseTeaProcess
     {
         protected abstract string Name { get; }
         public override string UniqueName => $"Dispense ${Name} Boba Tea Appliance Process";
-        public override Process Process => Refs.Find<Process, T>();
         public override float Speed => 0.75f;
         public override bool IsAutomatic => false;
     }

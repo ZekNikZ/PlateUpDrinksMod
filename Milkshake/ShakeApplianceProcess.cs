@@ -1,12 +1,10 @@
-﻿using KitchenData;
-using KitchenLib.Customs;
+﻿using KitchenDrinksMod.Customs;
 
 namespace KitchenDrinksMod.Milkshakes
 {
-    public class ShakeApplianceProcess : CustomApplianceProccess
+    public class ShakeApplianceProcess : ModApplianceProcess<ShakeProcess>
     {
         public override string UniqueName => "Shake Appliance Process";
-        public override Process Process => Refs.Shake;
         public override float Speed => 0.75f;
     }
 }

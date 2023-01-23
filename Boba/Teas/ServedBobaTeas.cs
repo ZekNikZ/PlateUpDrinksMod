@@ -30,6 +30,65 @@ namespace KitchenDrinksMod.Boba
         protected override string LiquidMaterial => "TaroTeaLiquid";
         protected override string LidMaterial => "TaroIndicator";
     }
+    internal class ServedBobaView : CompletableItemGroupView
+    {
+        public override void Initialize(GameObject prefab)
+        {
+            ComponentGroups = new()
+            {
+                new()
+                {
+                    Objects = new() { GameObjectUtils.GetChildObject(prefab, "Liquid2") },
+                    Item = Refs.MilkIngredient
+                },
+                new()
+                {
+                    Objects = new() { GameObjectUtils.GetChildObject(prefab, "Boba") },
+                    Item = Refs.CookedBoba
+                }
+            };
+
+            ComponentLabels = new()
+            {
+                new()
+                {
+                    Text = "Bl",
+                    Item = Refs.BlackTea
+                },
+                new()
+                {
+                    Text = "Ma",
+                    Item = Refs.MatchaTea
+                },
+                new()
+                {
+                    Text = "Ta",
+                    Item = Refs.TaroTea
+                },
+                new()
+                {
+                    Text = "Mi",
+                    Item = Refs.MilkIngredient
+                },
+                new()
+                {
+                    Text = "Bo",
+                    Item = Refs.CookedBoba
+                }
+            };
+
+            CompletionObjects = new()
+            {
+                GameObjectUtils.GetChildObject(prefab, "Lid"),
+                GameObjectUtils.GetChildObject(prefab, "Straw")
+            };
+        }
+
+        protected override bool IsComplete(ItemList components)
+        {
+            return components.Count == 3;
+        }
+    }
 
     public abstract class BaseServedBobaTea<T> : ModItemGroup where T: BobaTea
     {
@@ -64,66 +123,6 @@ namespace KitchenDrinksMod.Boba
                 }
             }
         };
-
-        private class ServedBobaView : CompletableItemGroupView
-        {
-            public override void Initialize(GameObject prefab)
-            {
-                ComponentGroups = new()
-                {
-                    new()
-                    {
-                        Objects = new() { GameObjectUtils.GetChildObject(prefab, "Liquid2") },
-                        Item = Refs.MilkIngredient
-                    },
-                    new()
-                    {
-                        Objects = new() { GameObjectUtils.GetChildObject(prefab, "Boba") },
-                        Item = Refs.CookedBoba
-                    }
-                };
-
-                ComponentLabels = new()
-                {
-                    new()
-                    {
-                        Text = "Bl",
-                        Item = Refs.BlackTea
-                    },
-                    new()
-                    {
-                        Text = "Ma",
-                        Item = Refs.MatchaTea
-                    },
-                    new()
-                    {
-                        Text = "Ta",
-                        Item = Refs.TaroTea
-                    },
-                    new()
-                    {
-                        Text = "Mi",
-                        Item = Refs.MilkIngredient
-                    },
-                    new()
-                    {
-                        Text = "Bo",
-                        Item = Refs.CookedBoba
-                    }
-                };
-
-                CompletionObjects = new()
-                {
-                    GameObjectUtils.GetChildObject(prefab, "Lid"),
-                    GameObjectUtils.GetChildObject(prefab, "Straw")
-                };
-            }
-
-            protected override bool IsComplete(ItemList components)
-            {
-                return components.Count == 3;
-            }
-        }
 
         protected override void Modify(ItemGroup itemGroup)
         {

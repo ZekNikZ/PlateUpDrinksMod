@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace KitchenDrinksMod.Customs
 {
-    public abstract class ModAppliance : CustomAppliance
+    public abstract class ModAppliance : CustomAppliance, IModGDO
     {
         public struct VariableApplianceProcess
         {
