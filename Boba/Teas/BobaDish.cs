@@ -10,8 +10,8 @@ namespace KitchenDrinksMod.Boba
     {
         public override string UniqueNameID => "Boba Dish";
         public override DishType Type => DishType.Base;
-        public override GameObject DisplayPrefab => Prefabs.BobaIcon;
-        public override GameObject IconPrefab => Prefabs.BobaIcon;
+        public override GameObject DisplayPrefab => Prefabs.Find("BobaCupPrefab", "BlackServed");
+        public override GameObject IconPrefab => Prefabs.Find("BobaCupPrefab", "BlackServed");
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override List<string> StartingNameSet => new()

@@ -10,8 +10,8 @@ namespace KitchenDrinksMod.Milkshakes
     {
         public override string UniqueNameID => "Milkshake Dish";
         public override DishType Type => DishType.Dessert;
-        public override GameObject DisplayPrefab => Prefabs.MilkshakeChocolate;
-        public override GameObject IconPrefab => Prefabs.MilkshakeChocolate;
+        public override GameObject DisplayPrefab => Prefabs.Find("Milkshake", "ChocolateServed");
+        public override GameObject IconPrefab => Prefabs.Find("Milkshake", "ChocolateServed");
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override HashSet<Item> MinimumIngredients => new()

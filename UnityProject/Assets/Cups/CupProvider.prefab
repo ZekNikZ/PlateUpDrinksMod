@@ -356,7 +356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4305502414739304968}
   m_Layer: 0
-  m_Name: Cup Provider
+  m_Name: CupProvider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

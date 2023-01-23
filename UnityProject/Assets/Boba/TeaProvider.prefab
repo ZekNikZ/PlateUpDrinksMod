@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 4305502414739304968}
   - component: {fileID: 5763522023588716082}
   m_Layer: 0
-  m_Name: Tea Provider
+  m_Name: TeaProvider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

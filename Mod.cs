@@ -12,11 +12,7 @@ using TMPro;
 using System.Collections.Generic;
 using KitchenLib.References;
 using KitchenData;
-using KitchenDrinksMod.Boba;
 using KitchenLib.Customs;
-using KitchenLib.Utils;
-using KitchenDrinksMod.Milkshakes;
-using KitchenDrinksMod.Cups;
 using KitchenDrinksMod.Customs;
 
 namespace KitchenDrinksMod
@@ -78,43 +74,6 @@ namespace KitchenDrinksMod
                     generic.Invoke(this, null);
                 }
             }
-
-            //// Cups
-            //AddGameDataObject<Cup>();
-            //AddGameDataObject<CupProvider>();
-
-            //// Milkshakes
-            //AddGameDataObject<ShakeProcess>();
-            //AddSubProcess<ShakeApplianceProcess>();
-            //AddSubProcess<ShakeApplianceProcessFast>();
-            //AddGameDataObject<MilkshakeVanilla>();
-            //AddGameDataObject<MilkshakeChocolate>();
-            //AddGameDataObject<MilkshakeStrawberry>();
-            //AddGameDataObject<MilkshakeVanillaRaw>();
-            //AddGameDataObject<MilkshakeChocolateRaw>();
-            //AddGameDataObject<MilkshakeStrawberryRaw>();
-            //AddGameDataObject<MilkshakeDish>();
-
-            //// Boba
-            //AddGameDataObject<DispenseBlackTea>();
-            //AddGameDataObject<DispenseMatchaTea>();
-            //AddGameDataObject<DispenseTaroTea>();
-            //AddSubProcess<DispenseBlackTeaApplianceProcess>();
-            //AddSubProcess<DispenseMatchaTeaApplianceProcess>();
-            //AddSubProcess<DispenseTaroTeaApplianceProcess>();
-            //AddGameDataObject<BobaTeaProvider>();
-            //AddGameDataObject<BobaProvider>();
-            //AddGameDataObject<UncookedBoba>();
-            //AddGameDataObject<CookedBoba>();
-            //AddGameDataObject<UncookedBobaPot>();
-            //AddGameDataObject<CookedBobaPot>();
-            //AddGameDataObject<BobaDish>();
-            //AddGameDataObject<BlackBobaTea>();
-            //AddGameDataObject<MatchaBobaTea>();
-            //AddGameDataObject<TaroBobaTea>();
-            //AddGameDataObject<ServedBlackBobaTea>();
-            //AddGameDataObject<ServedMatchaBobaTea>();
-            //AddGameDataObject<ServedTaroBobaTea>();
 
             LogInfo("Done loading game data.");
         }
@@ -218,18 +177,6 @@ namespace KitchenDrinksMod
                 foreach (var appliance in fastAppliances)
                 {
                     Refs.Find<Appliance>(appliance).Processes.Add(Refs.ShakeApplianceProcessFast);
-                }
-
-                // Prepare the materials for the boba icon prefab
-                var bobaIconPrefab = Prefabs.BobaIcon;
-                MaterialUtils.ApplyMaterial<MeshRenderer>(bobaIconPrefab, "Cup", MaterialHelpers.GetMaterialArray("BobaCup"));
-                MaterialUtils.ApplyMaterial<MeshRenderer>(bobaIconPrefab, "Liquid1", MaterialHelpers.GetMaterialArray("BlackTeaLiquid"));
-                MaterialUtils.ApplyMaterial<MeshRenderer>(bobaIconPrefab, "Liquid2", MaterialHelpers.GetMaterialArray("BlackTeaLiquid"));
-                MaterialUtils.ApplyMaterial<MeshRenderer>(bobaIconPrefab, "Lid", MaterialHelpers.GetMaterialArray("BlackIndicator"));
-                MaterialUtils.ApplyMaterial<MeshRenderer>(bobaIconPrefab, "Straw", MaterialHelpers.GetMaterialArray("Straw"));
-                foreach (var mesh in bobaIconPrefab.GetChildFromPath("Boba").GetComponentsInChildren<MeshRenderer>())
-                {
-                    mesh.materials = MaterialHelpers.GetMaterialArray("CookedBoba");
                 }
             };
         }

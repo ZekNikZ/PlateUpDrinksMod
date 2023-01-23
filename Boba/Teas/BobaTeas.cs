@@ -10,21 +10,21 @@ namespace KitchenDrinksMod.Boba
     public class BlackBobaTea : BobaTea
     {
         public override string UniqueNameID => "Boba Tea - Black";
-        public override GameObject Prefab => Prefabs.BlackTeaBase;
+        public override GameObject Prefab => Prefabs.Find("BobaCupPrefab", "BlackBase");
         protected override string LiquidMaterial => "BlackTeaLiquid";
     }
 
     public class MatchaBobaTea : BobaTea
     {
         public override string UniqueNameID => "Boba Tea - Matcha";
-        public override GameObject Prefab => Prefabs.MatchaTeaBase;
+        public override GameObject Prefab => Prefabs.Find("BobaCupPrefab", "MatchaBase");
         protected override string LiquidMaterial => "MatchaTeaLiquid";
     }
 
     public class TaroBobaTea : BobaTea
     {
         public override string UniqueNameID => "Boba Tea - Taro";
-        public override GameObject Prefab => Prefabs.TaroTeaBase;
+        public override GameObject Prefab => Prefabs.Find("BobaCupPrefab", "TaroBase");
         protected override string LiquidMaterial => "TaroTeaLiquid";
     }
 

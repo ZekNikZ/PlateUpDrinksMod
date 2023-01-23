@@ -3310,7 +3310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4149637484619085}
   m_Layer: 0
-  m_Name: Cooked Boba Pot
+  m_Name: BobaPot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

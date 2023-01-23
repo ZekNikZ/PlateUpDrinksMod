@@ -10,7 +10,7 @@ namespace KitchenDrinksMod.Boba
     public class CookedBobaPot : ModItem
     {
         public override string UniqueNameID => "Boba - Pot - Cooked";
-        public override GameObject Prefab => Prefabs.CookedBobaPot;
+        public override GameObject Prefab => Prefabs.Find("BobaPot");
         public override bool AllowSplitMerging => true;
         public override float SplitSpeed => 1f;
         public override int SplitCount => 3;

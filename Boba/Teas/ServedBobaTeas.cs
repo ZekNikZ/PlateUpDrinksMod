@@ -10,7 +10,7 @@ namespace KitchenDrinksMod.Boba
     public class ServedBlackBobaTea : BaseServedBobaTea<BlackBobaTea>
     {
         public override string UniqueNameID => "Boba Tea - Black - Serving";
-        public override GameObject Prefab => Prefabs.BlackTeaCup;
+        public override GameObject Prefab => Prefabs.Find("BobaCupPrefab", "BlackServed");
         protected override string LiquidMaterial => "BlackTeaLiquid";
         protected override string LidMaterial => "BlackIndicator";
     }
@@ -18,7 +18,7 @@ namespace KitchenDrinksMod.Boba
     public class ServedMatchaBobaTea : BaseServedBobaTea<MatchaBobaTea>
     {
         public override string UniqueNameID => "Boba Tea - Matcha - Serving";
-        public override GameObject Prefab => Prefabs.MatchaTeaCup;
+        public override GameObject Prefab => Prefabs.Find("BobaCupPrefab", "MatchaServed");
         protected override string LiquidMaterial => "MatchaTeaLiquid";
         protected override string LidMaterial => "MatchaIndicator";
     }
@@ -26,7 +26,7 @@ namespace KitchenDrinksMod.Boba
     public class ServedTaroBobaTea : BaseServedBobaTea<TaroBobaTea>
     {
         public override string UniqueNameID => "Boba Tea - Taro - Serving";
-        public override GameObject Prefab => Prefabs.TaroTeaCup;
+        public override GameObject Prefab => Prefabs.Find("BobaCupPrefab", "TaroServed");
         protected override string LiquidMaterial => "TaroTeaLiquid";
         protected override string LidMaterial => "TaroIndicator";
     }

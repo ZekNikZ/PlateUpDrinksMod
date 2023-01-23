@@ -11,7 +11,7 @@ namespace KitchenDrinksMod.Milkshakes
     public class MilkshakeVanillaRaw : CustomItemGroup
     {
         public override string UniqueNameID => "Milkshake - Vanilla";
-        public override GameObject Prefab => Prefabs.MilkshakeVanillaRaw;
+        public override GameObject Prefab => Prefabs.Find("Milkshake", "VanillaBase");
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
 

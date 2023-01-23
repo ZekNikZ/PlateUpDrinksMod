@@ -15,7 +15,7 @@ namespace KitchenDrinksMod.Cups
         public override bool SellOnlyAsDuplicate => true;
         public override bool IsPurchasable => true;
         public override ShoppingTags ShoppingTags => ShoppingTags.Cooking | ShoppingTags.Misc;
-        public override GameObject Prefab => Prefabs.CupProvider;
+        public override GameObject Prefab => Prefabs.Find("CupProvider");
         public override IDictionary<Locale, ApplianceInfo> LocalisedInfo => new Dictionary<Locale, ApplianceInfo>()
         {
             { Locale.English, LocalisationUtils.CreateApplianceInfo("Cups", "Provides cups", new(), new()) }

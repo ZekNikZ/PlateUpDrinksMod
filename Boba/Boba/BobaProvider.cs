@@ -15,7 +15,7 @@ namespace KitchenDrinksMod.Boba
         public override bool SellOnlyAsDuplicate => true;
         public override bool IsPurchasable => true;
         public override ShoppingTags ShoppingTags => ShoppingTags.Cooking | ShoppingTags.Misc;
-        public override GameObject Prefab => Prefabs.BobaProvider;
+        public override GameObject Prefab => Prefabs.Find("BobaProvider");
         public override IDictionary<Locale, ApplianceInfo> LocalisedInfo => new Dictionary<Locale, ApplianceInfo>()
         {
             { Locale.English, LocalisationUtils.CreateApplianceInfo("Boba Pearls", "Provides boba pearls", new(), new()) }

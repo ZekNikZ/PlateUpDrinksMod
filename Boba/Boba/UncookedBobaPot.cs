@@ -11,7 +11,7 @@ namespace KitchenDrinksMod.Boba
     public class UncookedBobaPot : ModItemGroup
     {
         public override string UniqueNameID => "Boba - Pot - Uncooked";
-        public override GameObject Prefab => Prefabs.UncookedBobaPot;
+        public override GameObject Prefab => Prefabs.Find("BobaPot");
         public override Item DisposesTo => Refs.Pot;
 
         public override List<ItemGroup.ItemSet> Sets => new()
