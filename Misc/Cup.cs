@@ -19,19 +19,19 @@ namespace KitchenDrinksMod.Items
             new Item.ItemProcess()
             {
                 Process = Refs.DispenseBlackTea,
-                Result = Refs.MilkshakeVanilla,
+                Result = Refs.BlackTea,
                 Duration = 1f
             },
             new Item.ItemProcess()
             {
                 Process = Refs.DispenseMatchaTea,
-                Result = Refs.MilkshakeChocolate,
+                Result = Refs.MatchaTea,
                 Duration = 1f
             },
             new Item.ItemProcess()
             {
                 Process = Refs.DispenseTaroTea,
-                Result = Refs.MilkshakeStrawberry,
+                Result = Refs.TaroTea,
                 Duration = 1f
             }
         };

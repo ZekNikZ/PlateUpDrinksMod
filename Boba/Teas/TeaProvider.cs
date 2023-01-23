@@ -73,7 +73,7 @@ namespace KitchenDrinksMod.Boba.Teas
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter Top", MaterialHelpers.GetMaterialArray("Wood - Default"));
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Handles", MaterialHelpers.GetMaterialArray("Knob"));
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Handles", MaterialHelpers.GetMaterialArray("Knob"));
-            var indicatorMats = new string[] { "DMBlackIndicator", "DMMatchaIndicator", "DMTaroIndicator" };
+            var indicatorMats = new string[] { "BlackIndicator", "MatchaIndicator", "TaroIndicator" };
             for (int i = 1; i <= 3; i++)
             {
                 MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, $"TeaDispenser{i}", MaterialHelpers.GetMaterialArray("DMAluminum", "DMBlackPlastic", indicatorMats[i - 1]));

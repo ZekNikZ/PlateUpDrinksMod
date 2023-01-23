@@ -73,7 +73,7 @@ namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
         protected override void OnUpdate()
         {
             // Base dishes
-            NativeArray<CUpgrade> existing = Upgrades.ToComponentDataArray<CUpgrade>(Allocator.Temp);
+            using NativeArray<CUpgrade> existing = Upgrades.ToComponentDataArray<CUpgrade>(Allocator.Temp);
             foreach (var dish in BaseDishes)
             {
                 foreach (CUpgrade item in existing)
@@ -93,8 +93,6 @@ namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
 
             next_dish: { }
             }
-
-            existing.Dispose();
         }
     }
 }

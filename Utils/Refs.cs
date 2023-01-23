@@ -1,6 +1,7 @@
 ﻿using KitchenData;
 using KitchenDrinksMod.Appliances;
 using KitchenDrinksMod.Boba;
+using KitchenDrinksMod.Boba.FinalProduct;
 using KitchenDrinksMod.Boba.Processes;
 using KitchenDrinksMod.Boba.Teas;
 using KitchenDrinksMod.Dishes;
@@ -26,8 +27,10 @@ namespace KitchenDrinksMod
         #endregion
 
         #region IngredientLib References
-        public static Item Milk => Find<Item>(IngredientLib.IngredientReferences.Milk);
-        public static Item MilkIngredient => Find<Item>(IngredientLib.SplitIngredientReferences.Milk);
+        public static Item Milk => Find<Item>("IngredientLib", "milk ");
+        //public static Item Milk => Find<Item>(IngredientLib.References.GetIngredient("milk"));
+        public static Item MilkIngredient => Find<Item>("IngredientLib", "milk ingredient");
+        //public static Item MilkIngredient => Find<Item>(IngredientLib.References.GetSplitIngredient("milk"));
         #endregion
 
         #region Modded References
@@ -47,6 +50,9 @@ namespace KitchenDrinksMod
         public static Item BlackTea => Find<Item, BlackTea>();
         public static Item MatchaTea => Find<Item, MatchaTea>();
         public static Item TaroTea => Find<Item, TaroTea>();
+        public static Item BlackTeaCombined => Find<Item, BlackTeaCombined>();
+        public static Item MatchaTeaCombined => Find<Item, MatchaTeaCombined>();
+        public static Item TaroTeaCombined => Find<Item, TaroTeaCombined>();
         public static Process DispenseBlackTea => Find<Process, DispenseBlackTea>();
         public static Process DispenseMatchaTea => Find<Process, DispenseMatchaTea>();
         public static Process DispenseTaroTea => Find<Process, DispenseTaroTea>();
@@ -57,6 +63,7 @@ namespace KitchenDrinksMod
         public static Item CookedBoba => Find<Item, CookedBoba>();
         public static Appliance BobaProvider => Find<Appliance, BobaProvider>();
         public static Item CookedBobaPot => Find<Item, CookedBobaPot>();
+        public static Dish BobaDish => Find<Dish, BobaDish>();
         #endregion
 
         internal static T Find<T>(int id) where T : GameDataObject
@@ -67,6 +74,11 @@ namespace KitchenDrinksMod
         internal static T Find<T, C>() where T : GameDataObject where C : CustomGameDataObject
         {
             return GDOUtils.GetCastedGDO<T, C>();
+        }
+
+        internal static T Find<T>(string modName, string name) where T : GameDataObject
+        {
+            return GDOUtils.GetCastedGDO<T>(modName, name);
         }
 
         private static Appliance.ApplianceProcesses FindApplianceProcess<C>() where C : CustomSubProcess

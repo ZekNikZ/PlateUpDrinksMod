@@ -21,7 +21,8 @@ using KitchenLib.Customs;
 using KitchenDrinksMod.Boba.Teas;
 using KitchenDrinksMod.Boba.Processes;
 using KitchenDrinksMod.ToMoveToLibraryModLater.Registry;
-using HarmonyLib;
+using KitchenDrinksMod.Boba.FinalProduct;
+using KitchenLib.Utils;
 
 // Namespace should have "Kitchen" in the beginning
 namespace KitchenDrinksMod
@@ -35,7 +36,7 @@ namespace KitchenDrinksMod
         public const string MOD_NAME = "Drinks";
         public const string MOD_VERSION = "0.1.0";
         public const string MOD_AUTHOR = "ZekNikZ";
-        public const string MOD_GAMEVERSION = ">=1.1.1";
+        public const string MOD_GAMEVERSION = ">=1.1.3";
         // Game version this mod is designed for in semver
         // e.g. ">=1.1.1" current and all future
         // e.g. ">=1.1.1 <=1.2.3" for all from/until
@@ -52,31 +53,6 @@ namespace KitchenDrinksMod
 
         public Mod() : base(MOD_GUID, MOD_NAME, MOD_AUTHOR, MOD_VERSION, MOD_GAMEVERSION, Assembly.GetExecutingAssembly()) { }
 
-        public struct Test
-        {
-            public int X;
-
-            public void Run()
-            {
-                LogInfo("Test struct Run()");
-            }
-        }
-
-        [HarmonyPatch(typeof(Test), "Run")]
-        class TestPatch
-        {
-            static bool Prefix(ref Test __instance)
-            {
-                LogInfo($"Test struct Prefix() = {__instance.X}");
-
-                return true;
-            }
-            static void Postfix(ref Test __instance)
-            {
-                LogInfo($"Test struct Postfix() = {__instance.X}");
-            }
-        }
-
         protected override void Initialise()
         {
             base.Initialise();
@@ -86,12 +62,6 @@ namespace KitchenDrinksMod
 
             MenuItemQuery = GetEntityQuery(new QueryHelper()
                 .All(typeof(CDishChoice)));
-
-            var x = new Test()
-            {
-                X = 2
-            };
-            x.Run();
         }
 
         private void AddGameData()
@@ -131,6 +101,9 @@ namespace KitchenDrinksMod
             AddGameDataObject<BlackTea>();
             AddGameDataObject<MatchaTea>();
             AddGameDataObject<TaroTea>();
+            AddGameDataObject<BlackTeaCombined>();
+            AddGameDataObject<MatchaTeaCombined>();
+            AddGameDataObject<TaroTeaCombined>();
 
             LogInfo("Done loading game data.");
         }
@@ -162,25 +135,31 @@ namespace KitchenDrinksMod
 
         private void AddProcessIcons()
         {
-            // TODO: this currently isn't working. Need to find a way to give TMP more than one font for the process icons
+            // No clue why this is needed, but it seems like I need to do this before loading any textures:
+            Bundle.LoadAllAssets<Texture2D>();
+            Bundle.LoadAllAssets<Sprite>();
+
             var spriteAsset = Bundle.LoadAsset<TMP_SpriteAsset>("Process Icons");
             TMP_Settings.defaultSpriteAsset.fallbackSpriteAssets.Add(spriteAsset);
+            spriteAsset.material = Object.Instantiate(TMP_Settings.defaultSpriteAsset.material);
+            spriteAsset.material.mainTexture = Bundle.LoadAsset<Texture2D>("ProcessIcons");
         }
 
         /// <summary>
         /// This entity query and modifications are only used to test my starting dish easier.
         /// </summary>
+        private bool done = false;
         protected override void OnUpdate()
         {
-            if (!DEBUG_MODE) return;
+            if (!DEBUG_MODE || done) return;
 
-            if (Refs.MilkshakeDish == null) return;
+            done = true;
 
             var menuChoices = MenuItemQuery.ToEntityArray(Allocator.TempJob);
             foreach (var menuChoice in menuChoices)
             {
                 CDishChoice cDishChoice = EntityManager.GetComponentData<CDishChoice>(menuChoice);
-                cDishChoice.Dish = Refs.MilkshakeDish.ID;
+                cDishChoice.Dish = Refs.BobaDish.ID;
                 EntityManager.SetComponentData(menuChoice, cDishChoice);
             }
             menuChoices.Dispose();
@@ -202,6 +181,7 @@ namespace KitchenDrinksMod
             {
                 ModRegistry.HandleBuildGameDataEvent(args);
 
+                // Add the milkshake shake process to the relevant processes
                 List<int> slowAppliances = new()
                 {
                     ApplianceReferences.Countertop,
@@ -217,7 +197,6 @@ namespace KitchenDrinksMod
                 {
                     Refs.Find<Appliance>(appliance).Processes.Add(Refs.ShakeApplianceProcess);
                 }
-
                 List<int> fastAppliances = new()
                 {
                     ApplianceReferences.Mixer,
@@ -229,9 +208,20 @@ namespace KitchenDrinksMod
                 {
                     Refs.Find<Appliance>(appliance).Processes.Add(Refs.ShakeApplianceProcessFast);
                 }
+
+                // Prepare the materials for the boba icon prefab
+                var bobaIconPrefab = Prefabs.BobaIcon;
+                MaterialUtils.ApplyMaterial<MeshRenderer>(bobaIconPrefab, "Cup", MaterialHelpers.GetMaterialArray("BobaCup"));
+                MaterialUtils.ApplyMaterial<MeshRenderer>(bobaIconPrefab, "Liquid1", MaterialHelpers.GetMaterialArray("BlackTeaLiquid"));
+                MaterialUtils.ApplyMaterial<MeshRenderer>(bobaIconPrefab, "Liquid2", MaterialHelpers.GetMaterialArray("BlackTeaLiquid"));
+                MaterialUtils.ApplyMaterial<MeshRenderer>(bobaIconPrefab, "Lid", MaterialHelpers.GetMaterialArray("BlackIndicator"));
+                MaterialUtils.ApplyMaterial<MeshRenderer>(bobaIconPrefab, "Straw", MaterialHelpers.GetMaterialArray("Straw"));
+                foreach (var mesh in bobaIconPrefab.GetChildFromPath("Boba").GetComponentsInChildren<MeshRenderer>())
+                {
+                    mesh.materials = MaterialHelpers.GetMaterialArray("CookedBoba");
+                }
             };
         }
-
 #region Logging
         // You can remove this, I just prefer a more standardized logging
         public static void LogInfo(string _log) { Debug.Log($"[{MOD_NAME}] " + _log); }

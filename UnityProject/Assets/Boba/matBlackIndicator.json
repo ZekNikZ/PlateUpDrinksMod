@@ -1,8 +1,8 @@
 {
-  "Name": "DMBlackIndicator",
+  "Name": "BlackIndicator",
   "_Color0W": 1.0,
-  "_Color0X": 1.0,
-  "_Color0Y": 0.0,
+  "_Color0X": 0.162097156,
+  "_Color0Y": 0.113537826,
   "_Color0Z": 0.0,
   "_Highlight": 0,
   "_OverlayBase64": "",

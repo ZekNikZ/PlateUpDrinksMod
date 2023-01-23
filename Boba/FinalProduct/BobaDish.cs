@@ -12,8 +12,8 @@ namespace KitchenDrinksMod.Boba
         public override DishType Type => DishType.Base;
         public override CardType CardType => CardType.Default;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
-        public override GameObject DisplayPrefab => Prefabs.CookedBobaPot;
-        public override GameObject IconPrefab => Prefabs.CookedBobaPot;
+        public override GameObject DisplayPrefab => Prefabs.BobaIcon;
+        public override GameObject IconPrefab => Prefabs.BobaIcon;
         public override float SelectionBias => 1;
 
         public override List<string> StartingNameSet => new()
@@ -29,10 +29,10 @@ namespace KitchenDrinksMod.Boba
 
         public override HashSet<Item> MinimumIngredients => new()
         {
+            Refs.BlackTea,
             Refs.Pot,
             Refs.UncookedBoba,
             Refs.Cup,
-            Refs.BlackTea,
             Refs.Water,
             Refs.Milk
         };
@@ -46,14 +46,24 @@ namespace KitchenDrinksMod.Boba
         {
             new Dish.MenuItem()
             {
-                Item = Refs.CookedBobaPot,
+                Item = Refs.BlackTeaCombined,
+                Phase = MenuPhase.Main
+            },
+            new Dish.MenuItem()
+            {
+                Item = Refs.MatchaTeaCombined,
+                Phase = MenuPhase.Main
+            },
+            new Dish.MenuItem()
+            {
+                Item = Refs.TaroTeaCombined,
                 Phase = MenuPhase.Main
             }
         };
 
         public override IDictionary<Locale, string> LocalisedRecipe => new Dictionary<Locale, string>
         {
-            { Locale.English, "Add boba pearls to water in pot and cook. Combine cooked boba with appropriate tea and milk" }
+            { Locale.English, "Add boba pearls to water in pot and cook. Combine cooked boba with appropriate tea, then add milk and serve" }
         };
 
         public override IDictionary<Locale, UnlockInfo> LocalisedInfo => new Dictionary<Locale, UnlockInfo>

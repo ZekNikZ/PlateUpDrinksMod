@@ -50,7 +50,7 @@ namespace KitchenDrinksMod.Boba
             }
         };
 
-        internal class View : ItemGroupView
+        private class View : ItemGroupView
         {
             internal void Setup(GameObject prefab)
             {

@@ -15,6 +15,8 @@ namespace KitchenDrinksMod.Boba
         public override float SplitSpeed => 1f;
         public override Item SplitSubItem => Refs.CookedBoba;
         public override int SplitCount => 3;
+        public override bool AllowSplitMerging => true;
+        public override bool PreventExplicitSplit => true;
         public override GameObject Prefab => Prefabs.CookedBobaPot;
         public override Item DisposesTo => Refs.Pot;
 
