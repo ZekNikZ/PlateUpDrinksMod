@@ -1,5 +1,5 @@
 ﻿using KitchenData;
-using KitchenDrinksMod.ToMoveToLibraryModLater.Dishes;
+using KitchenDrinksMod.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,12 +14,10 @@ namespace KitchenDrinksMod.Boba
         public override GameObject IconPrefab => Prefabs.BobaIcon;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
-
         public override List<string> StartingNameSet => new()
         {
             "Boba Tea"
         };
-
         public override HashSet<Item> MinimumIngredients => new()
         {
             Refs.BlackTea,
@@ -29,12 +27,10 @@ namespace KitchenDrinksMod.Boba
             Refs.Water,
             Refs.Milk
         };
-
         public override HashSet<Process> RequiredProcesses => new()
         {
             Refs.Cook
         };
-
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {
             new Dish.MenuItem()
@@ -53,12 +49,10 @@ namespace KitchenDrinksMod.Boba
                 Phase = MenuPhase.Main
             }
         };
-
         public override IDictionary<Locale, string> LocalisedRecipe => new Dictionary<Locale, string>
         {
             { Locale.English, "Add boba pearls to water in pot and cook. Combine cooked boba with appropriate tea, then add milk and serve" }
         };
-
         public override IDictionary<Locale, UnlockInfo> LocalisedInfo => new Dictionary<Locale, UnlockInfo>
         {
             { Locale.English, LocalisationUtils.CreateUnlockInfo("Boba Tea", "Adds boba teas as a main", "Offers three types of boba teas to enjoy") }

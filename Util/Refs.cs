@@ -1,12 +1,7 @@
 ﻿using KitchenData;
-using KitchenDrinksMod.Appliances;
 using KitchenDrinksMod.Boba;
-using KitchenDrinksMod.Boba.FinalProduct;
-using KitchenDrinksMod.Boba.Processes;
-using KitchenDrinksMod.Boba.Teas;
-using KitchenDrinksMod.Dishes;
-using KitchenDrinksMod.Items;
-using KitchenDrinksMod.Processes;
+using KitchenDrinksMod.Cups;
+using KitchenDrinksMod.Milkshakes;
 using KitchenLib.Customs;
 using KitchenLib.References;
 using KitchenLib.Utils;

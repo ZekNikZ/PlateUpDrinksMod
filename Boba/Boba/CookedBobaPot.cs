@@ -1,6 +1,6 @@
 ﻿using KitchenData;
-using KitchenDrinksMod.ToMoveToLibraryModLater.Dishes;
-using KitchenDrinksMod.Utils;
+using KitchenDrinksMod.Customs;
+using KitchenDrinksMod.Util;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;

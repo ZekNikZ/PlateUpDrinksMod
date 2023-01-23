@@ -1,13 +1,13 @@
 ﻿using Kitchen;
 using KitchenData;
-using KitchenDrinksMod.Utils;
+using KitchenDrinksMod.Util;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
 
-namespace KitchenDrinksMod.ToMoveToLibraryModLater
+namespace KitchenDrinksMod.Customs
 {
     /// <summary>
     /// Note to onlookers: I would have just made my own version which inherits from MonoBehavior, but custom classes are not

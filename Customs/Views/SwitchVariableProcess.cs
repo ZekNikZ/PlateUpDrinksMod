@@ -2,11 +2,10 @@
 using KitchenData;
 using KitchenMods;
 using System;
-using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Entities;
 
-namespace KitchenDrinksMod.ToMoveToLibraryModLater
+namespace KitchenDrinksMod.Customs
 {
     [UpdateBefore(typeof(ItemTransferGroup))]
     public class SwitchVariableProcessContainer : ItemInteractionSystem, IModSystem

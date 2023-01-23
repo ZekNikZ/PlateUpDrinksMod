@@ -1,10 +1,10 @@
 ﻿using KitchenData;
-using KitchenDrinksMod.Utils;
+using KitchenDrinksMod.Util;
 using KitchenLib.Customs;
 using KitchenLib.Utils;
 using UnityEngine;
 
-namespace KitchenDrinksMod.Items
+namespace KitchenDrinksMod.Milkshakes
 {
     public class MilkshakeVanilla : CustomItem
     {

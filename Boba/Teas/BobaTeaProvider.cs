@@ -1,14 +1,13 @@
 ﻿using Kitchen;
 using KitchenData;
-using KitchenDrinksMod.ToMoveToLibraryModLater;
-using KitchenDrinksMod.ToMoveToLibraryModLater.Registry;
-using KitchenDrinksMod.Utils;
+using KitchenDrinksMod.Customs;
+using KitchenDrinksMod.Util;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace KitchenDrinksMod.Boba.Teas
+namespace KitchenDrinksMod.Boba
 {
     public class BobaTeaProvider : ModAppliance
     {
@@ -26,7 +25,7 @@ namespace KitchenDrinksMod.Boba.Teas
         public override List<IApplianceProperty> Properties => new()
         {
             new CItemHolder(),
-            new CItemProvider(), 
+            new CItemProvider(),
             new CVariableProcessContainer()
             {
                 Current = 0,

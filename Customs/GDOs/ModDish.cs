@@ -1,11 +1,10 @@
 ﻿using KitchenData;
-using KitchenDrinksMod.ToMoveToLibraryModLater.Registry;
 using KitchenLib.Customs;
 using System.Collections.Generic;
 
-namespace KitchenDrinksMod.ToMoveToLibraryModLater.Dishes
+namespace KitchenDrinksMod.Customs
 {
-    public abstract class ModDish : CustomDish, ILocalisedRecipeHolder
+    public abstract class ModDish : CustomDish
     {
         public abstract override string UniqueNameID { get; }
         public abstract override DishType Type { get; }
@@ -41,7 +40,7 @@ namespace KitchenDrinksMod.ToMoveToLibraryModLater.Dishes
             }
 
             Dish dish = gdo as Dish;
-            ModRegistry.AddLocalisedRecipe(this, dish);
+            ModRegistry.AddLocalisedRecipe(this);
 
             if (Type == DishType.Base)
             {

@@ -3,7 +3,7 @@ using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KitchenDrinksMod.Utils
+namespace KitchenDrinksMod.Util
 {
     /**
      * Taken from https://github.com/DepletedNova/DrinksMod/blob/master/Util/MaterialHelper.cs

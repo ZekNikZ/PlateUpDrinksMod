@@ -1,12 +1,11 @@
 ﻿using HarmonyLib;
 using Kitchen;
 using KitchenData;
-using KitchenDrinksMod.ToMoveToLibraryModLater.Registry;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Entities;
 
-namespace KitchenDrinksMod.ToMoveToLibraryModLater.Patches
+namespace KitchenDrinksMod.Customs
 {
     [HarmonyPatch(typeof(ApplyItemProcesses), "Run")]
     public class ApplyItemProcessesRunPatch

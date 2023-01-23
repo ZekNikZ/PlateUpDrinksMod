@@ -1,13 +1,11 @@
 ﻿using KitchenData;
-using KitchenDrinksMod.Boba.Teas;
-using KitchenDrinksMod.ToMoveToLibraryModLater;
-using KitchenDrinksMod.ToMoveToLibraryModLater.Dishes;
-using KitchenDrinksMod.Utils;
+using KitchenDrinksMod.Customs;
+using KitchenDrinksMod.Util;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KitchenDrinksMod.Boba.FinalProduct
+namespace KitchenDrinksMod.Boba
 {
     public class ServedBlackBobaTea : BaseServedBobaTea<BlackBobaTea>
     {

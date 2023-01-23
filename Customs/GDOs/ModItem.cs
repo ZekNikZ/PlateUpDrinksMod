@@ -1,9 +1,9 @@
 ﻿using KitchenData;
 using KitchenLib.Customs;
 
-namespace KitchenDrinksMod.ToMoveToLibraryModLater.Dishes
+namespace KitchenDrinksMod.Customs
 {
-    public abstract class ModItemGroup : CustomItemGroup
+    public abstract class ModItem : CustomItem
     {
         public abstract override string UniqueNameID { get; }
         public override ItemCategory ItemCategory => ItemCategory.Generic;
@@ -19,11 +19,16 @@ namespace KitchenDrinksMod.ToMoveToLibraryModLater.Dishes
 
             gdo.name = $"DrinksMod - {UniqueNameID}";
 
-            Modify(gdo as ItemGroup);
+            Modify(gdo as Item);
 
             GameDataBuilt = true;
         }
 
-        protected virtual void Modify(ItemGroup itemGroup) { }
+        protected virtual void Modify(Item item) { }
+    }
+
+    public abstract class ModItem<T> : ModItem where T : CustomAppliance
+    {
+        public override Appliance DedicatedProvider => Refs.Find<Appliance, T>();
     }
 }

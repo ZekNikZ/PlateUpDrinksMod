@@ -1,6 +1,6 @@
 ﻿using KitchenData;
-using KitchenDrinksMod.ToMoveToLibraryModLater.Registry;
-using KitchenDrinksMod.Utils;
+using KitchenDrinksMod.Customs;
+using KitchenDrinksMod.Util;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +22,7 @@ namespace KitchenDrinksMod.Boba
         };
         public override List<IApplianceProperty> Properties => new()
         {
-            PropertyUtils.GetUnlimitedCItemProviderWithDirectInsert(Refs.UncookedBoba.ID)
+            Utils.GetUnlimitedCItemProviderWithDirectInsert(Refs.UncookedBoba.ID)
         };
 
         protected override void Modify(Appliance appliance)

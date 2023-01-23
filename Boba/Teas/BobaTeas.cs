@@ -1,11 +1,11 @@
 ﻿using KitchenData;
-using KitchenDrinksMod.Utils;
-using KitchenLib.Customs;
+using KitchenDrinksMod.Customs;
+using KitchenDrinksMod.Util;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KitchenDrinksMod.Boba.Teas
+namespace KitchenDrinksMod.Boba
 {
     public class BlackBobaTea : BobaTea
     {
@@ -28,7 +28,7 @@ namespace KitchenDrinksMod.Boba.Teas
         protected override string LiquidMaterial => "TaroTeaLiquid";
     }
 
-    public abstract class BobaTea: CustomItem
+    public abstract class BobaTea : ModItem
     {
         public abstract override string UniqueNameID { get; }
         public abstract override GameObject Prefab { get; }
@@ -39,7 +39,7 @@ namespace KitchenDrinksMod.Boba.Teas
         public override ItemValue ItemValue => ItemValue.Small;
         public override Appliance DedicatedProvider => Refs.TeaProvider;
 
-        public override void OnRegister(GameDataObject gameDataObject)
+        protected override void Modify(Item item)
         {
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Cup", MaterialHelpers.GetMaterialArray("BobaCup"));
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Liquid1", MaterialHelpers.GetMaterialArray(LiquidMaterial));
@@ -51,7 +51,7 @@ namespace KitchenDrinksMod.Boba.Teas
                 "Lid",
                 "Straw"
             };
-            foreach(var childPath in disabledChildObjects)
+            foreach (var childPath in disabledChildObjects)
             {
                 Prefab.GetChildFromPath(childPath).SetActive(false);
             }

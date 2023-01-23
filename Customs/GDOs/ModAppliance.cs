@@ -2,7 +2,7 @@
 using KitchenLib.Customs;
 using System.Collections.Generic;
 
-namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
+namespace KitchenDrinksMod.Customs
 {
     public abstract class ModAppliance : CustomAppliance
     {

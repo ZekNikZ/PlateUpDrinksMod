@@ -1,7 +1,7 @@
 ﻿using KitchenLib.Utils;
 using UnityEngine;
 
-namespace KitchenDrinksMod.Utils
+namespace KitchenDrinksMod.Util
 {
     internal static class Helper
     {

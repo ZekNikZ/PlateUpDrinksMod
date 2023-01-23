@@ -1,9 +1,9 @@
 ﻿using KitchenData;
-using KitchenDrinksMod.ToMoveToLibraryModLater.Registry;
+using KitchenDrinksMod.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 
-namespace KitchenDrinksMod.Boba.Processes
+namespace KitchenDrinksMod.Boba
 {
     public class DispenseBlackTea : DispenseTeaProcess
     {

@@ -1,12 +1,11 @@
 ﻿using KitchenData;
-using KitchenDrinksMod.Appliances;
-using KitchenDrinksMod.ToMoveToLibraryModLater.Dishes;
-using KitchenDrinksMod.Utils;
+using KitchenDrinksMod.Customs;
+using KitchenDrinksMod.Util;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KitchenDrinksMod.Items
+namespace KitchenDrinksMod.Cups
 {
     public class Cup : ModItem<CupProvider>
     {

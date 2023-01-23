@@ -1,8 +1,7 @@
 ﻿using KitchenData;
 using KitchenMods;
-using System;
 
-namespace KitchenDrinksMod.ToMoveToLibraryModLater
+namespace KitchenDrinksMod.Customs
 {
     public struct CVariableProcessContainer : IApplianceProperty, IModComponent
     {

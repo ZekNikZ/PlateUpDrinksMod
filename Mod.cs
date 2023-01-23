@@ -6,40 +6,28 @@ using System.Reflection;
 using Unity.Entities;
 using UnityEngine;
 using System.Linq;
-using KitchenDrinksMod.Items;
-using KitchenDrinksMod.Dishes;
-using KitchenDrinksMod.Appliances;
-using KitchenDrinksMod.Utils;
+using KitchenDrinksMod.Util;
 using Unity.Collections;
-using KitchenDrinksMod.Processes;
 using TMPro;
 using System.Collections.Generic;
 using KitchenLib.References;
 using KitchenData;
 using KitchenDrinksMod.Boba;
 using KitchenLib.Customs;
-using KitchenDrinksMod.Boba.Teas;
-using KitchenDrinksMod.Boba.Processes;
-using KitchenDrinksMod.ToMoveToLibraryModLater.Registry;
-using KitchenDrinksMod.Boba.FinalProduct;
 using KitchenLib.Utils;
+using KitchenDrinksMod.Milkshakes;
+using KitchenDrinksMod.Cups;
+using KitchenDrinksMod.Customs;
 
-// Namespace should have "Kitchen" in the beginning
 namespace KitchenDrinksMod
 {
     public class Mod : BaseMod, IModSystem
     {
-        // guid must be unique and is recommended to be in reverse domain name notation
-        // mod name that is displayed to the player and listed in the mods menu
-        // mod version must follow semver e.g. "1.2.3"
         public const string MOD_GUID = "io.zkz.plateup.drinks";
         public const string MOD_NAME = "Drinks";
         public const string MOD_VERSION = "0.1.0";
         public const string MOD_AUTHOR = "ZekNikZ";
         public const string MOD_GAMEVERSION = ">=1.1.3";
-        // Game version this mod is designed for in semver
-        // e.g. ">=1.1.1" current and all future
-        // e.g. ">=1.1.1 <=1.2.3" for all from/until
 
 #if DEBUG
         public const bool DEBUG_MODE = true;
@@ -57,7 +45,6 @@ namespace KitchenDrinksMod
         {
             base.Initialise();
 
-            // For log file output so the official plateup support staff can identify if/which a mod is being used
             LogWarning($"{MOD_GUID} v{MOD_VERSION} in use!");
 
             MenuItemQuery = GetEntityQuery(new QueryHelper()
@@ -135,7 +122,7 @@ namespace KitchenDrinksMod
 
         private void AddProcessIcons()
         {
-            // No clue why this is needed, but it seems like I need to do this before loading any textures:
+            // No clue why this is needed, but it seems like I need to do this before loading any icon textures:
             Bundle.LoadAllAssets<Texture2D>();
             Bundle.LoadAllAssets<Sprite>();
 
@@ -223,7 +210,6 @@ namespace KitchenDrinksMod
             };
         }
 #region Logging
-        // You can remove this, I just prefer a more standardized logging
         public static void LogInfo(string _log) { Debug.Log($"[{MOD_NAME}] " + _log); }
         public static void LogWarning(string _log) { Debug.LogWarning($"[{MOD_NAME}] " + _log); }
         public static void LogError(string _log) { Debug.LogError($"[{MOD_NAME}] " + _log); }

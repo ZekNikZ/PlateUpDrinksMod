@@ -1,19 +1,18 @@
 ﻿using Kitchen;
 using KitchenData;
 using KitchenLib.Event;
-using System;
 using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Entities;
 
-namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
+namespace KitchenDrinksMod.Customs
 {
     [UpdateBefore(typeof(GrantUpgrades))]
     internal class ModRegistry : GenericSystemBase
     {
         private EntityQuery Upgrades;
 
-        private static readonly List<Tuple<ILocalisedRecipeHolder, Dish>> RecipeHolders = new();
+        private static readonly List<ModDish> RecipeHolders = new();
         private static readonly List<Dish> BaseDishes = new();
         private static readonly List<ModAppliance> VariableAppliances = new();
 
@@ -21,9 +20,9 @@ namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
 
         private static bool GameDataBuilt = false;
 
-        public static void AddLocalisedRecipe(ILocalisedRecipeHolder holder, Dish dish)
+        public static void AddLocalisedRecipe(ModDish dish)
         {
-            RecipeHolders.Add(new Tuple<ILocalisedRecipeHolder, Dish>(holder, dish));
+            RecipeHolders.Add(dish);
         }
 
         public static void AddBaseDish(Dish dish)
@@ -46,10 +45,10 @@ namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
             // Recipe holders
             foreach (var holder in RecipeHolders)
             {
-                foreach (var entry in holder.Item1.LocalisedRecipe)
+                foreach (var entry in holder.LocalisedRecipe)
                 {
-                    args.gamedata.GlobalLocalisation.Recipes.Info.Get(entry.Key).Text.Add(holder.Item2, entry.Value);
-                    Mod.LogInfo($"Registered recipe \"{entry.Key}\" localization entry for dish {holder.Item2.Name} ({holder.Item2.ID}): \"{entry.Value}\"");
+                    args.gamedata.GlobalLocalisation.Recipes.Info.Get(entry.Key).Text.Add(holder.GameDataObject as Dish, entry.Value);
+                    Mod.LogInfo($"Registered recipe \"{entry.Key}\" localization entry for dish {(holder.GameDataObject as Dish).Name} ({holder.GameDataObject.ID}): \"{entry.Value}\"");
                 }
             }
 

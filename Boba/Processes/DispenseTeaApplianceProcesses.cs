@@ -1,7 +1,7 @@
 ﻿using KitchenData;
 using KitchenLib.Customs;
 
-namespace KitchenDrinksMod.Boba.Processes
+namespace KitchenDrinksMod.Boba
 {
     public class DispenseBlackTeaApplianceProcess : DispenseTeaApplianceProcess<DispenseBlackTea>
     {

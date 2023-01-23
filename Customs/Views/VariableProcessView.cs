@@ -5,7 +5,7 @@ using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
 
-namespace KitchenDrinksMod.ToMoveToLibraryModLater
+namespace KitchenDrinksMod.Customs
 {
     public class VariableProcessView : UpdatableObjectView<VariableProcessView.ViewData>
     {
