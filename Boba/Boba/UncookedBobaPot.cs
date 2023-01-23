@@ -1,5 +1,6 @@
 ﻿using Kitchen;
 using KitchenData;
+using KitchenDrinksMod.ToMoveToLibraryModLater.Dishes;
 using KitchenDrinksMod.Utils;
 using KitchenLib.Customs;
 using KitchenLib.Utils;
@@ -8,17 +9,15 @@ using UnityEngine;
 
 namespace KitchenDrinksMod.Boba
 {
-    public class UncookedBobaPot : CustomItemGroup
+    public class UncookedBobaPot : ModItemGroup
     {
-        public override string UniqueNameID => "Boba Pot - Uncooked";
+        public override string UniqueNameID => "Boba - Pot - Uncooked";
         public override GameObject Prefab => Prefabs.UncookedBobaPot;
-        public override ItemCategory ItemCategory => ItemCategory.Generic;
-        public override ItemStorage ItemStorageFlags => ItemStorage.None;
         public override Item DisposesTo => Refs.Pot;
 
         public override List<ItemGroup.ItemSet> Sets => new()
         {
-            new ItemGroup.ItemSet()
+            new()
             {
                 Min = 2,
                 Max = 2,
@@ -28,7 +27,7 @@ namespace KitchenDrinksMod.Boba
                     Refs.Water
                 }
             },
-            new ItemGroup.ItemSet()
+            new()
             {
                 Min = 1,
                 Max = 1,
@@ -42,7 +41,7 @@ namespace KitchenDrinksMod.Boba
 
         public override List<Item.ItemProcess> Processes => new()
         {
-            new Item.ItemProcess()
+            new()
             {
                 Process = Refs.Cook,
                 Result = Refs.CookedBobaPot,
@@ -50,7 +49,7 @@ namespace KitchenDrinksMod.Boba
             }
         };
 
-        private class View : ItemGroupView
+        private class UncookedBobaPotView : ItemGroupView
         {
             internal void Setup(GameObject prefab)
             {
@@ -70,7 +69,7 @@ namespace KitchenDrinksMod.Boba
             }
         }
 
-        public override void OnRegister(GameDataObject gameDataObject)
+        protected override void Modify(ItemGroup itemGroup)
         {
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Pot/Pot/Cylinder", MaterialHelpers.GetMaterialArray("Metal"));
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Pot/Pot/Cylinder.003", MaterialHelpers.GetMaterialArray("Metal Dark"));
@@ -81,7 +80,7 @@ namespace KitchenDrinksMod.Boba
                 mesh.materials = MaterialHelpers.GetMaterialArray("UncookedBoba");
             }
 
-            var view = Prefab.AddComponent<View>();
+            var view = Prefab.AddComponent<UncookedBobaPotView>();
             view.Setup(Prefab);
         }
     }

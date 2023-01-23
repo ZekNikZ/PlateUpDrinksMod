@@ -17,7 +17,7 @@ namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
         private static readonly List<Dish> BaseDishes = new();
         private static readonly List<ModAppliance> VariableAppliances = new();
 
-        public static readonly Dictionary<int, List<VariableApplianceProcess>> VariableApplianceProcesses = new();
+        public static readonly Dictionary<int, List<ModAppliance.VariableApplianceProcess>> VariableApplianceProcesses = new();
 
         private static bool GameDataBuilt = false;
 

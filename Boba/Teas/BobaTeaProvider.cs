@@ -10,11 +10,11 @@ using UnityEngine;
 
 namespace KitchenDrinksMod.Boba.Teas
 {
-    public class TeaProvider : ModAppliance
+    public class BobaTeaProvider : ModAppliance
     {
-        public override string UniqueNameID => "Source - Boba Teas";
+        public override string UniqueNameID => "Boba Tea - Source";
         public override string Name => "Boba Teas";
-        public override PriceTier PriceTier => PriceTier.Cheap;
+        public override PriceTier PriceTier => PriceTier.Medium;
         public override bool SellOnlyAsDuplicate => true;
         public override bool IsPurchasable => true;
         public override ShoppingTags ShoppingTags => ShoppingTags.Cooking | ShoppingTags.Misc;
@@ -63,10 +63,8 @@ namespace KitchenDrinksMod.Boba.Teas
             }
         }
 
-        public override void OnRegister(GameDataObject gdo)
+        protected override void Modify(Appliance appliance)
         {
-            base.OnRegister(gdo);
-
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter", MaterialHelpers.GetMaterialArray("Wood 4 - Painted"));
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter Doors", MaterialHelpers.GetMaterialArray("Wood 4 - Painted"));
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter Surface", MaterialHelpers.GetMaterialArray("Wood - Default"));

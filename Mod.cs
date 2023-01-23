@@ -91,19 +91,19 @@ namespace KitchenDrinksMod
             AddSubProcess<DispenseBlackTeaApplianceProcess>();
             AddSubProcess<DispenseMatchaTeaApplianceProcess>();
             AddSubProcess<DispenseTaroTeaApplianceProcess>();
-            AddGameDataObject<TeaProvider>();
+            AddGameDataObject<BobaTeaProvider>();
             AddGameDataObject<BobaProvider>();
             AddGameDataObject<UncookedBoba>();
             AddGameDataObject<CookedBoba>();
             AddGameDataObject<UncookedBobaPot>();
             AddGameDataObject<CookedBobaPot>();
             AddGameDataObject<BobaDish>();
-            AddGameDataObject<BlackTea>();
-            AddGameDataObject<MatchaTea>();
-            AddGameDataObject<TaroTea>();
-            AddGameDataObject<BlackTeaCombined>();
-            AddGameDataObject<MatchaTeaCombined>();
-            AddGameDataObject<TaroTeaCombined>();
+            AddGameDataObject<BlackBobaTea>();
+            AddGameDataObject<MatchaBobaTea>();
+            AddGameDataObject<TaroBobaTea>();
+            AddGameDataObject<ServedBlackBobaTea>();
+            AddGameDataObject<ServedMatchaBobaTea>();
+            AddGameDataObject<ServedTaroBobaTea>();
 
             LogInfo("Done loading game data.");
         }

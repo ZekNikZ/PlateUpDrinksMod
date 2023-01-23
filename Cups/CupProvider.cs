@@ -9,23 +9,23 @@ namespace KitchenDrinksMod.Appliances
 {
     public class CupProvider : ModAppliance
     {
-        public override string UniqueNameID => "Source - Cups";
+        public override string UniqueNameID => "Cups - Source";
         public override string Name => "Cups";
-        public override PriceTier PriceTier => PriceTier.Cheap;
+        public override PriceTier PriceTier => PriceTier.Medium;
         public override bool SellOnlyAsDuplicate => true;
         public override bool IsPurchasable => true;
         public override ShoppingTags ShoppingTags => ShoppingTags.Cooking | ShoppingTags.Misc;
         public override GameObject Prefab => Prefabs.CupProvider;
-        public override List<IApplianceProperty> Properties => new()
-        {
-            KitchenPropertiesUtils.GetUnlimitedCItemProvider(Refs.Cup.ID)
-        };
         public override IDictionary<Locale, ApplianceInfo> LocalisedInfo => new Dictionary<Locale, ApplianceInfo>()
         {
             { Locale.English, LocalisationUtils.CreateApplianceInfo("Cups", "Provides cups", new(), new()) }
         };
+        public override List<IApplianceProperty> Properties => new()
+        {
+            KitchenPropertiesUtils.GetUnlimitedCItemProvider(Refs.Cup.ID)
+        };
 
-        public override void OnRegister(GameDataObject gdo)
+        protected override void Modify(Appliance appliance)
         {
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter", MaterialHelpers.GetMaterialArray("Wood 4 - Painted"));
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter Doors", MaterialHelpers.GetMaterialArray("Wood 4 - Painted"));

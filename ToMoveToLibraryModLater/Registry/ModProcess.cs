@@ -6,7 +6,9 @@ namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
 {
     public abstract class ModProcess : CustomProcess
     {
+        public abstract override string UniqueNameID { get; }
         public virtual IDictionary<Locale, ProcessInfo> LocalisedInfo { get; }
+        private bool GameDataBuilt = false;
 
         public override LocalisationObject<ProcessInfo> Info
         {
@@ -22,5 +24,19 @@ namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
                 return info;
             }
         }
+
+        public override sealed void OnRegister(GameDataObject gdo)
+        {
+            if (GameDataBuilt)
+            {
+                return;
+            }
+
+            Modify(gdo as Process);
+
+            GameDataBuilt = true;
+        }
+
+        protected virtual void Modify(Process process) { }
     }
 }

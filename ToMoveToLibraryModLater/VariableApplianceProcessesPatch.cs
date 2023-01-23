@@ -44,7 +44,7 @@ namespace KitchenDrinksMod.ToMoveToLibraryModLater.Patches
         {
             if (ApplyItemProcessesRunPatch.EntityManager.RequireComponent(ApplyItemProcessesRunPatch.ApplianceEntity, out CVariableProcessContainer variableProcessContainer))
             {
-                if (ModRegistry.VariableApplianceProcesses.TryGetValue(appliance, out List<VariableApplianceProcess> variableProcesses))
+                if (ModRegistry.VariableApplianceProcesses.TryGetValue(appliance, out List<ModAppliance.VariableApplianceProcess> variableProcesses))
                 {
                     foreach (var variableProcess in variableProcesses)
                     {

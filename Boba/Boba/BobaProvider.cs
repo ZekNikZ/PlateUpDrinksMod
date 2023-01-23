@@ -2,34 +2,30 @@
 using KitchenDrinksMod.ToMoveToLibraryModLater.Registry;
 using KitchenDrinksMod.Utils;
 using KitchenLib.Utils;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace KitchenDrinksMod.Boba
 {
     public class BobaProvider : ModAppliance
     {
-        public override string UniqueNameID => "Source - Boba";
+        public override string UniqueNameID => "Boba - Source";
         public override string Name => "Boba Pearls";
-        public override PriceTier PriceTier => PriceTier.Cheap;
+        public override PriceTier PriceTier => PriceTier.Medium;
         public override bool SellOnlyAsDuplicate => true;
         public override bool IsPurchasable => true;
         public override ShoppingTags ShoppingTags => ShoppingTags.Cooking | ShoppingTags.Misc;
         public override GameObject Prefab => Prefabs.BobaProvider;
-        public override List<IApplianceProperty> Properties => new()
-        {
-            PropertyUtils.GetUnlimitedCItemProviderWithDirectInsert(Refs.UncookedBoba.ID)
-        };
         public override IDictionary<Locale, ApplianceInfo> LocalisedInfo => new Dictionary<Locale, ApplianceInfo>()
         {
             { Locale.English, LocalisationUtils.CreateApplianceInfo("Boba Pearls", "Provides boba pearls", new(), new()) }
         };
+        public override List<IApplianceProperty> Properties => new()
+        {
+            PropertyUtils.GetUnlimitedCItemProviderWithDirectInsert(Refs.UncookedBoba.ID)
+        };
 
-        public override void OnRegister(GameDataObject gdo)
+        protected override void Modify(Appliance appliance)
         {
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter", MaterialHelpers.GetMaterialArray("Wood 4 - Painted"));
             MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter Doors", MaterialHelpers.GetMaterialArray("Wood 4 - Painted"));

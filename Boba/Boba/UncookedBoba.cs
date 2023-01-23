@@ -1,13 +1,10 @@
 ﻿using KitchenData;
-using KitchenLib.Customs;
+using KitchenDrinksMod.ToMoveToLibraryModLater.Dishes;
 
 namespace KitchenDrinksMod.Boba
 {
-    public class CookedBoba: CustomItem
+    public class UncookedBoba: ModItem<BobaProvider>
     {
-        public override string UniqueNameID => "Boba - Cooked";
-        public override ItemCategory ItemCategory => ItemCategory.Generic;
-        public override ItemStorage ItemStorageFlags => ItemStorage.None;
-        public override ItemValue ItemValue => ItemValue.Small;
+        public override string UniqueNameID => "Boba - Uncooked";
     }
 }

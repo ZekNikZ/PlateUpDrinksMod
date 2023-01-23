@@ -2,37 +2,33 @@
 using KitchenDrinksMod.Utils;
 using KitchenLib.Customs;
 using KitchenLib.Utils;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace KitchenDrinksMod.Boba.Teas
 {
-    public class BlackTea : BaseTea
+    public class BlackBobaTea : BobaTea
     {
-        public override string UniqueNameID => "Black Tea - Base";
+        public override string UniqueNameID => "Boba Tea - Black";
         public override GameObject Prefab => Prefabs.BlackTeaBase;
         protected override string LiquidMaterial => "BlackTeaLiquid";
     }
 
-    public class MatchaTea : BaseTea
+    public class MatchaBobaTea : BobaTea
     {
-        public override string UniqueNameID => "Matcha Tea - Base";
+        public override string UniqueNameID => "Boba Tea - Matcha";
         public override GameObject Prefab => Prefabs.MatchaTeaBase;
         protected override string LiquidMaterial => "MatchaTeaLiquid";
     }
 
-    public class TaroTea : BaseTea
+    public class TaroBobaTea : BobaTea
     {
-        public override string UniqueNameID => "Taro Tea - Base";
+        public override string UniqueNameID => "Boba Tea - Taro";
         public override GameObject Prefab => Prefabs.TaroTeaBase;
         protected override string LiquidMaterial => "TaroTeaLiquid";
     }
 
-    public abstract class BaseTea: CustomItem
+    public abstract class BobaTea: CustomItem
     {
         public abstract override string UniqueNameID { get; }
         public abstract override GameObject Prefab { get; }

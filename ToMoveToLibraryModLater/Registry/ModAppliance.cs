@@ -6,7 +6,16 @@ namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
 {
     public abstract class ModAppliance : CustomAppliance
     {
-        public virtual IDictionary<Locale, ApplianceInfo> LocalisedInfo { get; private set; }
+        public struct VariableApplianceProcess
+        {
+            public int Item;
+            public List<Appliance.ApplianceProcesses> Processes;
+        }
+
+        public abstract override string UniqueNameID { get; }
+        public virtual IDictionary<Locale, ApplianceInfo> LocalisedInfo { get; internal set; }
+        public virtual List<VariableApplianceProcess> VariableApplianceProcesses { get; internal set; }
+        private bool GameDataBuilt = false;
 
         public override LocalisationObject<ApplianceInfo> Info
         {
@@ -23,14 +32,25 @@ namespace KitchenDrinksMod.ToMoveToLibraryModLater.Registry
             }
         }
 
-        public virtual List<VariableApplianceProcess> VariableApplianceProcesses { get; private set; }
-
-        public override void OnRegister(GameDataObject gameDataObject)
+        public override sealed void OnRegister(GameDataObject gdo)
         {
+            if (GameDataBuilt)
+            {
+                return;
+            }
+
             if (VariableApplianceProcesses != null)
             {
                 ModRegistry.AddVariableApplianceProcesses(this);
             }
+
+            gdo.name = $"DrinksMod - {UniqueNameID}";
+
+            Modify(gdo as Appliance);
+
+            GameDataBuilt = true;
         }
+
+        protected virtual void Modify(Appliance appliance) { }
     }
 }
