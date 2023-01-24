@@ -10,8 +10,8 @@ namespace KitchenDrinksMod.Boba
     {
         public override string UniqueNameID => "Boba Dish";
         public override DishType Type => DishType.Base;
-        public override GameObject DisplayPrefab => Prefabs.Find("BobaCupPrefab", "BlackServed");
-        public override GameObject IconPrefab => Prefabs.Find("BobaCupPrefab", "BlackServed");
+        public override GameObject DisplayPrefab => Prefabs.Find("BobaCupPrefab", "DishIcon");
+        public override GameObject IconPrefab => Prefabs.Find("BobaCupPrefab", "DishIcon");
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override List<string> StartingNameSet => new()
@@ -35,17 +35,17 @@ namespace KitchenDrinksMod.Boba
         {
             new Dish.MenuItem()
             {
-                Item = Refs.BlackTeaCombined,
+                Item = Refs.ServedBlackTea,
                 Phase = MenuPhase.Main
             },
             new Dish.MenuItem()
             {
-                Item = Refs.MatchaTeaCombined,
+                Item = Refs.ServedMatchaTea,
                 Phase = MenuPhase.Main
             },
             new Dish.MenuItem()
             {
-                Item = Refs.TaroTeaCombined,
+                Item = Refs.ServedTaroTea,
                 Phase = MenuPhase.Main
             }
         };

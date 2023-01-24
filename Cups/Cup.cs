@@ -1,7 +1,6 @@
 ﻿using KitchenData;
 using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
-using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,7 +35,7 @@ namespace KitchenDrinksMod.Cups
 
         protected override void Modify(Item item)
         {
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Model/Cup", MaterialHelpers.GetMaterialArray("Cup Base"));
+            Prefab.ApplyMaterialToChild("Model/Cup", "CupBase");
         }
     }
 }

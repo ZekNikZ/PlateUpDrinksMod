@@ -6,28 +6,30 @@ using UnityEngine;
 namespace KitchenDrinksMod.Util
 {
     /**
-     * Taken from https://github.com/DepletedNova/DrinksMod/blob/master/Util/MaterialHelper.cs
+     * Adapted from https://github.com/DepletedNova/DrinksMod/blob/master/Util/MaterialHelper.cs
      */
     internal static class MaterialHelpers
     {
-        public static void ApplyMaterial<T>(this GameObject gameObject, Material[] materials) where T : Renderer
+        public static GameObject ApplyMaterial<T>(this GameObject gameObject, Material[] materials) where T : Renderer
         {
             var comp = gameObject.GetComponent<T>();
             if (comp == null)
-                return;
+                return gameObject;
 
             comp.materials = materials;
+
+            return gameObject;
         }
-        public static void ApplyMaterial(this GameObject gameObject, Material[] materials)
+        public static GameObject ApplyMaterial(this GameObject gameObject, Material[] materials)
         {
-            ApplyMaterial<MeshRenderer>(gameObject, materials);
+            return ApplyMaterial<MeshRenderer>(gameObject, materials);
         }
-        public static void ApplyMaterial(this GameObject gameObject, params string[] materials)
+        public static GameObject ApplyMaterial(this GameObject gameObject, params string[] materials)
         {
-            ApplyMaterial<MeshRenderer>(gameObject, GetMaterialArray(materials));
+            return ApplyMaterial<MeshRenderer>(gameObject, GetMaterialArray(materials));
         }
 
-        public static void ApplyMaterialToChildren<T>(this GameObject gameObject, string nameMatch, Material[] materials) where T : Renderer
+        public static GameObject ApplyMaterialToChildren<T>(this GameObject gameObject, string nameMatch, Material[] materials) where T : Renderer
         {
             for (int i = 0; i < gameObject.GetChildCount(); i++)
             {
@@ -36,27 +38,35 @@ namespace KitchenDrinksMod.Util
                     continue;
                 child.ApplyMaterial<T>(materials);
             }
+
+            return gameObject;
         }
-        public static void ApplyMaterialToChildren(this GameObject gameObject, string nameMatch, Material[] materials)
+        public static GameObject ApplyMaterialToChildren(this GameObject gameObject, string nameMatch, Material[] materials)
         {
-            ApplyMaterialToChildren<MeshRenderer>(gameObject, nameMatch, materials);
+            return ApplyMaterialToChildren<MeshRenderer>(gameObject, nameMatch, materials);
         }
-        public static void ApplyMaterialToChildren(this GameObject gameObject, string nameMatch, params string[] materials)
+        public static GameObject ApplyMaterialToChildren(this GameObject gameObject, string nameMatch, params string[] materials)
         {
-            ApplyMaterialToChildren<MeshRenderer>(gameObject, nameMatch, GetMaterialArray(materials));
+            return ApplyMaterialToChildren<MeshRenderer>(gameObject, nameMatch, GetMaterialArray(materials));
         }
 
-        public static void ApplyMaterialToChild<T>(this GameObject gameObject, string childName, Material[] materials) where T : Renderer
+        public static GameObject ApplyMaterialToChild<T>(this GameObject gameObject, string childName, Material[] materials) where T : Renderer
         {
-            gameObject.GetChild(childName).ApplyMaterial<T>(materials);
+            gameObject.GetChildFromPath(childName).ApplyMaterial<T>(materials);
+
+            return gameObject;
         }
-        public static void ApplyMaterialToChild(this GameObject gameObject, string childName, Material[] materials)
+        public static GameObject ApplyMaterialToChild(this GameObject gameObject, string childName, Material[] materials)
         {
-            gameObject.GetChild(childName).ApplyMaterial(materials);
+            gameObject.GetChildFromPath(childName).ApplyMaterial(materials);
+
+            return gameObject;
         }
-        public static void ApplyMaterialToChild(this GameObject gameObject, string childName, params string[] materials)
+        public static GameObject ApplyMaterialToChild(this GameObject gameObject, string childName, params string[] materials)
         {
-            gameObject.GetChild(childName).ApplyMaterial(GetMaterialArray(materials));
+            gameObject.GetChildFromPath(childName).ApplyMaterial(GetMaterialArray(materials));
+
+            return gameObject;
         }
 
         public static Material[] GetMaterialArray(params string[] materials)
@@ -108,6 +118,53 @@ namespace KitchenDrinksMod.Util
             Color col = Helper.ColorFromHex(color);
             col.a = opacity;
             return CreateTransparent(name, col);
+        }
+
+        public static GameObject SetupMaterialsLikeCounter(this GameObject gameObject)
+        {
+            gameObject.ApplyMaterialToChild("Block/Counter2/Counter", "Wood 4 - Painted");
+            gameObject.ApplyMaterialToChild("Block/Counter2/Counter Doors", "Wood 4 - Painted");
+            gameObject.ApplyMaterialToChild("Block/Counter2/Counter Surface", "Wood - Default");
+            gameObject.ApplyMaterialToChild("Block/Counter2/Counter Top", "Wood - Default");
+            gameObject.ApplyMaterialToChild("Block/Counter2/Handles", "Knob");
+
+            return gameObject;
+        }
+
+        public static GameObject SetupMaterialsLikePot(this GameObject gameObject)
+        {
+            gameObject.ApplyMaterialToChild("Pot/Pot/Cylinder", "Metal");
+            gameObject.ApplyMaterialToChild("Pot/Pot/Cylinder.003", "Metal Dark");
+            gameObject.ApplyMaterialToChild("Water", "Water");
+
+            return gameObject;
+        }
+
+        public static GameObject SetupMaterialsLikeBobaCup(this GameObject gameObject, string liquidMaterial, string lidMaterial = "BlackIndicator")
+        {
+            gameObject
+                .ApplyMaterialToChild("Cup", "BobaCup")
+                .ApplyMaterialToChild("Liquid1", liquidMaterial)
+                .ApplyMaterialToChild("Liquid2", liquidMaterial)
+                .ApplyMaterialToChild("Lid", lidMaterial)
+                .ApplyMaterialToChild("Straw", "Straw");
+
+            gameObject.GetChildFromPath("Boba").ApplyMaterialToChildren("CookedBoba");
+
+            return gameObject;
+        }
+
+        public static GameObject SetupMaterialsLikeMilkshake(this GameObject gameObject, string liquidMaterial, string iceCreamMaterial="Vanilla")
+        {
+            gameObject
+                .ApplyMaterialToChild("Model/Cup", "CupBase")
+                .ApplyMaterialToChild("Model/Liquid", liquidMaterial)
+                .ApplyMaterialToChild("Model/Straw", "Straw")
+                .ApplyMaterialToChild("Model/IceCream1", iceCreamMaterial)
+                .ApplyMaterialToChild("Model/IceCream2", iceCreamMaterial)
+                .ApplyMaterialToChild("Model/IceCream3", iceCreamMaterial);
+
+            return gameObject;
         }
     }
 }

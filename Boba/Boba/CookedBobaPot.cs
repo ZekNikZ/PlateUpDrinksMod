@@ -21,16 +21,10 @@ namespace KitchenDrinksMod.Boba
 
         protected override void Modify(Item item)
         {
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Pot/Pot/Cylinder", MaterialHelpers.GetMaterialArray("Metal"));
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Pot/Pot/Cylinder.003", MaterialHelpers.GetMaterialArray("Metal Dark"));
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Water", MaterialHelpers.GetMaterialArray("Water"));
+            Prefab.SetupMaterialsLikePot();
+            Prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("CookedBoba");
 
             Prefab.GetChildFromPath("BobaBalls").SetActive(true);
-
-            foreach (var mesh in Prefab.GetChildFromPath("BobaBalls").GetComponentsInChildren<MeshRenderer>())
-            {
-                mesh.materials = MaterialHelpers.GetMaterialArray("CookedBoba");
-            }
         }
     }
 }

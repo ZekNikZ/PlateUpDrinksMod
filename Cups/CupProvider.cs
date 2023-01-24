@@ -27,17 +27,13 @@ namespace KitchenDrinksMod.Cups
 
         protected override void Modify(Appliance appliance)
         {
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter", MaterialHelpers.GetMaterialArray("Wood 4 - Painted"));
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter Doors", MaterialHelpers.GetMaterialArray("Wood 4 - Painted"));
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter Surface", MaterialHelpers.GetMaterialArray("Wood - Default"));
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Counter Top", MaterialHelpers.GetMaterialArray("Wood - Default"));
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Handles", MaterialHelpers.GetMaterialArray("Knob"));
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Block/Counter2/Handles", MaterialHelpers.GetMaterialArray("Knob"));
+            Prefab.SetupMaterialsLikeCounter();
+
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, $"Cups/CupStack{i}/Cup{j}/Model/Cup", MaterialHelpers.GetMaterialArray("Cup Base"));
+                    Prefab.ApplyMaterialToChild($"Cups/CupStack{i}/Cup{j}/Model/Cup", "CupBase");
                 }
             }
         }

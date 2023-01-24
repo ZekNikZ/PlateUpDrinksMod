@@ -1,6 +1,7 @@
 ﻿using KitchenData;
 using KitchenDrinksMod.Boba;
 using KitchenDrinksMod.Cups;
+using KitchenDrinksMod.Milkshake;
 using KitchenDrinksMod.Milkshakes;
 using KitchenLib.Customs;
 using KitchenLib.References;
@@ -29,25 +30,30 @@ namespace KitchenDrinksMod
         #endregion
 
         #region Modded References
+        // Cups
         public static Item Cup => Find<Item, Cup>();
         public static Appliance CupProvider => Find<Appliance, CupProvider>();
-        public static Item MilkshakeVanilla => Find<Item, MilkshakeVanilla>();
-        public static ItemGroup MilkshakeVanillaRaw => Find<ItemGroup, MilkshakeVanillaRaw>();
-        public static Item MilkshakeChocolate => Find<Item, MilkshakeChocolate>();
-        public static ItemGroup MilkshakeChocolateRaw => Find<ItemGroup, MilkshakeChocolateRaw>();
-        public static Item MilkshakeStrawberry => Find<Item, MilkshakeStrawberry>();
-        public static ItemGroup MilkshakeStrawberryRaw => Find<ItemGroup, MilkshakeStrawberryRaw>();
+
+        // Milkshakes
+        public static Item ServedVanillaMilkshake => Find<Item, ServedVanillaMilkshake>();
+        public static Item ServedChocolateMilkshake => Find<Item, ServedChocolateMilkshake>();
+        public static Item ServedStrawberryMilkshake => Find<Item, ServedStrawberryMilkshake>();
+        public static ItemGroup VanillaMilkshake => Find<ItemGroup, VanillaMilkshake>();
+        public static ItemGroup ChocolateMilkshake => Find<ItemGroup, ChocolateMilkshake>();
+        public static ItemGroup StrawberryMilkshake => Find<ItemGroup, StrawberryMilkshake>();
         public static Dish MilkshakeDish => Find<Dish, MilkshakeDish>();
         public static Process Shake => Find<Process, ShakeProcess>();
         public static Appliance.ApplianceProcesses ShakeApplianceProcess => FindApplianceProcess<ShakeApplianceProcess>();
         public static Appliance.ApplianceProcesses ShakeApplianceProcessFast => FindApplianceProcess<ShakeApplianceProcessFast>();
+
+        // Boba
         public static Appliance TeaProvider => Find<Appliance, BobaTeaProvider>();
         public static Item BlackTea => Find<Item, BlackBobaTea>();
         public static Item MatchaTea => Find<Item, MatchaBobaTea>();
         public static Item TaroTea => Find<Item, TaroBobaTea>();
-        public static Item BlackTeaCombined => Find<Item, ServedBlackBobaTea>();
-        public static Item MatchaTeaCombined => Find<Item, ServedMatchaBobaTea>();
-        public static Item TaroTeaCombined => Find<Item, ServedTaroBobaTea>();
+        public static Item ServedBlackTea => Find<Item, ServedBlackBobaTea>();
+        public static Item ServedMatchaTea => Find<Item, ServedMatchaBobaTea>();
+        public static Item ServedTaroTea => Find<Item, ServedTaroBobaTea>();
         public static Process DispenseBlackTea => Find<Process, DispenseBlackTea>();
         public static Process DispenseMatchaTea => Find<Process, DispenseMatchaTea>();
         public static Process DispenseTaroTea => Find<Process, DispenseTaroTea>();

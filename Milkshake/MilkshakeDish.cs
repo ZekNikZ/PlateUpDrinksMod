@@ -2,7 +2,6 @@
 using KitchenDrinksMod.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace KitchenDrinksMod.Milkshakes
 {
@@ -10,8 +9,6 @@ namespace KitchenDrinksMod.Milkshakes
     {
         public override string UniqueNameID => "Milkshake Dish";
         public override DishType Type => DishType.Dessert;
-        public override GameObject DisplayPrefab => Prefabs.Find("Milkshake", "ChocolateServed");
-        public override GameObject IconPrefab => Prefabs.Find("Milkshake", "ChocolateServed");
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override HashSet<Item> MinimumIngredients => new()
@@ -28,17 +25,17 @@ namespace KitchenDrinksMod.Milkshakes
         {
             new Dish.MenuItem()
             {
-                Item = Refs.MilkshakeVanilla,
+                Item = Refs.ServedVanillaMilkshake,
                 Phase = MenuPhase.Dessert
             },
             new Dish.MenuItem()
             {
-                Item = Refs.MilkshakeChocolate,
+                Item = Refs.ServedChocolateMilkshake,
                 Phase = MenuPhase.Dessert
             },
             new Dish.MenuItem()
             {
-                Item = Refs.MilkshakeStrawberry,
+                Item = Refs.ServedStrawberryMilkshake,
                 Phase = MenuPhase.Dessert
             }
         };

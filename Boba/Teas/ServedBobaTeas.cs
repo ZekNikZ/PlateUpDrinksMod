@@ -9,24 +9,21 @@ namespace KitchenDrinksMod.Boba
 {
     public class ServedBlackBobaTea : BaseServedBobaTea<BlackBobaTea>
     {
-        public override string UniqueNameID => "Boba Tea - Black - Serving";
-        public override GameObject Prefab => Prefabs.Find("BobaCupPrefab", "BlackServed");
+        protected override string Name => "Black";
         protected override string LiquidMaterial => "BlackTeaLiquid";
         protected override string LidMaterial => "BlackIndicator";
     }
 
     public class ServedMatchaBobaTea : BaseServedBobaTea<MatchaBobaTea>
     {
-        public override string UniqueNameID => "Boba Tea - Matcha - Serving";
-        public override GameObject Prefab => Prefabs.Find("BobaCupPrefab", "MatchaServed");
+        protected override string Name => "Matcha";
         protected override string LiquidMaterial => "MatchaTeaLiquid";
         protected override string LidMaterial => "MatchaIndicator";
     }
 
     public class ServedTaroBobaTea : BaseServedBobaTea<TaroBobaTea>
     {
-        public override string UniqueNameID => "Boba Tea - Taro - Serving";
-        public override GameObject Prefab => Prefabs.Find("BobaCupPrefab", "TaroServed");
+        protected override string Name => "Taro";
         protected override string LiquidMaterial => "TaroTeaLiquid";
         protected override string LidMaterial => "TaroIndicator";
     }
@@ -90,13 +87,15 @@ namespace KitchenDrinksMod.Boba
         }
     }
 
-    public abstract class BaseServedBobaTea<T> : ModItemGroup where T: BobaTea
+    public abstract class BaseServedBobaTea<T> : ModItemGroup where T : BobaTea
     {
-        public abstract override string UniqueNameID { get; }
-        public abstract override GameObject Prefab { get; }
+        protected abstract string Name { get; }
         protected abstract string LiquidMaterial { get; }
         protected abstract string LidMaterial { get; }
 
+        public override string UniqueNameID => $"Boba Tea - {Name} - Serving";
+        public override GameObject Prefab => Prefabs.Find("BobaCupPrefab", $"{Name}Served");
+        public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemValue ItemValue => ItemValue.Medium;
 
@@ -126,16 +125,7 @@ namespace KitchenDrinksMod.Boba
 
         protected override void Modify(ItemGroup itemGroup)
         {
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Cup", MaterialHelpers.GetMaterialArray("BobaCup"));
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Liquid1", MaterialHelpers.GetMaterialArray(LiquidMaterial));
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Liquid2", MaterialHelpers.GetMaterialArray(LiquidMaterial));
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Lid", MaterialHelpers.GetMaterialArray(LidMaterial));
-            MaterialUtils.ApplyMaterial<MeshRenderer>(Prefab, "Straw", MaterialHelpers.GetMaterialArray("Straw"));
-
-            foreach (var mesh in Prefab.GetChildFromPath("Boba").GetComponentsInChildren<MeshRenderer>())
-            {
-                mesh.materials = MaterialHelpers.GetMaterialArray("CookedBoba");
-            }
+            Prefab.SetupMaterialsLikeBobaCup(LiquidMaterial, LidMaterial);
 
             if (!Prefab.HasComponent<ServedBobaView>())
             {

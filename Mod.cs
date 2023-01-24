@@ -51,6 +51,8 @@ namespace KitchenDrinksMod
         {
             LogInfo("Attempting to register game data...");
 
+            // Note to onlookers: this is a way for me to automatically register my custom
+            // GDOs without individually referencing each one here. Copy at your own risk.
             MethodInfo mAddGameDataObject = typeof(BaseMod).GetMethod(nameof(BaseMod.AddGameDataObject));
             MethodInfo mAddSubProcess = typeof(BaseMod).GetMethod(nameof(BaseMod.AddSubProcess));
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
@@ -82,14 +84,9 @@ namespace KitchenDrinksMod
         {
             LogInfo("Attempting to create materials...");
 
-            AddMaterial(MaterialHelpers.CreateFlat("Cup Base", 0xE0E0E0));
+            AddMaterial(MaterialHelpers.CreateFlat("CupBase", 0xE0E0E0));
             AddMaterial(MaterialHelpers.CreateFlat("Straw", 0x0099DB));
-
             AddMaterial(MaterialHelpers.CreateFlat("Milk", 0xB0B0B0));
-
-            AddMaterial(MaterialHelpers.CreateFlat("Vanilla", 0xFFF16D));
-            AddMaterial(MaterialHelpers.CreateFlat("Chocolate", 0x622300));
-            AddMaterial(MaterialHelpers.CreateFlat("Strawberry", 0xFF044E));
 
             foreach (var asset in Bundle.LoadAllAssets<TextAsset>())
             {
