@@ -1,5 +1,6 @@
 ﻿using KitchenData;
 using KitchenDrinksMod.Customs;
+using KitchenDrinksMod.Util;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,5 +58,10 @@ namespace KitchenDrinksMod.Boba
         {
             { Locale.English, LocalisationUtils.CreateUnlockInfo("Boba Tea", "Adds boba teas as a main", "Offers three types of boba teas to enjoy") }
         };
+
+        protected override void Modify(Dish dish)
+        {
+            DisplayPrefab.SetupMaterialsLikeBobaCup("BlackTeaLiquid", "BlackIndicator");
+        }
     }
 }

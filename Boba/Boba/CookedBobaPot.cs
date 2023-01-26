@@ -1,7 +1,6 @@
 ﻿using KitchenData;
 using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
-using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace KitchenDrinksMod.Boba
     public class CookedBobaPot : ModItem
     {
         public override string UniqueNameID => "Boba - Pot - Cooked";
-        public override GameObject Prefab => Prefabs.Find("BobaPot");
+        public override GameObject Prefab => Prefabs.Find("BobaPot", "Cooked");
         public override bool AllowSplitMerging => true;
         public override float SplitSpeed => 1f;
         public override int SplitCount => 3;
@@ -22,7 +21,7 @@ namespace KitchenDrinksMod.Boba
         protected override void Modify(Item item)
         {
             Prefab.SetupMaterialsLikePot();
-            Prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("CookedBoba");
+            Prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("Ball", "CookedBoba");
 
             Prefab.GetChildFromPath("BobaBalls").SetActive(true);
         }

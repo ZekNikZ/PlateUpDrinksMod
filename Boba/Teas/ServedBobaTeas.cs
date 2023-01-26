@@ -27,7 +27,8 @@ namespace KitchenDrinksMod.Boba
         protected override string LiquidMaterial => "TaroTeaLiquid";
         protected override string LidMaterial => "TaroIndicator";
     }
-    internal class ServedBobaView : CompletableItemGroupView
+
+    public class ServedBobaView : CompletableItemGroupView
     {
         public override void Initialize(GameObject prefab)
         {
@@ -123,15 +124,20 @@ namespace KitchenDrinksMod.Boba
             }
         };
 
-        protected override void Modify(ItemGroup itemGroup)
+        public override void AttachDependentProperties(GameData gameData, GameDataObject gameDataObject)
         {
-            Prefab.SetupMaterialsLikeBobaCup(LiquidMaterial, LidMaterial);
-
             if (!Prefab.HasComponent<ServedBobaView>())
             {
                 var view = Prefab.AddComponent<ServedBobaView>();
                 view.Initialize(Prefab);
             }
+
+            base.AttachDependentProperties(gameData, gameDataObject);
+        }
+
+        protected override void Modify(ItemGroup itemGroup)
+        {
+            Prefab.SetupMaterialsLikeBobaCup(LiquidMaterial, LidMaterial);
         }
     }
 }

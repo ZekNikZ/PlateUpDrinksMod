@@ -121,12 +121,17 @@ namespace KitchenDrinksMod.Milkshake
             }
         };
 
+        public override void AttachDependentProperties(GameData gameData, GameDataObject gameDataObject)
+        {
+            var view = Prefab.AddComponent<MilkshakeItemGroupView>();
+            view.Setup(Prefab, BaseIceCream, ColorblindLabel);
+
+            base.AttachDependentProperties(gameData, gameDataObject);
+        }
+
         protected override void Modify(ItemGroup itemGroup)
         {
             Prefab.SetupMaterialsLikeMilkshake("Milk", IceCreamMaterial);
-
-            var view = Prefab.AddComponent<MilkshakeItemGroupView>();
-            view.Setup(Prefab, BaseIceCream, ColorblindLabel);
         }
     }
 }

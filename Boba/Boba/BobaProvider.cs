@@ -30,7 +30,7 @@ namespace KitchenDrinksMod.Boba
             Prefab.SetupMaterialsLikeCounter()
                 .ApplyMaterialToChild("BobaBag", "BobaBag");
 
-            Prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("UncookedBoba");
+            Prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("Ball", "UncookedBoba");
         }
     }
 }

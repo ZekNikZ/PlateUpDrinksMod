@@ -149,7 +149,7 @@ namespace KitchenDrinksMod.Util
                 .ApplyMaterialToChild("Lid", lidMaterial)
                 .ApplyMaterialToChild("Straw", "Straw");
 
-            gameObject.GetChildFromPath("Boba").ApplyMaterialToChildren("CookedBoba");
+            gameObject.GetChildFromPath("Boba").ApplyMaterialToChildren("Boba", "CookedBoba");
 
             return gameObject;
         }

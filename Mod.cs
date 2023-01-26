@@ -138,9 +138,9 @@ namespace KitchenDrinksMod
             Bundle = mod.GetPacks<AssetBundleModPack>().SelectMany(e => e.AssetBundles).First();
             LogInfo("Done loading asset bundle.");
 
-            AddGameData();
-
             AddMaterials();
+
+            AddGameData();
 
             AddProcessIcons();
 

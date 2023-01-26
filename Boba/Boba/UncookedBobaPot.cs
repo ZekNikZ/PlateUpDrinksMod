@@ -2,7 +2,6 @@
 using KitchenData;
 using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
-using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ namespace KitchenDrinksMod.Boba
     public class UncookedBobaPot : ModItemGroup
     {
         public override string UniqueNameID => "Boba - Pot - Uncooked";
-        public override GameObject Prefab => Prefabs.Find("BobaPot");
+        public override GameObject Prefab => Prefabs.Find("BobaPot", "Uncooked");
         public override Item DisposesTo => Refs.Pot;
 
         public override List<ItemGroup.ItemSet> Sets => new()
@@ -56,25 +55,30 @@ namespace KitchenDrinksMod.Boba
                 {
                     new ComponentGroup()
                     {
-                        GameObject = GameObjectUtils.GetChildObject(prefab, "BobaBalls"),
+                        GameObject = prefab.GetChild("BobaBalls"),
                         Item = Refs.UncookedBoba
                     },
                     new ComponentGroup()
                     {
-                        GameObject = GameObjectUtils.GetChildObject(prefab, "Water"),
+                        GameObject = prefab.GetChild("Water"),
                         Item = Refs.Water
                     }
                 };
             }
         }
 
+        public override void AttachDependentProperties(GameData gameData, GameDataObject gameDataObject)
+        {
+            var view = Prefab.AddComponent<UncookedBobaPotView>();
+            view.Setup(Prefab);
+
+            base.AttachDependentProperties(gameData, gameDataObject);
+        }
+
         protected override void Modify(ItemGroup itemGroup)
         {
             Prefab.SetupMaterialsLikePot();
-            Prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("UncookedBoba");
-
-            var view = Prefab.AddComponent<UncookedBobaPotView>();
-            view.Setup(Prefab);
+            Prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("Ball", "UncookedBoba");
         }
     }
 }

@@ -27,8 +27,15 @@ namespace KitchenDrinksMod
 
                 if (copyName != "")
                 {
-                    var copy = Object.Instantiate(prefab);
+                    var parent = GameObject.Find("Prefabs");
+                    if (parent == null)
+                    {
+                        parent = new GameObject("Prefabs");
+                    }
+
+                    var copy = Object.Instantiate(prefab, parent.transform);
                     copy.transform.localPosition = Vector3.positiveInfinity;
+                    copy.name = name + copyName;
                     PrefabCache.Add(name + copyName, copy);
                 }
                 else
