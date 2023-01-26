@@ -7,7 +7,27 @@ using UnityEngine;
 
 namespace KitchenDrinksMod.Boba
 {
-    public class UncookedBobaPot : ModItemGroup
+    public class UncookedBobaPotView : ItemGroupView
+    {
+        internal void Setup(GameObject prefab)
+        {
+            ComponentGroups = new()
+            {
+                new ComponentGroup()
+                {
+                    GameObject = prefab.GetChild("BobaBalls"),
+                    Item = Refs.UncookedBoba
+                },
+                new ComponentGroup()
+                {
+                    GameObject = prefab.GetChild("Water"),
+                    Item = Refs.Water
+                }
+            };
+        }
+    }
+
+    public class UncookedBobaPot : ModItemGroup<UncookedBobaPotView>
     {
         public override string UniqueNameID => "Boba - Pot - Uncooked";
         public override GameObject Prefab => Prefabs.Find("BobaPot", "Uncooked");
@@ -47,38 +67,12 @@ namespace KitchenDrinksMod.Boba
             }
         };
 
-        private class UncookedBobaPotView : ItemGroupView
-        {
-            internal void Setup(GameObject prefab)
-            {
-                ComponentGroups = new()
-                {
-                    new ComponentGroup()
-                    {
-                        GameObject = prefab.GetChild("BobaBalls"),
-                        Item = Refs.UncookedBoba
-                    },
-                    new ComponentGroup()
-                    {
-                        GameObject = prefab.GetChild("Water"),
-                        Item = Refs.Water
-                    }
-                };
-            }
-        }
-
-        public override void AttachDependentProperties(GameData gameData, GameDataObject gameDataObject)
-        {
-            var view = Prefab.AddComponent<UncookedBobaPotView>();
-            view.Setup(Prefab);
-
-            base.AttachDependentProperties(gameData, gameDataObject);
-        }
-
         protected override void Modify(ItemGroup itemGroup)
         {
             Prefab.SetupMaterialsLikePot();
             Prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("Ball", "UncookedBoba");
+
+            Prefab.GetComponent<UncookedBobaPotView>()?.Setup(Prefab);
         }
     }
 }

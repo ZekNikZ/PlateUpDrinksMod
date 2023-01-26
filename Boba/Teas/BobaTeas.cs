@@ -1,6 +1,8 @@
-﻿using KitchenData;
+﻿using Kitchen;
+using KitchenData;
 using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
+using KitchenLib.Colorblind;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,18 +12,21 @@ namespace KitchenDrinksMod.Boba
     {
         protected override string Name => "Black";
         protected override string LiquidMaterial => "BlackTeaLiquid";
+        public override string ColourBlindTag => "Bl";
     }
 
     public class MatchaBobaTea : BobaTea
     {
         protected override string Name => "Matcha";
         protected override string LiquidMaterial => "MatchaTeaLiquid";
+        public override string ColourBlindTag => "Ma";
     }
 
     public class TaroBobaTea : BobaTea
     {
         protected override string Name => "Taro";
         protected override string LiquidMaterial => "TaroTeaLiquid";
+        public override string ColourBlindTag => "T";
     }
 
     public abstract class BobaTea : ModItem

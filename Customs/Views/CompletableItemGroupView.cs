@@ -1,8 +1,10 @@
 ﻿using Kitchen;
 using KitchenData;
 using KitchenDrinksMod.Util;
+using KitchenLib.Utils;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -19,24 +21,22 @@ namespace KitchenDrinksMod.Customs
     {
         private Dictionary<int, ComponentGroup> DrawComponents;
 
-        [SerializeField]
-        private TextMeshPro ColourblindLabel;
+        private FieldInfo fColourblindLabel = ReflectionUtils.GetField<ItemGroupView>("ColourblindLabel");
+        private TextMeshPro ColourblindLabel => (TextMeshPro)fColourblindLabel.GetValue(this);
 
-        [SerializeField]
-        private GameObject SubviewPrefab;
+        private FieldInfo fSubviewPrefab = ReflectionUtils.GetField<ItemGroupView>("SubviewPrefab");
+        private GameObject SubviewPrefab => (GameObject)fSubviewPrefab.GetValue(this);
 
-        [SerializeField]
-        private GameObject SubviewContainer;
-
-        [SerializeField]
-        protected new List<ComponentGroup> ComponentGroups;
+        private FieldInfo fSubviewContainer = ReflectionUtils.GetField<ItemGroupView>("SubviewContainer");
+        private GameObject SubviewContainer => (GameObject)fSubviewContainer.GetValue(this);
 
         [SerializeField]
         protected List<GameObject> CompletionObjects;
 
         [SerializeField]
-        protected new List<ColourBlindLabel> ComponentLabels = new();
+        protected string CompletionLabel;
 
+        [SerializeField]
         private CompletableItemGroupView Subview;
 
         private void Start()
@@ -49,17 +49,10 @@ namespace KitchenDrinksMod.Customs
             DrawComponents = ComponentGroups.ToDictionary(e => e.Item.ID, e => e);
         }
 
-        public virtual void Initialize(GameObject prefab)
-        {
-
-        }
-
         protected virtual bool IsComplete(ItemList components) => false;
 
         public new void PerformUpdate(int item_id, ItemList components)
         {
-            Mod.LogInfo("UPDATED");
-
             if (SubviewPrefab != null)
             {
                 if (Subview == null)
@@ -110,18 +103,25 @@ namespace KitchenDrinksMod.Customs
 
             if (ColourblindLabel != null && ComponentLabels != null)
             {
-                StringBuilder stringBuilder = new();
-                foreach (ColourBlindLabel colourBlindLabel in ComponentLabels)
+                if (CompletionLabel != null && IsComplete(components))
                 {
-                    foreach (int num2 in components)
+                    ColourblindLabel.text = CompletionLabel;
+                }
+                else
+                {
+                    StringBuilder stringBuilder = new();
+                    foreach (ColourBlindLabel colourBlindLabel in ComponentLabels)
                     {
-                        if (colourBlindLabel.Item.ID == num2)
+                        foreach (int num2 in components)
                         {
-                            stringBuilder.Append(colourBlindLabel.Text);
+                            if (colourBlindLabel.Item.ID == num2)
+                            {
+                                stringBuilder.Append(colourBlindLabel.Text);
+                            }
                         }
                     }
+                    ColourblindLabel.text = stringBuilder.ToString();
                 }
-                ColourblindLabel.text = stringBuilder.ToString();
             }
         }
 

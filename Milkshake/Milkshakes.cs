@@ -30,7 +30,7 @@ namespace KitchenDrinksMod.Milkshake
         protected override Item BaseIceCream => Refs.IceCreamVanilla;
     }
 
-    internal class MilkshakeItemGroupView : ItemGroupView
+    public class MilkshakeItemGroupView : ItemGroupView
     {
         internal void Setup(GameObject prefab, Item baseIceCream, string colorblindLabel)
         {
@@ -75,7 +75,7 @@ namespace KitchenDrinksMod.Milkshake
         }
     }
 
-    public abstract class BaseMilkshake<T> : ModItemGroup where T : BaseServedMilkshake
+    public abstract class BaseMilkshake<T> : ModItemGroup<MilkshakeItemGroupView> where T : BaseServedMilkshake
     {
         protected abstract string Name { get; }
         protected abstract string IceCreamMaterial { get; }
@@ -121,17 +121,11 @@ namespace KitchenDrinksMod.Milkshake
             }
         };
 
-        public override void AttachDependentProperties(GameData gameData, GameDataObject gameDataObject)
-        {
-            var view = Prefab.AddComponent<MilkshakeItemGroupView>();
-            view.Setup(Prefab, BaseIceCream, ColorblindLabel);
-
-            base.AttachDependentProperties(gameData, gameDataObject);
-        }
-
         protected override void Modify(ItemGroup itemGroup)
         {
             Prefab.SetupMaterialsLikeMilkshake("Milk", IceCreamMaterial);
+
+            Prefab.GetComponent<MilkshakeItemGroupView>()?.Setup(Prefab, BaseIceCream, ColorblindLabel);
         }
     }
 }

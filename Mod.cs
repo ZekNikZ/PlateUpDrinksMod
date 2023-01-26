@@ -88,15 +88,6 @@ namespace KitchenDrinksMod
             AddMaterial(MaterialHelpers.CreateFlat("Straw", 0x0099DB));
             AddMaterial(MaterialHelpers.CreateFlat("Milk", 0xB0B0B0));
 
-            foreach (var asset in Bundle.LoadAllAssets<TextAsset>())
-            {
-                if (asset.name.StartsWith("mat"))
-                {
-                    LogInfo($"Loading material from {asset.name}.json");
-                    AddMaterial(CustomMaterials.LoadMaterialFromJson(asset.text));
-                }
-            }
-
             LogInfo("Done creating materials.");
         }
 
@@ -118,6 +109,11 @@ namespace KitchenDrinksMod
         private bool done = false;
         protected override void OnUpdate()
         {
+            // Because of the silly way colorblind support is done in KitchenLib, I have to do this here
+            Refs.BlackTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0.05f, 0.4f, 0);
+            Refs.MatchaTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0.05f, 0.4f, 0);
+            Refs.TaroTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0.05f, 0.4f, 0);
+
             if (!DEBUG_MODE || done) return;
 
             done = true;

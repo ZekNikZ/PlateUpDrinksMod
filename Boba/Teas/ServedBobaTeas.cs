@@ -1,6 +1,7 @@
 ﻿using KitchenData;
 using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
+using KitchenLib.Colorblind;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace KitchenDrinksMod.Boba
         protected override string Name => "Black";
         protected override string LiquidMaterial => "BlackTeaLiquid";
         protected override string LidMaterial => "BlackIndicator";
+        protected override string ColorblindLabel => "Bl";
     }
 
     public class ServedMatchaBobaTea : BaseServedBobaTea<MatchaBobaTea>
@@ -19,6 +21,7 @@ namespace KitchenDrinksMod.Boba
         protected override string Name => "Matcha";
         protected override string LiquidMaterial => "MatchaTeaLiquid";
         protected override string LidMaterial => "MatchaIndicator";
+        protected override string ColorblindLabel => "M";
     }
 
     public class ServedTaroBobaTea : BaseServedBobaTea<TaroBobaTea>
@@ -26,11 +29,12 @@ namespace KitchenDrinksMod.Boba
         protected override string Name => "Taro";
         protected override string LiquidMaterial => "TaroTeaLiquid";
         protected override string LidMaterial => "TaroIndicator";
+        protected override string ColorblindLabel => "T";
     }
 
     public class ServedBobaView : CompletableItemGroupView
     {
-        public override void Initialize(GameObject prefab)
+        public void Setup(GameObject prefab, string completionLabel)
         {
             ComponentGroups = new()
             {
@@ -60,7 +64,7 @@ namespace KitchenDrinksMod.Boba
                 },
                 new()
                 {
-                    Text = "Ta",
+                    Text = "T",
                     Item = Refs.TaroTea
                 },
                 new()
@@ -80,6 +84,8 @@ namespace KitchenDrinksMod.Boba
                 GameObjectUtils.GetChildObject(prefab, "Lid"),
                 GameObjectUtils.GetChildObject(prefab, "Straw")
             };
+
+            CompletionLabel = completionLabel;
         }
 
         protected override bool IsComplete(ItemList components)
@@ -88,14 +94,16 @@ namespace KitchenDrinksMod.Boba
         }
     }
 
-    public abstract class BaseServedBobaTea<T> : ModItemGroup where T : BobaTea
+    public abstract class BaseServedBobaTea<T> : ModItemGroup<ServedBobaView> where T : BobaTea
     {
         protected abstract string Name { get; }
         protected abstract string LiquidMaterial { get; }
         protected abstract string LidMaterial { get; }
+        protected abstract string ColorblindLabel { get; }
 
         public override string UniqueNameID => $"Boba Tea - {Name} - Serving";
         public override GameObject Prefab => Prefabs.Find("BobaCupPrefab", $"{Name}Served");
+        protected override Vector3 ColorblindLabelPosition => new(0.05f, 0.4f, 0);
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemValue ItemValue => ItemValue.Medium;
@@ -124,20 +132,11 @@ namespace KitchenDrinksMod.Boba
             }
         };
 
-        public override void AttachDependentProperties(GameData gameData, GameDataObject gameDataObject)
-        {
-            if (!Prefab.HasComponent<ServedBobaView>())
-            {
-                var view = Prefab.AddComponent<ServedBobaView>();
-                view.Initialize(Prefab);
-            }
-
-            base.AttachDependentProperties(gameData, gameDataObject);
-        }
-
         protected override void Modify(ItemGroup itemGroup)
         {
             Prefab.SetupMaterialsLikeBobaCup(LiquidMaterial, LidMaterial);
+
+            Prefab.GetComponent<ServedBobaView>()?.Setup(Prefab, ColorblindLabel);
         }
     }
 }

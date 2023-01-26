@@ -47,42 +47,7 @@ namespace KitchenDrinksMod.Customs
             base.Initialise();
 
             Appliances = GetEntityQuery(new QueryHelper().All(typeof(CCreateAppliance)));
-            //ComponentTypes = new List<Type>();
-
-            //var fComponents = ReflectionUtils.GetField<AssemblyModPack>("Components");
-
-            //foreach (var mod in ModPreload.Mods)
-            //{
-            //    foreach (var pack in mod.GetPacks<AssemblyModPack>())
-            //    {
-            //        foreach (var type in (List<Type>) fComponents.GetValue(pack))
-            //        {
-            //            ComponentTypes.Add(type);
-            //            Mod.LogInfo($"Found modded property type: {type}");
-            //        }
-            //    }
-            //}
         }
-
-        //protected override void OnUpdate()
-        //{
-        //    using var appliances = Appliances.ToEntityArray(Allocator.TempJob);
-        //    foreach (var appliance in appliances)
-        //    {
-        //        int applianceId = EntityManager.GetComponentData<CCreateAppliance>(appliance).ID;
-        //        if (CustomGDO.GDOs.TryGetValue(applianceId, out CustomGameDataObject gdo))
-        //        {
-        //            foreach (var prop in ((Appliance) gdo.GameDataObject).Properties)
-        //            {
-        //                Mod.LogInfo($"Potential property type: {prop.GetType()}");
-        //                if (ComponentTypes.Any(type => type.IsAssignableFrom(prop.GetType())))
-        //                {
-        //                    EntityManager.AddComponentData(appliance, prop);
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
 
         protected override void OnUpdate()
         {

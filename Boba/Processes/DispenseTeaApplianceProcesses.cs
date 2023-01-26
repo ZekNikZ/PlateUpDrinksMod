@@ -21,7 +21,7 @@ namespace KitchenDrinksMod.Boba
     {
         protected abstract string Name { get; }
         public override string UniqueName => $"Dispense ${Name} Boba Tea Appliance Process";
-        public override float Speed => 0.75f;
+        public override float Speed => 1.25f;
         public override bool IsAutomatic => false;
     }
 }

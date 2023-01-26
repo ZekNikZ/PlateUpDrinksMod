@@ -32,7 +32,7 @@ namespace KitchenDrinksMod.Milkshake
         public override GameObject Prefab => Prefabs.Find("Milkshake", $"{Name}Served");
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
-        public override ItemValue ItemValue => ItemValue.Medium;
+        public override ItemValue ItemValue => ItemValue.SideLarge;
 
         protected override void Modify(Item item)
         {
