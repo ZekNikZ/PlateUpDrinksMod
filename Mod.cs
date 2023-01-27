@@ -12,7 +12,6 @@ using TMPro;
 using System.Collections.Generic;
 using KitchenLib.References;
 using KitchenData;
-using KitchenLib.Customs;
 using KitchenDrinksMod.Customs;
 
 namespace KitchenDrinksMod
@@ -102,9 +101,9 @@ namespace KitchenDrinksMod
             Refs.BlackTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
             Refs.MatchaTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
             Refs.TaroTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
-            Refs.ServedVanillaMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
-            Refs.ServedChocolateMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.4f, 0);
-            Refs.ServedStrawberryMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.4f, 0);
+            Refs.ServedVanillaMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
+            Refs.ServedChocolateMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
+            Refs.ServedStrawberryMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
 
             if (!DEBUG_MODE || done) return;
 

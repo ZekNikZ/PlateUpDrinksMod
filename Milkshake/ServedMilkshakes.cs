@@ -40,9 +40,10 @@ namespace KitchenDrinksMod.Milkshake
         protected override void Modify(Item item)
         {
             Prefab.SetupMaterialsLikeMilkshake(LiquidMaterial);
-            Prefab.GetChildFromPath("Model/IceCream1").SetActive(false);
-            Prefab.GetChildFromPath("Model/IceCream2").SetActive(false);
-            Prefab.GetChildFromPath("Model/IceCream3").SetActive(false);
+            Prefab.GetChildFromPath("MilkshakeCup/LiquidHalf").SetActive(false);
+            Prefab.GetChildFromPath("MilkshakeCup/IceCream1").SetActive(false);
+            Prefab.GetChildFromPath("MilkshakeCup/IceCream2").SetActive(false);
+            Prefab.GetChildFromPath("MilkshakeCup/IceCream3").SetActive(false);
         }
     }
 }

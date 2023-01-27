@@ -157,12 +157,13 @@ namespace KitchenDrinksMod.Util
         public static GameObject SetupMaterialsLikeMilkshake(this GameObject gameObject, string liquidMaterial, string iceCreamMaterial="Vanilla")
         {
             gameObject
-                .ApplyMaterialToChild("Model/Cup", "CupBase")
-                .ApplyMaterialToChild("Model/Liquid", liquidMaterial)
-                .ApplyMaterialToChild("Model/Straw", "Straw")
-                .ApplyMaterialToChild("Model/IceCream1", iceCreamMaterial)
-                .ApplyMaterialToChild("Model/IceCream2", iceCreamMaterial)
-                .ApplyMaterialToChild("Model/IceCream3", iceCreamMaterial);
+                .ApplyMaterialToChild("MilkshakeCup/Cup", "BobaCup")
+                .ApplyMaterialToChild("MilkshakeCup/LiquidFull", liquidMaterial)
+                .ApplyMaterialToChild("MilkshakeCup/LiquidHalf", liquidMaterial)
+                .ApplyMaterialToChild("MilkshakeCup/Straw", "Straw")
+                .ApplyMaterialToChild("MilkshakeCup/IceCream1", iceCreamMaterial)
+                .ApplyMaterialToChild("MilkshakeCup/IceCream2", iceCreamMaterial)
+                .ApplyMaterialToChild("MilkshakeCup/IceCream3", iceCreamMaterial);
 
             return gameObject;
         }

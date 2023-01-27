@@ -38,21 +38,21 @@ namespace KitchenDrinksMod.Milkshake
             {
                 new()
                 {
-                    GameObject = prefab.GetChildFromPath("Model/Cup"),
+                    GameObject = prefab.GetChildFromPath("MilkshakeCup/Cup"),
                     Item = Refs.Cup
                 },
                 new()
                 {
-                    GameObject = prefab.GetChildFromPath("Model/Liquid"),
+                    GameObject = prefab.GetChildFromPath("MilkshakeCup/LiquidHalf"),
                     Item = Refs.MilkIngredient
                 },
                 new()
                 {
                     Objects = new()
                     {
-                        prefab.GetChildFromPath("Model/IceCream1"),
-                        //prefab.GetChildFromPath("Model/IceCream2"),
-                        prefab.GetChildFromPath("Model/IceCream3")
+                        prefab.GetChildFromPath("MilkshakeCup/IceCream1"),
+                        prefab.GetChildFromPath("MilkshakeCup/IceCream2"),
+                        prefab.GetChildFromPath("MilkshakeCup/IceCream3")
                     },
                     DrawAll = true,
                     Item = baseIceCream
@@ -125,7 +125,8 @@ namespace KitchenDrinksMod.Milkshake
         protected override void Modify(ItemGroup itemGroup)
         {
             Prefab.SetupMaterialsLikeMilkshake("Milk", IceCreamMaterial);
-            Prefab.GetChildFromPath("Model/Straw").SetActive(false);
+            Prefab.GetChildFromPath("MilkshakeCup/Straw").SetActive(false);
+            Prefab.GetChildFromPath("MilkshakeCup/LiquidFull").SetActive(false);
 
             Prefab.GetComponent<MilkshakeItemGroupView>()?.Setup(Prefab, BaseIceCream, ColorblindLabel);
         }
