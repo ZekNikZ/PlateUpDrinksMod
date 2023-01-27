@@ -17,7 +17,11 @@ namespace KitchenDrinksMod.Boba
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override List<string> StartingNameSet => new()
         {
-            "Boba Tea"
+            "Quali-Tea",
+            "The Perfect Matcha",
+            "Taro-ific Teas",
+            "The Tea Room",
+            "Bubble Bubble"
         };
         public override HashSet<Item> MinimumIngredients => new()
         {
@@ -37,17 +41,20 @@ namespace KitchenDrinksMod.Boba
             new Dish.MenuItem()
             {
                 Item = Refs.ServedBlackTea,
-                Phase = MenuPhase.Main
+                Phase = MenuPhase.Main,
+                Weight = 1
             },
             new Dish.MenuItem()
             {
                 Item = Refs.ServedMatchaTea,
-                Phase = MenuPhase.Main
+                Phase = MenuPhase.Main,
+                Weight = 1
             },
             new Dish.MenuItem()
             {
                 Item = Refs.ServedTaroTea,
-                Phase = MenuPhase.Main
+                Phase = MenuPhase.Main,
+                Weight = 1
             }
         };
         public override IDictionary<Locale, string> LocalisedRecipe => new Dictionary<Locale, string>

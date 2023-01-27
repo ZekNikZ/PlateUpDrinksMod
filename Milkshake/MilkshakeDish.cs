@@ -26,17 +26,20 @@ namespace KitchenDrinksMod.Milkshakes
             new Dish.MenuItem()
             {
                 Item = Refs.ServedVanillaMilkshake,
-                Phase = MenuPhase.Dessert
+                Phase = MenuPhase.Dessert,
+                Weight = 1
             },
             new Dish.MenuItem()
             {
                 Item = Refs.ServedChocolateMilkshake,
-                Phase = MenuPhase.Dessert
+                Phase = MenuPhase.Dessert,
+                Weight = 1
             },
             new Dish.MenuItem()
             {
                 Item = Refs.ServedStrawberryMilkshake,
-                Phase = MenuPhase.Dessert
+                Phase = MenuPhase.Dessert,
+                Weight = 1
             }
         };
         public override IDictionary<Locale, string> LocalisedRecipe => new Dictionary<Locale, string>
