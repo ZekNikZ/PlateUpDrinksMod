@@ -11,8 +11,8 @@ namespace KitchenDrinksMod.Boba
     {
         public override string UniqueNameID => "Boba Dish";
         public override DishType Type => DishType.Base;
-        public override GameObject DisplayPrefab => Prefabs.Find("BobaCupPrefab", "DishIcon");
-        public override GameObject IconPrefab => Prefabs.Find("BobaCupPrefab", "DishIcon");
+        public override GameObject DisplayPrefab => Prefabs.Find("BobaCupIconPrefab");
+        public override GameObject IconPrefab => Prefabs.Find("BobaCupIconPrefab");
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override List<string> StartingNameSet => new()
@@ -61,7 +61,7 @@ namespace KitchenDrinksMod.Boba
 
         protected override void Modify(Dish dish)
         {
-            DisplayPrefab.SetupMaterialsLikeBobaCup("BlackTeaLiquid", "BlackIndicator");
+            DisplayPrefab.GetChildFromPath("BobaCupPrefab").SetupMaterialsLikeBobaCup("BlackTeaLiquid", "BlackIndicator");
         }
     }
 }

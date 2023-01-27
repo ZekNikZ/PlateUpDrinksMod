@@ -103,7 +103,7 @@ namespace KitchenDrinksMod.Boba
 
         public override string UniqueNameID => $"Boba Tea - {Name} - Serving";
         public override GameObject Prefab => Prefabs.Find("BobaCupPrefab", $"{Name}Served");
-        protected override Vector3 ColorblindLabelPosition => new(0.05f, 0.4f, 0);
+        protected override Vector3 ColorblindLabelPosition => new(0, 0.2f, 0);
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemValue ItemValue => ItemValue.Medium;

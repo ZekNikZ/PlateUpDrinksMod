@@ -80,17 +80,6 @@ namespace KitchenDrinksMod
             LogInfo("Done loading game data.");
         }
 
-        private void AddMaterials()
-        {
-            LogInfo("Attempting to create materials...");
-
-            AddMaterial(MaterialHelpers.CreateFlat("CupBase", 0xE0E0E0));
-            AddMaterial(MaterialHelpers.CreateFlat("Straw", 0x0099DB));
-            AddMaterial(MaterialHelpers.CreateFlat("Milk", 0xB0B0B0));
-
-            LogInfo("Done creating materials.");
-        }
-
         private void AddProcessIcons()
         {
             // No clue why this is needed, but it seems like I need to do this before loading any icon textures:
@@ -110,19 +99,20 @@ namespace KitchenDrinksMod
         protected override void OnUpdate()
         {
             // Because of the silly way colorblind support is done in KitchenLib, I have to do this here
-            Refs.BlackTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0.05f, 0.4f, 0);
-            Refs.MatchaTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0.05f, 0.4f, 0);
-            Refs.TaroTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0.05f, 0.4f, 0);
+            Refs.BlackTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
+            Refs.MatchaTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
+            Refs.TaroTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
+            Refs.ServedVanillaMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
+            Refs.ServedChocolateMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.4f, 0);
+            Refs.ServedStrawberryMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.4f, 0);
 
             if (!DEBUG_MODE || done) return;
-
-            done = true;
 
             var menuChoices = MenuItemQuery.ToEntityArray(Allocator.TempJob);
             foreach (var menuChoice in menuChoices)
             {
                 CDishChoice cDishChoice = EntityManager.GetComponentData<CDishChoice>(menuChoice);
-                cDishChoice.Dish = Refs.BobaDish.ID;
+                cDishChoice.Dish = Refs.MilkshakeDish.ID;
                 EntityManager.SetComponentData(menuChoice, cDishChoice);
             }
             menuChoices.Dispose();
@@ -133,8 +123,6 @@ namespace KitchenDrinksMod
             LogInfo("Attempting to load asset bundle...");
             Bundle = mod.GetPacks<AssetBundleModPack>().SelectMany(e => e.AssetBundles).First();
             LogInfo("Done loading asset bundle.");
-
-            AddMaterials();
 
             AddGameData();
 

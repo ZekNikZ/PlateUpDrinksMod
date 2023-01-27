@@ -84,6 +84,7 @@ namespace KitchenDrinksMod.Milkshake
 
         public override string UniqueNameID => $"Milkshake - {Name}";
         public override GameObject Prefab => Prefabs.Find("Milkshake", Name);
+        protected override Vector3 ColorblindLabelPosition => new(0, 0.7f, 0);
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
 
@@ -124,6 +125,7 @@ namespace KitchenDrinksMod.Milkshake
         protected override void Modify(ItemGroup itemGroup)
         {
             Prefab.SetupMaterialsLikeMilkshake("Milk", IceCreamMaterial);
+            Prefab.GetChildFromPath("Model/Straw").SetActive(false);
 
             Prefab.GetComponent<MilkshakeItemGroupView>()?.Setup(Prefab, BaseIceCream, ColorblindLabel);
         }
