@@ -57,7 +57,7 @@ namespace KitchenDrinksMod.Boba
                 Weight = 1
             }
         };
-        public override IDictionary<Locale, string> LocalisedRecipe => new Dictionary<Locale, string>
+        public override Dictionary<Locale, string> Recipe => new Dictionary<Locale, string>
         {
             { Locale.English, "Add boba pearls to water in pot and cook. Combine cooked boba with appropriate tea, then add milk and serve" }
         };

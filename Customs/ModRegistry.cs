@@ -12,18 +12,12 @@ namespace KitchenDrinksMod.Customs
     {
         private EntityQuery Upgrades;
 
-        private static readonly List<ModDish> RecipeHolders = new();
         private static readonly List<Dish> BaseDishes = new();
         private static readonly List<ModAppliance> VariableAppliances = new();
 
         public static readonly Dictionary<int, List<ModAppliance.VariableApplianceProcess>> VariableApplianceProcesses = new();
 
         private static bool GameDataBuilt = false;
-
-        public static void AddLocalisedRecipe(ModDish dish)
-        {
-            RecipeHolders.Add(dish);
-        }
 
         public static void AddBaseDish(Dish dish)
         {
@@ -40,16 +34,6 @@ namespace KitchenDrinksMod.Customs
             if (GameDataBuilt)
             {
                 return;
-            }
-
-            // Recipe holders
-            foreach (var holder in RecipeHolders)
-            {
-                foreach (var entry in holder.LocalisedRecipe)
-                {
-                    args.gamedata.GlobalLocalisation.Recipes.Info.Get(entry.Key).Text.Add(holder.GameDataObject as Dish, entry.Value);
-                    Mod.LogInfo($"Registered recipe \"{entry.Key}\" localization entry for dish {(holder.GameDataObject as Dish).Name} ({holder.GameDataObject.ID}): \"{entry.Value}\"");
-                }
             }
 
             // Variable processes

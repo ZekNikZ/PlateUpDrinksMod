@@ -14,7 +14,6 @@ namespace KitchenDrinksMod.Customs
         public override bool IsUnlockable => true;
         private bool GameDataBuilt = false;
 
-        public virtual IDictionary<Locale, string> LocalisedRecipe { get; }
         public virtual IDictionary<Locale, UnlockInfo> LocalisedInfo { get; }
 
         public override LocalisationObject<UnlockInfo> Info
@@ -40,7 +39,6 @@ namespace KitchenDrinksMod.Customs
             }
 
             Dish dish = gdo as Dish;
-            ModRegistry.AddLocalisedRecipe(this);
 
             if (Type == DishType.Base)
             {

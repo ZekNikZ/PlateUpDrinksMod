@@ -23,10 +23,8 @@ namespace KitchenDrinksMod
         #endregion
 
         #region IngredientLib References
-        public static Item Milk => Find<Item>("IngredientLib", "milk ");
-        //public static Item Milk => Find<Item>(IngredientLib.References.GetIngredient("milk"));
+        public static Item Milk => Find<Item>("IngredientLib", "milk");
         public static Item MilkIngredient => Find<Item>("IngredientLib", "milk ingredient");
-        //public static Item MilkIngredient => Find<Item>(IngredientLib.References.GetSplitIngredient("milk"));
         #endregion
 
         #region Modded References

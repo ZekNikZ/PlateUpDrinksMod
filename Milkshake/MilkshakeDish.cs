@@ -42,7 +42,7 @@ namespace KitchenDrinksMod.Milkshakes
                 Weight = 1
             }
         };
-        public override IDictionary<Locale, string> LocalisedRecipe => new Dictionary<Locale, string>
+        public override Dictionary<Locale, string> Recipe => new Dictionary<Locale, string>
         {
             { Locale.English, "Add ice cream and milk to cup and shake" }
         };
