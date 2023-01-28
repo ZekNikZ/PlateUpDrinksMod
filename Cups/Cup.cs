@@ -30,6 +30,24 @@ namespace KitchenDrinksMod.Cups
                 Process = Refs.DispenseTaroTea,
                 Result = Refs.TaroTea,
                 Duration = 1f
+            },
+            new Item.ItemProcess()
+            {
+                Process = Refs.DispenseRedSoda,
+                Result = Refs.RedSoda,
+                Duration = 1f
+            },
+            new Item.ItemProcess()
+            {
+                Process = Refs.DispenseGreenSoda,
+                Result = Refs.GreenSoda,
+                Duration = 1f
+            },
+            new Item.ItemProcess()
+            {
+                Process = Refs.DispenseBlueSoda,
+                Result = Refs.BlueSoda,
+                Duration = 1f
             }
         };
 

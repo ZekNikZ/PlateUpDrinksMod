@@ -118,7 +118,7 @@ namespace KitchenDrinksMod.Milkshake
             {
                 Process = Refs.Shake,
                 Result = Refs.Find<Item, T>(),
-                Duration = 1
+                Duration = 0.75f
             }
         };
 

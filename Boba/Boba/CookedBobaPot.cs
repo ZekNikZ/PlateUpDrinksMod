@@ -29,7 +29,7 @@ namespace KitchenDrinksMod.Boba
         public override GameObject Prefab => Prefabs.Find("BobaPot", "Cooked");
         public override bool AllowSplitMerging => true;
         public override float SplitSpeed => 0.75f;
-        public override int SplitCount => 3;
+        public override int SplitCount => 5;
         public override Item SplitSubItem => Refs.CookedBoba;
         public override List<Item> SplitDepletedItems => new() { Refs.Pot };
         public override bool PreventExplicitSplit => true;

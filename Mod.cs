@@ -20,7 +20,7 @@ namespace KitchenDrinksMod
     {
         public const string MOD_GUID = "io.zkz.plateup.drinks";
         public const string MOD_NAME = "Drinks";
-        public const string MOD_VERSION = "0.2.1";
+        public const string MOD_VERSION = "0.3.1";
         public const string MOD_AUTHOR = "ZekNikZ";
         public const string MOD_GAMEVERSION = ">=1.1.3";
 
@@ -95,15 +95,33 @@ namespace KitchenDrinksMod
         /// This entity query and modifications are only used to test my starting dish easier.
         /// </summary>
         private bool done = false;
+        private bool colorblindSetup = false;
         protected override void OnUpdate()
         {
-            // Because of the silly way colorblind support is done in KitchenLib, I have to do this here
-            Refs.BlackTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
-            Refs.MatchaTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
-            Refs.TaroTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
-            Refs.ServedVanillaMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
-            Refs.ServedChocolateMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
-            Refs.ServedStrawberryMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
+            if (!colorblindSetup)
+            {
+                Refs.BlackTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
+                Refs.MatchaTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
+                Refs.TaroTea.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
+
+                Refs.ServedVanillaMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
+                Refs.ServedChocolateMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
+                Refs.ServedStrawberryMilkshake.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
+
+                Refs.RedSoda.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
+                Refs.GreenSoda.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
+                Refs.BlueSoda.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
+
+                Refs.TeaProvider.Prefab.GetChildFromPath("TeaDispenser1/ColorblindLabelParent").AddApplianceColorblindLabel("Bl");
+                Refs.TeaProvider.Prefab.GetChildFromPath("TeaDispenser2/ColorblindLabelParent").AddApplianceColorblindLabel("Ma");
+                Refs.TeaProvider.Prefab.GetChildFromPath("TeaDispenser3/ColorblindLabelParent").AddApplianceColorblindLabel("T");
+
+                Refs.SodaProvider.Prefab.GetChildFromPath("ColorblindLabelParent1").AddApplianceColorblindLabel("R");
+                Refs.SodaProvider.Prefab.GetChildFromPath("ColorblindLabelParent2").AddApplianceColorblindLabel("G");
+                Refs.SodaProvider.Prefab.GetChildFromPath("ColorblindLabelParent3").AddApplianceColorblindLabel("B");
+
+                colorblindSetup = true;
+            }
 
             if (!DEBUG_MODE || done) return;
 
@@ -111,7 +129,7 @@ namespace KitchenDrinksMod
             foreach (var menuChoice in menuChoices)
             {
                 CDishChoice cDishChoice = EntityManager.GetComponentData<CDishChoice>(menuChoice);
-                cDishChoice.Dish = Refs.MilkshakeDish.ID;
+                cDishChoice.Dish = Refs.SodaDish.ID;
                 EntityManager.SetComponentData(menuChoice, cDishChoice);
             }
             menuChoices.Dispose();

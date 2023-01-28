@@ -154,6 +154,16 @@ namespace KitchenDrinksMod.Util
             return gameObject;
         }
 
+        public static GameObject SetupMaterialsLikeSodaCup(this GameObject gameObject, string liquidMaterial, string lidMaterial = "BlackIndicator")
+        {
+            gameObject
+                .ApplyMaterialToChild("Model/Cup", "CupBase")
+                .ApplyMaterialToChild("Model/Liquid", liquidMaterial)
+                .ApplyMaterialToChild("Model/Straw", "Straw");
+
+            return gameObject;
+        }
+
         public static GameObject SetupMaterialsLikeMilkshake(this GameObject gameObject, string liquidMaterial, string iceCreamMaterial="Vanilla")
         {
             gameObject

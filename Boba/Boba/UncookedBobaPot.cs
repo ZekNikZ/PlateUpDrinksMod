@@ -63,7 +63,7 @@ namespace KitchenDrinksMod.Boba
             {
                 Process = Refs.Cook,
                 Result = Refs.CookedBobaPot,
-                Duration = 2
+                Duration = 4
             }
         };
 

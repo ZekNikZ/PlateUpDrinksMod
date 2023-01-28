@@ -7,20 +7,20 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace KitchenDrinksMod.Boba
+namespace KitchenDrinksMod.Soda
 {
-    public class BobaTeaProvider : ModAppliance
+    public class SodaProvider : ModAppliance
     {
-        public override string UniqueNameID => "Boba Tea - Source";
-        public override string Name => "Boba Teas";
+        public override string UniqueNameID => "Soda - Source";
+        public override string Name => "Fountain Drinks";
         public override PriceTier PriceTier => PriceTier.Medium;
         public override bool SellOnlyAsDuplicate => true;
         public override bool IsPurchasable => true;
         public override ShoppingTags ShoppingTags => ShoppingTags.Cooking | ShoppingTags.Misc;
-        public override GameObject Prefab => Prefabs.Find("TeaProvider", "Base");
+        public override GameObject Prefab => Prefabs.Find("SodaProvider", "Base");
         public override IDictionary<Locale, ApplianceInfo> LocalisedInfo => new Dictionary<Locale, ApplianceInfo>()
         {
-            { Locale.English, LocalisationUtils.CreateApplianceInfo("Boba Teas", "Provides teas for boba", new(), new()) }
+            { Locale.English, LocalisationUtils.CreateApplianceInfo("Fountain Drinks", "Provides soda", new(), new()) }
         };
         public override List<IApplianceProperty> Properties => new()
         {
@@ -39,14 +39,14 @@ namespace KitchenDrinksMod.Boba
                 Item = Refs.Cup.ID,
                 Processes = new()
                 {
-                    Refs.DispenseBlackTeaApplianceProcess,
-                    Refs.DispenseMatchaTeaApplianceProcess,
-                    Refs.DispenseTaroTeaApplianceProcess
+                    Refs.DispenseRedSodaApplianceProcess,
+                    Refs.DispenseGreenSodaApplianceProcess,
+                    Refs.DispenseBlueSodaApplianceProcess
                 }
             }
         };
 
-        internal class TeaProviderProcessView : VariableProcessView
+        internal class SodaProviderProcessView : VariableProcessView
         {
             internal void Setup(GameObject prefab)
             {
@@ -54,9 +54,9 @@ namespace KitchenDrinksMod.Boba
                 HoldPointContainer = prefab.GetComponent<HoldPointContainer>();
                 HoldPoints = new()
                 {
-                    prefab.GetChildFromPath("TeaDispenser1/HoldPoint1").transform,
-                    prefab.GetChildFromPath("TeaDispenser2/HoldPoint2").transform,
-                    prefab.GetChildFromPath("TeaDispenser3/HoldPoint3").transform,
+                    prefab.GetChildFromPath("HoldPoint1").transform,
+                    prefab.GetChildFromPath("HoldPoint2").transform,
+                    prefab.GetChildFromPath("HoldPoint3").transform,
                 };
                 HoldPointContainer.HoldPoint = HoldPoints.First();
             }
@@ -65,15 +65,21 @@ namespace KitchenDrinksMod.Boba
         protected override void Modify(Appliance appliance)
         {
             Prefab.SetupMaterialsLikeCounter();
-            var indicatorMats = new string[] { "BlackTeaLiquid", "MatchaTeaLiquid", "TaroTeaLiquid" };
+            GameObject dispenser = Prefab.GetChildFromPath("SodaDispenser");
+            dispenser.ApplyMaterialToChild("Back", "DMBlackPlastic", "MetalLight", "MetalDark")
+                .ApplyMaterialToChild("Base", "DMBlackPlastic", "MetalDark")
+                .ApplyMaterialToChild("BumpOut", "MetalLight", "DMBlackPlastic");
+
+            var indicatorMats = new string[] { "RedLiquid", "GreenLiquid", "BlueLiquid" };
             for (int i = 1; i <= 3; i++)
             {
-                Prefab.ApplyMaterialToChild($"TeaDispenser{i}", "DMAluminum", "DMBlackPlastic", indicatorMats[i - 1]);
-                Prefab.ApplyMaterialToChild($"TeaDispenser{i}/Indicator{i}", "DispenserIndicator");
+                dispenser.ApplyMaterialToChild($"Flavor{i}", indicatorMats[i - 1]);
+                dispenser.ApplyMaterialToChild($"Indicator{i}", "DispenserIndicator");
+                dispenser.ApplyMaterialToChild($"Nozzle{i}", "DMBlackPlastic");
             }
 
             Prefab.AddComponent<HoldPointContainer>();
-            var view = Prefab.AddComponent<TeaProviderProcessView>();
+            var view = Prefab.AddComponent<SodaProviderProcessView>();
             view.Setup(Prefab);
         }
     }

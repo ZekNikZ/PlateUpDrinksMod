@@ -1,8 +1,6 @@
-﻿using Kitchen;
-using KitchenData;
+﻿using KitchenData;
 using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
-using KitchenLib.Colorblind;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,6 +38,16 @@ namespace KitchenDrinksMod.Boba
         public override ItemStorage ItemStorageFlags => ItemStorage.None;
         public override ItemValue ItemValue => ItemValue.Small;
         public override Appliance DedicatedProvider => Refs.TeaProvider;
+
+        public override List<Item.ItemProcess> Processes => new()
+        {
+            new()
+            {
+                Process = Refs.Clean,
+                Duration = 0.35f,
+                Result = Refs.Cup
+            }
+        };
 
         protected override void Modify(Item item)
         {
