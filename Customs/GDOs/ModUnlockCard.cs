@@ -4,12 +4,11 @@ using System.Collections.Generic;
 
 namespace KitchenDrinksMod.Customs
 {
-    public abstract class ModDish : CustomDish, IModGDO
+    public abstract class ModUnlockCard : CustomUnlockCard, IModGDO
     {
         public abstract override string UniqueNameID { get; }
-        public abstract override DishType Type { get; }
         public override CardType CardType => CardType.Default;
-        public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
+        public override UnlockGroup UnlockGroup => UnlockGroup.Generic;
         public override bool IsUnlockable => true;
         private bool GameDataBuilt = false;
 
@@ -37,20 +36,15 @@ namespace KitchenDrinksMod.Customs
                 return;
             }
 
-            Dish dish = gdo as Dish;
-
-            if (Type == DishType.Base)
-            {
-                ModRegistry.AddBaseDish(dish);
-            }
+            UnlockCard card = gdo as UnlockCard;
 
             gdo.name = $"DrinksMod - {UniqueNameID}";
 
-            Modify(dish);
+            Modify(card);
 
             GameDataBuilt = true;
         }
 
-        protected virtual void Modify(Dish dish) { }
+        protected virtual void Modify(UnlockCard dish) { }
     }
 }
