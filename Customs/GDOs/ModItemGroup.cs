@@ -1,12 +1,13 @@
 ﻿using Kitchen;
 using KitchenData;
+using KitchenDrinksMod.Util;
 using KitchenLib.Colorblind;
 using KitchenLib.Customs;
 using UnityEngine;
 
 namespace KitchenDrinksMod.Customs
 {
-    public abstract class ModItemGroup<T> : CustomItemGroup<T>, IModGDO where T: ItemGroupView
+    public abstract class ModItemGroup<T> : CustomItemGroup<T>, IModGDO where T : ItemGroupView
     {
         public abstract override string UniqueNameID { get; }
         protected virtual Vector3 ColorblindLabelPosition { get; private set; } = Vector3.zero;
@@ -17,12 +18,12 @@ namespace KitchenDrinksMod.Customs
 
         public override sealed void OnRegister(GameDataObject gdo)
         {
+            gdo.name = $"DrinksMod - {UniqueNameID}";
+
             if (GameDataBuilt)
             {
                 return;
             }
-
-            gdo.name = $"DrinksMod - {UniqueNameID}";
 
             Modify(gdo as ItemGroup);
 
@@ -37,5 +38,10 @@ namespace KitchenDrinksMod.Customs
         }
 
         protected virtual void Modify(ItemGroup itemGroup) { }
+    }
+
+    public abstract class ModItemGroup : ModItemGroup<DummyItemGroupView>
+    {
+
     }
 }

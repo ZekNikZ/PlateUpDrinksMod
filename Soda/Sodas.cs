@@ -35,7 +35,7 @@ namespace KitchenDrinksMod.Soda
         public override string UniqueNameID => $"Boba Tea - {Name}";
         public override GameObject Prefab => Prefabs.Find("SodaCupPrefab", $"{Name}");
         public override ItemCategory ItemCategory => ItemCategory.Generic;
-        public override ItemStorage ItemStorageFlags => ItemStorage.None;
+        public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemValue ItemValue => ItemValue.Small;
         public override Appliance DedicatedProvider => Refs.SodaProvider;
 

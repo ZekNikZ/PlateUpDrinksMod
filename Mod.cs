@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using KitchenLib.References;
 using KitchenData;
 using KitchenDrinksMod.Customs;
+using KitchenDrinksMod.Boba;
 
 namespace KitchenDrinksMod
 {
@@ -20,7 +21,7 @@ namespace KitchenDrinksMod
     {
         public const string MOD_GUID = "io.zkz.plateup.drinks";
         public const string MOD_NAME = "Drinks";
-        public const string MOD_VERSION = "0.3.1";
+        public const string MOD_VERSION = "0.3.2";
         public const string MOD_AUTHOR = "ZekNikZ";
         public const string MOD_GAMEVERSION = ">=1.1.3";
 
@@ -29,8 +30,6 @@ namespace KitchenDrinksMod
 #else
         public const bool DEBUG_MODE = false;
 #endif
-
-        private EntityQuery MenuItemQuery;
 
         public static AssetBundle Bundle;
 
@@ -41,9 +40,6 @@ namespace KitchenDrinksMod
             base.Initialise();
 
             LogWarning($"{MOD_GUID} v{MOD_VERSION} in use!");
-
-            MenuItemQuery = GetEntityQuery(new QueryHelper()
-                .All(typeof(CDishChoice)));
         }
 
         private void AddGameData()
@@ -94,7 +90,6 @@ namespace KitchenDrinksMod
         /// <summary>
         /// This entity query and modifications are only used to test my starting dish easier.
         /// </summary>
-        private bool done = false;
         private bool colorblindSetup = false;
         protected override void OnUpdate()
         {
@@ -112,6 +107,8 @@ namespace KitchenDrinksMod
                 Refs.GreenSoda.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
                 Refs.BlueSoda.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
 
+                Refs.MilkInCup.Prefab.GetChildFromPath("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
+
                 Refs.TeaProvider.Prefab.GetChildFromPath("TeaDispenser1/ColorblindLabelParent").AddApplianceColorblindLabel("Bl");
                 Refs.TeaProvider.Prefab.GetChildFromPath("TeaDispenser2/ColorblindLabelParent").AddApplianceColorblindLabel("Ma");
                 Refs.TeaProvider.Prefab.GetChildFromPath("TeaDispenser3/ColorblindLabelParent").AddApplianceColorblindLabel("T");
@@ -122,17 +119,6 @@ namespace KitchenDrinksMod
 
                 colorblindSetup = true;
             }
-
-            if (!DEBUG_MODE || done) return;
-
-            var menuChoices = MenuItemQuery.ToEntityArray(Allocator.TempJob);
-            foreach (var menuChoice in menuChoices)
-            {
-                CDishChoice cDishChoice = EntityManager.GetComponentData<CDishChoice>(menuChoice);
-                cDishChoice.Dish = Refs.SodaDish.ID;
-                EntityManager.SetComponentData(menuChoice, cDishChoice);
-            }
-            menuChoices.Dispose();
         }
 
         protected override void OnPostActivate(KitchenMods.Mod mod)
@@ -176,6 +162,9 @@ namespace KitchenDrinksMod
                 {
                     Refs.Find<Appliance>(appliance).Processes.Add(Refs.ShakeApplianceProcessFast);
                 }
+
+                // Fix bug with card requirements
+                Refs.Find<Unlock, ThrowOutCupsCard>().BlockedBy.Clear();
             };
         }
         #region Logging

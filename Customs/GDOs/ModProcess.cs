@@ -27,6 +27,8 @@ namespace KitchenDrinksMod.Customs
 
         public override sealed void OnRegister(GameDataObject gdo)
         {
+            gdo.name = $"DrinksMod - ${UniqueNameID}";
+
             if (GameDataBuilt)
             {
                 return;

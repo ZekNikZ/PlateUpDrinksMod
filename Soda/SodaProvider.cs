@@ -36,7 +36,7 @@ namespace KitchenDrinksMod.Soda
         {
             new VariableApplianceProcess
             {
-                Item = Refs.Cup.ID,
+                Items = new ItemList(Refs.Cup.ID),
                 Processes = new()
                 {
                     Refs.DispenseRedSodaApplianceProcess,
@@ -74,7 +74,7 @@ namespace KitchenDrinksMod.Soda
             for (int i = 1; i <= 3; i++)
             {
                 dispenser.ApplyMaterialToChild($"Flavor{i}", indicatorMats[i - 1]);
-                dispenser.ApplyMaterialToChild($"Indicator{i}", "DispenserIndicator");
+                dispenser.ApplyMaterialToChild($"Indicator{i}", indicatorMats[i - 1]);
                 dispenser.ApplyMaterialToChild($"Nozzle{i}", "DMBlackPlastic");
             }
 

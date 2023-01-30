@@ -36,7 +36,7 @@ namespace KitchenDrinksMod.Boba
         {
             new VariableApplianceProcess
             {
-                Item = Refs.Cup.ID,
+                Items = new ItemList(Refs.Cup.ID, Refs.MilkInCup.ID),
                 Processes = new()
                 {
                     Refs.DispenseBlackTeaApplianceProcess,
@@ -69,7 +69,7 @@ namespace KitchenDrinksMod.Boba
             for (int i = 1; i <= 3; i++)
             {
                 Prefab.ApplyMaterialToChild($"TeaDispenser{i}", "DMAluminum", "DMBlackPlastic", indicatorMats[i - 1]);
-                Prefab.ApplyMaterialToChild($"TeaDispenser{i}/Indicator{i}", "DispenserIndicator");
+                Prefab.ApplyMaterialToChild($"TeaDispenser{i}/Indicator{i}", indicatorMats[i - 1]);
             }
 
             Prefab.AddComponent<HoldPointContainer>();

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Entities;
 
-namespace KitchenDrinksMod.Boba.Teas
+namespace KitchenDrinksMod.Boba
 {
     public class ThrowOutCupsCard : ModUnlockCard
     {
@@ -14,6 +14,7 @@ namespace KitchenDrinksMod.Boba.Teas
 
         public override string UniqueNameID => "ThrowOutCupsCard";
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
+        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
 
         public override List<UnlockEffect> Effects => new()
         {
@@ -21,6 +22,11 @@ namespace KitchenDrinksMod.Boba.Teas
             {
                 Status = RestaurantStatus
             }
+        };
+
+        public override List<Unlock> HardcodedRequirements => new()
+        {
+            Refs.BobaDish
         };
 
         public override IDictionary<Locale, UnlockInfo> LocalisedInfo => new Dictionary<Locale, UnlockInfo>

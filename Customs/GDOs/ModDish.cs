@@ -32,6 +32,8 @@ namespace KitchenDrinksMod.Customs
 
         public override sealed void OnRegister(GameDataObject gdo)
         {
+            gdo.name = $"DrinksMod - {UniqueNameID}";
+
             if (GameDataBuilt)
             {
                 return;
@@ -39,12 +41,10 @@ namespace KitchenDrinksMod.Customs
 
             Dish dish = gdo as Dish;
 
-            if (Type == DishType.Base)
+            if (Type == DishType.Base || Mod.DEBUG_MODE)
             {
                 ModRegistry.AddBaseDish(dish);
             }
-
-            gdo.name = $"DrinksMod - {UniqueNameID}";
 
             Modify(dish);
 

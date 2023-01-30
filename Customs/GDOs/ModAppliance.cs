@@ -8,7 +8,7 @@ namespace KitchenDrinksMod.Customs
     {
         public struct VariableApplianceProcess
         {
-            public int Item;
+            public ItemList Items;
             public List<Appliance.ApplianceProcesses> Processes;
         }
 
@@ -34,6 +34,8 @@ namespace KitchenDrinksMod.Customs
 
         public override sealed void OnRegister(GameDataObject gdo)
         {
+            gdo.name = $"DrinksMod - {UniqueNameID}";
+
             if (GameDataBuilt)
             {
                 return;
@@ -43,8 +45,6 @@ namespace KitchenDrinksMod.Customs
             {
                 ModRegistry.AddVariableApplianceProcesses(this);
             }
-
-            gdo.name = $"DrinksMod - {UniqueNameID}";
 
             Modify(gdo as Appliance);
 
