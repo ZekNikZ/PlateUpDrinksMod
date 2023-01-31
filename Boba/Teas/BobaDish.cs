@@ -13,7 +13,7 @@ namespace KitchenDrinksMod.Boba
         public override DishType Type => DishType.Base;
         public override GameObject DisplayPrefab => Prefabs.Find("BobaCupIconPrefab");
         public override GameObject IconPrefab => Prefabs.Find("BobaCupIconPrefab");
-        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallIncrease;
+        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.LargeIncrease;
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override List<string> StartingNameSet => new()
         {

@@ -64,7 +64,7 @@ namespace KitchenDrinksMod.Boba
 
                     if (orderedItem.ItemID == Refs.ServedBlackTea.ID || orderedItem.ItemID == Refs.ServedMatchaTea.ID || orderedItem.ItemID == Refs.ServedTaroTea.ID)
                     {
-                        orderedItem.DirtItem = Refs.Pot.ID;
+                        orderedItem.DirtItem = Refs.DirtyBobaCup.ID;
                     }
 
                     buffer[i] = orderedItem;

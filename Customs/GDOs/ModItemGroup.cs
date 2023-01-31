@@ -11,6 +11,7 @@ namespace KitchenDrinksMod.Customs
     {
         public abstract override string UniqueNameID { get; }
         protected virtual Vector3 ColorblindLabelPosition { get; private set; } = Vector3.zero;
+        protected virtual bool AddColorblindLabel { get; private set; } = true;
 
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.None;
@@ -27,7 +28,7 @@ namespace KitchenDrinksMod.Customs
 
             Modify(gdo as ItemGroup);
 
-            if (Prefab.TryGetComponent<ItemGroupView>(out var itemGroupView))
+            if (AddColorblindLabel && Prefab.TryGetComponent<ItemGroupView>(out var itemGroupView))
             {
                 GameObject clonedColourBlind = ColorblindUtils.cloneColourBlindObjectAndAddToItem(GameDataObject as ItemGroup);
                 ColorblindUtils.setColourBlindLabelObjectOnItemGroupView(itemGroupView, clonedColourBlind);

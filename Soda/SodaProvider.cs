@@ -36,7 +36,7 @@ namespace KitchenDrinksMod.Soda
         {
             new VariableApplianceProcess
             {
-                Items = new ItemList(Refs.Cup.ID),
+                Items = new ItemList(Refs.Cup.ID, Refs.VanillaIceCreamInCup.ID),
                 Processes = new()
                 {
                     Refs.DispenseRedSodaApplianceProcess,

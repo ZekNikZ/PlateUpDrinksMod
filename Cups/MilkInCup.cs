@@ -1,10 +1,11 @@
-﻿using KitchenData;
+﻿using Kitchen;
+using KitchenData;
 using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KitchenDrinksMod.Milkshake
+namespace KitchenDrinksMod.Cups
 {
     public class MilkInCup : ModItemGroup
     {
@@ -12,7 +13,8 @@ namespace KitchenDrinksMod.Milkshake
         public override string ColourBlindTag => "Mi";
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override GameObject Prefab => Prefabs.Find("SodaCupPrefab", "Milk");
-        protected override Vector3 ColorblindLabelPosition => new Vector3(0, 0.7f, 0);
+        protected override Vector3 ColorblindLabelPosition => new(0, 0.7f, 0);
+        protected override bool AddColorblindLabel => false;
 
         public override List<ItemGroup.ItemSet> Sets => new()
         {

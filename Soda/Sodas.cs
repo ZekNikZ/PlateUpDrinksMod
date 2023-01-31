@@ -32,7 +32,7 @@ namespace KitchenDrinksMod.Soda
         protected abstract string Name { get; }
         protected abstract string LiquidMaterial { get; }
 
-        public override string UniqueNameID => $"Boba Tea - {Name}";
+        public override string UniqueNameID => $"Soda - {Name}";
         public override GameObject Prefab => Prefabs.Find("SodaCupPrefab", $"{Name}");
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;

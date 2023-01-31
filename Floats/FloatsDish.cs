@@ -3,52 +3,51 @@ using KitchenDrinksMod.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 
-namespace KitchenDrinksMod.Milkshakes
+namespace KitchenDrinksMod.Floats
 {
-    public class MilkshakeDish : ModDish
+    public class FloatsDish : ModDish
     {
-        public override string UniqueNameID => "Milkshake Dish";
+        public override string UniqueNameID => "Floats Dish";
         public override DishType Type => DishType.Dessert;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override HashSet<Item> MinimumIngredients => new()
         {
-            Refs.IceCreamVanilla,
-            Refs.Milk,
-            Refs.Cup
+            Refs.RedSoda,
+            Refs.Cup,
+            Refs.IceCreamVanilla
         };
         public override HashSet<Process> RequiredProcesses => new()
         {
-            Refs.Shake
         };
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {
             new Dish.MenuItem()
             {
-                Item = Refs.ServedVanillaMilkshake,
+                Item = Refs.RedFloat,
                 Phase = MenuPhase.Dessert,
                 Weight = 1
             },
             new Dish.MenuItem()
             {
-                Item = Refs.ServedChocolateMilkshake,
+                Item = Refs.GreenFloat,
                 Phase = MenuPhase.Dessert,
                 Weight = 1
             },
             new Dish.MenuItem()
             {
-                Item = Refs.ServedStrawberryMilkshake,
+                Item = Refs.BlueFloat,
                 Phase = MenuPhase.Dessert,
                 Weight = 1
             }
         };
         public override Dictionary<Locale, string> Recipe => new Dictionary<Locale, string>
         {
-            { Locale.English, "Add ice cream and milk to cup and shake" }
+            { Locale.English, "Dispense desired flavor of soda into a cup and add vanilla ice cream" }
         };
         public override IDictionary<Locale, UnlockInfo> LocalisedInfo => new Dictionary<Locale, UnlockInfo>
         {
-            { Locale.English, LocalisationUtils.CreateUnlockInfo("Milkshakes", "Adds milkshakes as a dessert", "Offers three flavours of milkshake as a dessert") }
+            { Locale.English, LocalisationUtils.CreateUnlockInfo("Floats", "Adds soda floats as a dessert", "Offers three flavours of vanilla floats") }
         };
     }
 }

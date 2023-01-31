@@ -1,0 +1,122 @@
+﻿using Kitchen;
+using KitchenData;
+using KitchenDrinksMod.Cups;
+using KitchenDrinksMod.Customs;
+using KitchenDrinksMod.Util;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace KitchenDrinksMod.Milkshake
+{
+    public class ChocolateMilkshake : BaseMilkshake<ServedChocolateMilkshake, ChocolateIceCreamInCup>
+    {
+        protected override string Name => "Chocolate";
+        protected override string IceCreamMaterial => "Chocolate";
+        protected override string ColorblindLabel => "C";
+    }
+
+    public class StrawberryMilkshake : BaseMilkshake<ServedStrawberryMilkshake, StrawberryIceCreamInCup>
+    {
+        protected override string Name => "Strawberry";
+        protected override string IceCreamMaterial => "Strawberry";
+        protected override string ColorblindLabel => "S";
+    }
+    public class VanillaMilkshake : BaseMilkshake<ServedVanillaMilkshake, VanillaIceCreamInCup>
+    {
+        protected override string Name => "Vanilla";
+        protected override string IceCreamMaterial => "Vanilla";
+        protected override string ColorblindLabel => "V";
+    }
+
+    public class MilkshakeItemGroupView : ItemGroupView
+    {
+        internal void Setup(GameObject prefab, Item iceCreamInCup, string colorblindLabel, Item milkIngredient=null)
+        {
+            ComponentGroups = new()
+            {
+                new()
+                {
+                    GameObject = prefab.GetChildFromPath("MilkshakeCup/LiquidHalf"),
+                    Item = milkIngredient ?? Refs.MilkIngredient
+                },
+                new()
+                {
+                    Objects = new()
+                    {
+                        prefab.GetChildFromPath("MilkshakeCup/Cup"),
+                        prefab.GetChildFromPath("MilkshakeCup/IceCream1"),
+                        prefab.GetChildFromPath("MilkshakeCup/IceCream2"),
+                        prefab.GetChildFromPath("MilkshakeCup/IceCream3")
+                    },
+                    DrawAll = true,
+                    Item = iceCreamInCup
+                }
+            };
+
+            ComponentLabels = new()
+            {
+                new()
+                {
+                    Text = "Mi",
+                    Item = Refs.MilkIngredient
+                },
+                new()
+                {
+                    Text = "Mi",
+                    Item = Refs.MilkInCup
+                },
+                new()
+                {
+                    Text = colorblindLabel,
+                    Item = iceCreamInCup
+                },
+            };
+        }
+    }
+
+    public abstract class BaseMilkshake<T, I> : ModItemGroup<MilkshakeItemGroupView> where T : BaseServedMilkshake where I : BaseIceCreamInCup
+    {
+        protected abstract string Name { get; }
+        protected abstract string IceCreamMaterial { get; }
+        protected abstract string ColorblindLabel { get; }
+
+        public override string UniqueNameID => $"Milkshake - {Name}";
+        public override GameObject Prefab => Prefabs.Find("Milkshake", Name);
+        protected override Vector3 ColorblindLabelPosition => new(0, 0.7f, 0);
+        public override ItemCategory ItemCategory => ItemCategory.Generic;
+        public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
+
+        public override List<ItemGroup.ItemSet> Sets => new()
+        {
+            new ItemGroup.ItemSet()
+            {
+                Min = 2,
+                Max = 2,
+                Items = new List<Item>
+                {
+                    Refs.MilkIngredient,
+                    Refs.Find<ItemGroup, I>()
+                }
+            }
+        };
+
+        public override List<Item.ItemProcess> Processes => new()
+        {
+            new Item.ItemProcess()
+            {
+                Process = Refs.Shake,
+                Result = Refs.Find<Item, T>(),
+                Duration = 0.75f
+            }
+        };
+
+        protected override void Modify(ItemGroup itemGroup)
+        {
+            Prefab.SetupMaterialsLikeMilkshake("Milk", IceCreamMaterial);
+            Prefab.GetChildFromPath("MilkshakeCup/Straw").SetActive(false);
+            Prefab.GetChildFromPath("MilkshakeCup/LiquidFull").SetActive(false);
+
+            Prefab.GetComponent<MilkshakeItemGroupView>()?.Setup(Prefab, Refs.Find<Item, I>(), ColorblindLabel);
+        }
+    }
+}

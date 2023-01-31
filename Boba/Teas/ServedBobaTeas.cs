@@ -1,7 +1,6 @@
 ﻿using KitchenData;
 using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
-using KitchenLib.Colorblind;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;

@@ -31,7 +31,7 @@ namespace KitchenDrinksMod.Milkshake
         protected override Item BaseIceCream => Refs.IceCreamVanilla;
     }
 
-    public abstract class BaseMilkFirstMilkshake<T> : ModItemGroup where T : BaseServedMilkshake
+    public abstract class BaseMilkFirstMilkshake<T> : ModItemGroup<MilkshakeItemGroupView> where T : BaseServedMilkshake
     {
         protected abstract string Name { get; }
         protected abstract string IceCreamMaterial { get; }
@@ -80,8 +80,10 @@ namespace KitchenDrinksMod.Milkshake
         protected override void Modify(ItemGroup itemGroup)
         {
             Prefab.SetupMaterialsLikeMilkshake("Milk", IceCreamMaterial);
+            Prefab.GetChildFromPath("MilkshakeCup/LiquidFull").SetActive(false);
+            Prefab.GetChildFromPath("MilkshakeCup/Straw").SetActive(false);
 
-            Prefab.GetComponent<MilkshakeItemGroupView>()?.Setup(Prefab, BaseIceCream, ColorblindLabel);
+            Prefab.GetComponent<MilkshakeItemGroupView>()?.Setup(Prefab, BaseIceCream, ColorblindLabel, Refs.MilkInCup);
         }
     }
 }

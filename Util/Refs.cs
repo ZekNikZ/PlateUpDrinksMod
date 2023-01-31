@@ -1,6 +1,7 @@
 ﻿using KitchenData;
 using KitchenDrinksMod.Boba;
 using KitchenDrinksMod.Cups;
+using KitchenDrinksMod.Floats;
 using KitchenDrinksMod.Milkshake;
 using KitchenDrinksMod.Milkshakes;
 using KitchenDrinksMod.Soda;
@@ -34,6 +35,7 @@ namespace KitchenDrinksMod
         // Cups
         public static Item Cup => Find<Item, Cup>();
         public static Item MilkInCup => Find<Item, MilkInCup>();
+        public static Item VanillaIceCreamInCup => Find<Item, VanillaIceCreamInCup>();
         public static Appliance CupProvider => Find<Appliance, CupProvider>();
 
         // Milkshakes
@@ -71,6 +73,7 @@ namespace KitchenDrinksMod
         public static Appliance BobaProvider => Find<Appliance, BobaProvider>();
         public static Item CookedBobaPot => Find<Item, CookedBobaPot>();
         public static Dish BobaDish => Find<Dish, BobaDish>();
+        public static Item DirtyBobaCup => Find<Item, DirtyBobaCup>();
 
         // Soda
         public static Item RedSoda => Find<Item, RedSoda>();
@@ -84,6 +87,15 @@ namespace KitchenDrinksMod
         public static Appliance.ApplianceProcesses DispenseGreenSodaApplianceProcess => FindApplianceProcess<DispenseGreenSodaApplianceProcess>();
         public static Appliance.ApplianceProcesses DispenseBlueSodaApplianceProcess => FindApplianceProcess<DispenseBlueSodaApplianceProcess>();
         public static Dish SodaDish => Find<Dish, SodaDish>();
+
+        // Floats
+        public static Item RedFloat => Find<Item, RedFloat>();
+        public static Item GreenFloat => Find<Item, GreenFloat>();
+        public static Item BlueFloat => Find<Item, BlueFloat>();
+        public static Item RedSodaWithIceCream => Find<Item, RedSodaWithIceCream>();
+        public static Item GreenSodaWithIceCream => Find<Item, GreenSodaWithIceCream>();
+        public static Item BlueSodaWithIceCream => Find<Item, BlueSodaWithIceCream>();
+        public static Dish FloatsDish => Find<Dish, FloatsDish>();
         #endregion
 
         internal static T Find<T>(int id) where T : GameDataObject
