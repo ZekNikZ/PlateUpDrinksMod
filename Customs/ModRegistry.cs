@@ -1,5 +1,4 @@
 ﻿using Kitchen;
-using KitchenData;
 using KitchenLib.Event;
 using System.Collections.Generic;
 using Unity.Collections;
@@ -7,22 +6,15 @@ using Unity.Entities;
 
 namespace KitchenDrinksMod.Customs
 {
-    [UpdateBefore(typeof(GrantUpgrades))]
-    internal class ModRegistry : GenericSystemBase
+    internal class ModRegistry
     {
         private EntityQuery Upgrades;
 
-        private static readonly List<Dish> BaseDishes = new();
         private static readonly List<ModAppliance> VariableAppliances = new();
 
         public static readonly Dictionary<int, List<ModAppliance.VariableApplianceProcess>> VariableApplianceProcesses = new();
 
         private static bool GameDataBuilt = false;
-
-        public static void AddBaseDish(Dish dish)
-        {
-            BaseDishes.Add(dish);
-        }
 
         public static void AddVariableApplianceProcesses(ModAppliance appliance)
         {
@@ -46,36 +38,6 @@ namespace KitchenDrinksMod.Customs
             Mod.LogInfo("Done building additional game data.");
 
             GameDataBuilt = true;
-        }
-
-        protected override void Initialise()
-        {
-            Upgrades = GetEntityQuery(typeof(CUpgrade));
-        }
-
-        protected override void OnUpdate()
-        {
-            // Base dishes
-            using NativeArray<CUpgrade> existing = Upgrades.ToComponentDataArray<CUpgrade>(Allocator.Temp);
-            foreach (var dish in BaseDishes)
-            {
-                foreach (CUpgrade item in existing)
-                {
-                    if (item.ID == dish.ID)
-                    {
-                        goto next_dish;
-                    }
-                }
-
-                var entity = EntityManager.CreateEntity(typeof(CUpgrade), typeof(CPersistThroughSceneChanges));
-                EntityManager.AddComponentData(entity, new CUpgrade
-                {
-                    ID = dish.ID
-                });
-                Mod.LogInfo($"Registered base dish {dish.Name} ({dish.ID})");
-
-            next_dish: { }
-            }
         }
     }
 }

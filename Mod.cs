@@ -3,11 +3,9 @@ using KitchenLib;
 using KitchenLib.Event;
 using KitchenMods;
 using System.Reflection;
-using Unity.Entities;
 using UnityEngine;
 using System.Linq;
 using KitchenDrinksMod.Util;
-using Unity.Collections;
 using TMPro;
 using System.Collections.Generic;
 using KitchenLib.References;
@@ -21,7 +19,7 @@ namespace KitchenDrinksMod
     {
         public const string MOD_GUID = "io.zkz.plateup.drinks";
         public const string MOD_NAME = "Drinks";
-        public const string MOD_VERSION = "0.4.0";
+        public const string MOD_VERSION = "0.4.2";
         public const string MOD_AUTHOR = "ZekNikZ";
         public const string MOD_GAMEVERSION = ">=1.1.3";
 

@@ -41,11 +41,6 @@ namespace KitchenDrinksMod.Customs
 
             Dish dish = gdo as Dish;
 
-            if (Type == DishType.Base || Mod.DEBUG_MODE)
-            {
-                ModRegistry.AddBaseDish(dish);
-            }
-
             Modify(dish);
 
             GameDataBuilt = true;

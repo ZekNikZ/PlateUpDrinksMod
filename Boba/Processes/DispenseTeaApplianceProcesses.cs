@@ -20,7 +20,7 @@ namespace KitchenDrinksMod.Boba
     public abstract class DispenseTeaApplianceProcess<T> : ModApplianceProcess<T> where T : DispenseTeaProcess
     {
         protected abstract string Name { get; }
-        public override string UniqueName => $"Dispense ${Name} Boba Tea Appliance Process";
+        public override string UniqueName => $"Dispense {Name} Boba Tea Appliance Process";
         public override float Speed => 1.25f;
         public override bool IsAutomatic => false;
     }

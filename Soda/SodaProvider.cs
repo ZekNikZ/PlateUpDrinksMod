@@ -25,7 +25,6 @@ namespace KitchenDrinksMod.Soda
         public override List<IApplianceProperty> Properties => new()
         {
             new CItemHolder(),
-            new CItemProvider(),
             new CVariableProcessContainer()
             {
                 Current = 0,

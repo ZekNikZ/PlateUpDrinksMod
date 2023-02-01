@@ -15,9 +15,10 @@ namespace KitchenDrinksMod.Boba
         public override GameObject IconPrefab => Prefabs.Find("BobaCupIconPrefab");
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.LargeIncrease;
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
+        public override bool IsAvailableAsLobbyOption => true;
         public override List<string> StartingNameSet => new()
         {
-            "Quali-Tea",
+            "Quali-Tea Drinks",
             "The Perfect Matcha",
             "Taro-ific Teas",
             "The Tea Room",

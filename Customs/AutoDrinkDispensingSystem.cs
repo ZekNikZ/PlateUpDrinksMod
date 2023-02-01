@@ -67,7 +67,7 @@ namespace KitchenDrinksMod.Customs
                 EntityManager.AddComponent<CAutomatedDrinkInteractorProvider>(appliance);
 
                 // Mark the drink provider so that we don't allow speeding up the process with multiple portioners
-                EntityManager.AddComponent<CAutomatedDrinkInteractorReciever>(facingAppliance);
+                // EntityManager.AddComponent<CAutomatedDrinkInteractorReciever>(facingAppliance);
             }
         }
     }

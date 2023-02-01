@@ -12,6 +12,7 @@ namespace KitchenDrinksMod.Boba
     {
         public const RestaurantStatus RestaurantStatus = (RestaurantStatus)(-628800);
 
+        public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
         public override string UniqueNameID => "ThrowOutCupsCard";
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;

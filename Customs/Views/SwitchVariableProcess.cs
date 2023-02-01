@@ -62,6 +62,7 @@ namespace KitchenDrinksMod.Customs
                         if (prop is CVariableProcessContainer container)
                         {
                             EntityManager.AddComponentData(appliance, container);
+                            EntityManager.RemoveComponent<CItemProvider>(appliance);
                         }
                     }
                 }
