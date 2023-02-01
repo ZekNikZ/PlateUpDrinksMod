@@ -26,7 +26,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.037990034, y: 0.23179911, z: -0.03605847}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2876047158068286873}
   m_Father: {fileID: 0}
@@ -99,9 +98,37 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7713488093689168173, guid: 578eef729658e57409034d75a5a3876f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -653670549176157601, guid: 578eef729658e57409034d75a5a3876f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 578eef729658e57409034d75a5a3876f, type: 3}
       propertyPath: m_Name
       value: MilkshakeCup
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348853086083086740, guid: 578eef729658e57409034d75a5a3876f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591596197004761495, guid: 578eef729658e57409034d75a5a3876f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745296001028295522, guid: 578eef729658e57409034d75a5a3876f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621357944151990850, guid: 578eef729658e57409034d75a5a3876f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8544919010764424634, guid: 578eef729658e57409034d75a5a3876f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 578eef729658e57409034d75a5a3876f, type: 3}
