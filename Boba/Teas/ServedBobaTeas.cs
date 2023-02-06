@@ -105,7 +105,7 @@ namespace KitchenDrinksMod.Boba
         protected override Vector3 ColorblindLabelPosition => new(0, 0.2f, 0);
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
-        public override ItemValue ItemValue => ItemValue.MediumLarge;
+        public override ItemValue ItemValue => ItemValue.Large;
 
         public override List<ItemGroup.ItemSet> Sets => new()
         {

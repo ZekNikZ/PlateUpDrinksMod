@@ -19,7 +19,7 @@ namespace KitchenDrinksMod
     {
         public const string MOD_GUID = "io.zkz.plateup.drinks";
         public const string MOD_NAME = "Drinks";
-        public const string MOD_VERSION = "0.4.2";
+        public const string MOD_VERSION = "0.4.3";
         public const string MOD_AUTHOR = "ZekNikZ";
         public const string MOD_GAMEVERSION = ">=1.1.3";
 
