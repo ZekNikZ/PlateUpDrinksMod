@@ -106,6 +106,7 @@ namespace KitchenDrinksMod.Boba
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemValue ItemValue => ItemValue.Large;
+        public override bool CanContainSide => true;
 
         public override List<ItemGroup.ItemSet> Sets => new()
         {
