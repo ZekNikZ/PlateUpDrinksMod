@@ -1,5 +1,5 @@
-﻿using KitchenData;
-using KitchenDrinksMod.Customs;
+﻿using ApplianceLib.Customs.GDO;
+using KitchenData;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 
@@ -42,13 +42,13 @@ namespace KitchenDrinksMod.Milkshakes
                 Weight = 1
             }
         };
-        public override Dictionary<Locale, string> Recipe => new Dictionary<Locale, string>
+        public override Dictionary<Locale, string> Recipe => new()
         {
             { Locale.English, "Add ice cream and milk to cup and shake" }
         };
-        public override IDictionary<Locale, UnlockInfo> LocalisedInfo => new Dictionary<Locale, UnlockInfo>
+        public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            { Locale.English, LocalisationUtils.CreateUnlockInfo("Milkshakes", "Adds milkshakes as a dessert", "Offers three flavours of milkshake as a dessert") }
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Milkshakes", "Adds milkshakes as a dessert", "Offers three flavours of milkshake as a dessert"))
         };
     }
 }

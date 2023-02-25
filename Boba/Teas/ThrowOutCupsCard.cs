@@ -1,6 +1,6 @@
-﻿using Kitchen;
+﻿using ApplianceLib.Customs.GDO;
+using Kitchen;
 using KitchenData;
-using KitchenDrinksMod.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using Unity.Collections;
@@ -30,9 +30,9 @@ namespace KitchenDrinksMod.Boba
             Refs.BobaDish
         };
 
-        public override IDictionary<Locale, UnlockInfo> LocalisedInfo => new Dictionary<Locale, UnlockInfo>
+        public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            { Locale.English, LocalisationUtils.CreateUnlockInfo("Dirty Cups", "Customers leave behind their dirty boba cups which must be thrown out", "Hopefully you have a bin!") }
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Dirty Cups", "Customers leave behind their dirty boba cups which must be thrown out", "Hopefully you have a bin!"))
         };
     }
 

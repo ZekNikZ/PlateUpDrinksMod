@@ -1,5 +1,5 @@
-﻿using KitchenData;
-using KitchenDrinksMod.Customs;
+﻿using ApplianceLib.Customs.GDO;
+using KitchenData;
 using KitchenDrinksMod.Util;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,9 +49,9 @@ namespace KitchenDrinksMod.Boba
             }
         };
 
-        protected override void Modify(Item item)
+        protected override void SetupPrefab(GameObject prefab)
         {
-            Prefab.SetupMaterialsLikeBobaCup(LiquidMaterial);
+            prefab.SetupMaterialsLikeBobaCup(LiquidMaterial);
 
             var disabledChildObjects = new List<string>()
             {
@@ -62,7 +62,7 @@ namespace KitchenDrinksMod.Boba
             };
             foreach (var childPath in disabledChildObjects)
             {
-                Prefab.GetChildFromPath(childPath).SetActive(false);
+                prefab.GetChildFromPath(childPath).SetActive(false);
             }
         }
     }

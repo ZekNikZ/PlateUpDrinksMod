@@ -1,5 +1,5 @@
-﻿using KitchenData;
-using KitchenDrinksMod.Customs;
+﻿using ApplianceLib.Customs.GDO;
+using KitchenData;
 using KitchenDrinksMod.Util;
 using KitchenLib.Utils;
 using System.Collections.Generic;
@@ -62,14 +62,14 @@ namespace KitchenDrinksMod.Boba
         {
             { Locale.English, "Add boba pearls to water in pot and cook. Combine cooked boba with appropriate tea, then add milk and serve" }
         };
-        public override IDictionary<Locale, UnlockInfo> LocalisedInfo => new Dictionary<Locale, UnlockInfo>
+        public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            { Locale.English, LocalisationUtils.CreateUnlockInfo("Boba Tea", "Adds boba teas as a main", "Offers three types of boba teas to enjoy") }
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Boba Tea", "Adds boba teas as a main", "Offers three types of boba teas to enjoy"))
         };
 
-        protected override void Modify(Dish dish)
+        protected override void SetupDisplayPrefab(GameObject prefab)
         {
-            DisplayPrefab.GetChildFromPath("BobaCupPrefab").SetupMaterialsLikeBobaCup("BlackTeaLiquid", "BlackIndicator");
+            prefab.GetChildFromPath("BobaCupPrefab").SetupMaterialsLikeBobaCup("BlackTeaLiquid", "BlackIndicator");
         }
     }
 }

@@ -1,17 +1,15 @@
 ﻿using Kitchen;
 using KitchenLib;
-using KitchenLib.Event;
 using KitchenMods;
 using System.Reflection;
 using UnityEngine;
 using System.Linq;
 using KitchenDrinksMod.Util;
 using TMPro;
+using ApplianceLib.Customs;
+using KitchenLib.Event;
 using System.Collections.Generic;
-using KitchenLib.References;
 using KitchenData;
-using KitchenDrinksMod.Customs;
-using KitchenDrinksMod.Boba;
 
 namespace KitchenDrinksMod
 {
@@ -33,10 +31,8 @@ namespace KitchenDrinksMod
 
         public Mod() : base(MOD_GUID, MOD_NAME, MOD_AUTHOR, MOD_VERSION, MOD_GAMEVERSION, Assembly.GetExecutingAssembly()) { }
 
-        protected override void Initialise()
+        protected override void OnInitialise()
         {
-            base.Initialise();
-
             LogWarning($"{MOD_GUID} v{MOD_VERSION} in use!");
         }
 
@@ -44,31 +40,7 @@ namespace KitchenDrinksMod
         {
             LogInfo("Attempting to register game data...");
 
-            // Note to onlookers: this is a way for me to automatically register my custom
-            // GDOs without individually referencing each one here. Copy at your own risk.
-            MethodInfo mAddGameDataObject = typeof(BaseMod).GetMethod(nameof(BaseMod.AddGameDataObject));
-            MethodInfo mAddSubProcess = typeof(BaseMod).GetMethod(nameof(BaseMod.AddSubProcess));
-            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
-            {
-                if (type.IsAbstract)
-                {
-                    continue;
-                }
-
-                if (typeof(IModGDO).IsAssignableFrom(type))
-                {
-                    LogInfo($"Found custom GDO of type {type.Name}");
-                    MethodInfo generic = mAddGameDataObject.MakeGenericMethod(type);
-                    generic.Invoke(this, null);
-                }
-
-                if (typeof(IModProcess).IsAssignableFrom(type))
-                {
-                    LogInfo($"Found sub process of type {type.Name}");
-                    MethodInfo generic = mAddSubProcess.MakeGenericMethod(type);
-                    generic.Invoke(this, null);
-                }
-            }
+            ModGDOs.RegisterModGDOs(this, Assembly.GetExecutingAssembly());
 
             LogInfo("Done loading game data.");
         }
@@ -129,40 +101,47 @@ namespace KitchenDrinksMod
 
             AddProcessIcons();
 
-            Events.BuildGameDataEvent += delegate (object s, BuildGameDataEventArgs args)
+            Events.BuildGameDataEvent += (s, args) =>
             {
-                ModRegistry.HandleBuildGameDataEvent(args);
-
-                // Add the milkshake shake process to the relevant processes
-                List<int> slowAppliances = new()
+                Refs.Cup.DerivedProcesses.AddRange(new List<Item.ItemProcess>()
                 {
-                    ApplianceReferences.Countertop,
-                    ApplianceReferences.CoffeeTable,
-                    ApplianceReferences.TableLarge,
-                    ApplianceReferences.TableBasicCloth,
-                    ApplianceReferences.TableFancyCloth,
-                    ApplianceReferences.TableCheapMetal,
-                    ApplianceReferences.SourceOil,
-                    ApplianceReferences.Workstation
-                };
-                foreach (var appliance in slowAppliances)
-                {
-                    Refs.Find<Appliance>(appliance).Processes.Add(Refs.ShakeApplianceProcess);
-                }
-                List<int> fastAppliances = new()
-                {
-                    ApplianceReferences.Mixer,
-                    ApplianceReferences.MixerHeated,
-                    ApplianceReferences.MixerRapid,
-                    ApplianceReferences.MixerPusher,
-                };
-                foreach (var appliance in fastAppliances)
-                {
-                    Refs.Find<Appliance>(appliance).Processes.Add(Refs.ShakeApplianceProcessFast);
-                }
-
-                // Fix bug with card requirements
-                Refs.Find<Unlock, ThrowOutCupsCard>().BlockedBy.Clear();
+                    new Item.ItemProcess()
+                    {
+                        Process = Refs.DispenseBlackTea,
+                        Result = Refs.BlackTea,
+                        Duration = 1f
+                    },
+                    new Item.ItemProcess()
+                    {
+                        Process = Refs.DispenseMatchaTea,
+                        Result = Refs.MatchaTea,
+                        Duration = 1f
+                    },
+                    new Item.ItemProcess()
+                    {
+                        Process = Refs.DispenseTaroTea,
+                        Result = Refs.TaroTea,
+                        Duration = 1f
+                    },
+                    new Item.ItemProcess()
+                    {
+                        Process = Refs.DispenseRedSoda,
+                        Result = Refs.RedSoda,
+                        Duration = 1f
+                    },
+                    new Item.ItemProcess()
+                    {
+                        Process = Refs.DispenseGreenSoda,
+                        Result = Refs.GreenSoda,
+                        Duration = 1f
+                    },
+                    new Item.ItemProcess()
+                    {
+                        Process = Refs.DispenseBlueSoda,
+                        Result = Refs.BlueSoda,
+                        Duration = 1f
+                    }
+                }.ToList());
             };
         }
         #region Logging

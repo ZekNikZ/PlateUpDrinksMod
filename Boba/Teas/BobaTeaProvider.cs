@@ -1,6 +1,8 @@
-﻿using Kitchen;
+﻿using ApplianceLib.Api;
+using ApplianceLib.Api.Prefab;
+using ApplianceLib.Customs.GDO;
+using Kitchen;
 using KitchenData;
-using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
 using KitchenLib.Utils;
 using System.Collections.Generic;
@@ -9,39 +11,42 @@ using UnityEngine;
 
 namespace KitchenDrinksMod.Boba
 {
-    public class BobaTeaProvider : ModAppliance
+    public class BobaTeaProvider : ModAppliance, IVariableProcessAppliance
     {
         public override string UniqueNameID => "Boba Tea - Source";
-        public override string Name => "Boba Teas";
         public override PriceTier PriceTier => PriceTier.Medium;
         public override bool SellOnlyAsDuplicate => true;
         public override bool IsPurchasable => true;
         public override ShoppingTags ShoppingTags => ShoppingTags.Cooking | ShoppingTags.Misc;
         public override GameObject Prefab => Prefabs.Find("TeaProvider", "Base");
-        public override IDictionary<Locale, ApplianceInfo> LocalisedInfo => new Dictionary<Locale, ApplianceInfo>()
+        public override List<(Locale, ApplianceInfo)> InfoList => new()
         {
-            { Locale.English, LocalisationUtils.CreateApplianceInfo("Boba Teas", "Provides teas for boba", new(), new()) }
+            (Locale.English, LocalisationUtils.CreateApplianceInfo("Boba Teas", "Provides teas for boba", new(), new()))
         };
         public override List<IApplianceProperty> Properties => new()
         {
             new CItemHolder(),
             new CVariableProcessContainer()
             {
-                Current = 0,
-                Max = 3
+                Current = 0
             }
         };
-        public override List<VariableApplianceProcess> VariableApplianceProcesses => new()
+        public List<Appliance.ApplianceProcesses> VariableApplianceProcesses => new()
         {
-            new VariableApplianceProcess
+            new()
             {
-                Items = new ItemList(Refs.Cup.ID, Refs.MilkInCup.ID),
-                Processes = new()
-                {
-                    Refs.DispenseBlackTeaApplianceProcess,
-                    Refs.DispenseMatchaTeaApplianceProcess,
-                    Refs.DispenseTaroTeaApplianceProcess
-                }
+                Process = Refs.DispenseBlackTea,
+                Speed = 1.25f
+            },
+            new()
+            {
+                Process = Refs.DispenseMatchaTea,
+                Speed = 1.25f
+            },
+            new()
+            {
+                Process = Refs.DispenseTaroTea,
+                Speed = 1.25f
             }
         };
 
@@ -57,22 +62,27 @@ namespace KitchenDrinksMod.Boba
                     prefab.GetChildFromPath("TeaDispenser2/HoldPoint2").transform,
                     prefab.GetChildFromPath("TeaDispenser3/HoldPoint3").transform,
                 };
-                HoldPointContainer.HoldPoint = HoldPoints.First();
             }
         }
 
         protected override void Modify(Appliance appliance)
         {
-            Prefab.SetupMaterialsLikeCounter();
+            NotActuallyProviders.RemoveProvidersFrom(appliance);
+        }
+
+        protected override void SetupPrefab(GameObject prefab)
+        {
+            prefab.AttachCounter(CounterType.Drawers);
+
             var indicatorMats = new string[] { "BlackTeaLiquid", "MatchaTeaLiquid", "TaroTeaLiquid" };
             for (int i = 1; i <= 3; i++)
             {
-                Prefab.ApplyMaterialToChild($"TeaDispenser{i}", "DMAluminum", "DMBlackPlastic", indicatorMats[i - 1]);
-                Prefab.ApplyMaterialToChild($"TeaDispenser{i}/Indicator{i}", indicatorMats[i - 1]);
+                prefab.ApplyMaterialToChild($"TeaDispenser{i}", "DMAluminum", "DMBlackPlastic", indicatorMats[i - 1]);
+                prefab.ApplyMaterialToChild($"TeaDispenser{i}/Indicator{i}", indicatorMats[i - 1]);
             }
 
-            Prefab.AddComponent<HoldPointContainer>();
-            var view = Prefab.AddComponent<TeaProviderProcessView>();
+            prefab.AddComponent<HoldPointContainer>();
+            var view = prefab.AddComponent<TeaProviderProcessView>();
             view.Setup(Prefab);
         }
     }

@@ -1,4 +1,5 @@
-﻿using KitchenData;
+﻿using ApplianceLib.Customs.GDO;
+using KitchenData;
 using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
 using KitchenLib.Utils;
@@ -89,7 +90,27 @@ namespace KitchenDrinksMod.Boba
 
         protected override bool IsComplete(ItemList components)
         {
-            return components.Count == 3;
+            bool foundBoba = false;
+            bool foundMilk = false;
+            bool foundTea = false;
+
+            foreach (var itemId in components)
+            {
+                if (itemId == Refs.CookedBoba.ID)
+                {
+                    foundBoba = true;
+                }
+                else if (itemId == Refs.MilkIngredient.ID)
+                {
+                    foundMilk = true;
+                }
+                else if (itemId == Refs.BlackTea.ID || itemId == Refs.MatchaTea.ID || itemId == Refs.TaroTea.ID)
+                {
+                    foundTea = true;
+                }
+            }
+
+            return foundBoba && foundMilk && foundTea;
         }
     }
 
@@ -132,11 +153,11 @@ namespace KitchenDrinksMod.Boba
             }
         };
 
-        protected override void Modify(ItemGroup itemGroup)
+        protected override void SetupPrefab(GameObject prefab)
         {
-            Prefab.SetupMaterialsLikeBobaCup(LiquidMaterial, LidMaterial);
+            prefab.SetupMaterialsLikeBobaCup(LiquidMaterial, LidMaterial);
 
-            Prefab.GetComponent<ServedBobaView>()?.Setup(Prefab, ColorblindLabel);
+            prefab.GetComponent<ServedBobaView>()?.Setup(Prefab, ColorblindLabel);
         }
     }
 }

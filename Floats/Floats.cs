@@ -1,4 +1,5 @@
-﻿using KitchenData;
+﻿using ApplianceLib.Customs.GDO;
+using KitchenData;
 using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Soda;
 using KitchenDrinksMod.Util;
@@ -76,11 +77,26 @@ namespace KitchenDrinksMod.Floats
 
         protected override bool IsComplete(ItemList components)
         {
-            return components.Count == 2;
+            bool foundSoda = false;
+            bool foundIceCream = false;
+
+            foreach (var itemId in components)
+            {
+                if (itemId == Refs.RedSoda.ID || itemId == Refs.GreenSoda.ID || itemId == Refs.BlueSoda.ID)
+                {
+                    foundSoda = true;
+                }
+                else if (itemId == Refs.IceCreamVanilla.ID)
+                {
+                    foundIceCream = true;
+                }
+            }
+
+            return foundSoda && foundIceCream;
         }
     }
 
-    public abstract class BaseFloat<T> : ModItemGroup<FloatItemGroupView> where T: BaseSoda
+    public abstract class BaseFloat<T> : ModItemGroup<FloatItemGroupView> where T : BaseSoda
     {
         protected abstract string Name { get; }
         protected abstract string ColorblindLabel { get; }
@@ -108,12 +124,12 @@ namespace KitchenDrinksMod.Floats
             }
         };
 
-        protected override void Modify(ItemGroup itemGroup)
+        protected override void SetupPrefab(GameObject prefab)
         {
-            Prefab.SetupMaterialsLikeMilkshake(LiquidMaterial);
-            Prefab.GetChildFromPath("MilkshakeCup/LiquidHalf").SetActive(false);
+            prefab.SetupMaterialsLikeMilkshake(LiquidMaterial);
+            prefab.GetChildFromPath("MilkshakeCup/LiquidHalf").SetActive(false);
 
-            Prefab.GetComponent<FloatItemGroupView>()?.Setup(Prefab, ColorblindLabel, Refs.Find<Item, T>());
+            prefab.GetComponent<FloatItemGroupView>()?.Setup(prefab, ColorblindLabel, Refs.Find<Item, T>());
         }
     }
 }

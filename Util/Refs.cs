@@ -1,8 +1,8 @@
-﻿using KitchenData;
+﻿using ApplianceLib.Api.References;
+using KitchenData;
 using KitchenDrinksMod.Boba;
 using KitchenDrinksMod.Cups;
 using KitchenDrinksMod.Floats;
-using KitchenDrinksMod.Milkshake;
 using KitchenDrinksMod.Milkshakes;
 using KitchenDrinksMod.Soda;
 using KitchenLib.Customs;
@@ -31,12 +31,15 @@ namespace KitchenDrinksMod
         public static Item MilkIngredient => Find<Item>("IngredientLib", "milk ingredient");
         #endregion
 
+        #region ApplianceLib References
+        public static Item Cup => ApplianceLibGDOs.Refs.Cup;
+        public static Appliance CupProvider => ApplianceLibGDOs.Refs.CupProvider;
+        #endregion
+
         #region Modded References
         // Cups
-        public static Item Cup => Find<Item, Cup>();
         public static Item MilkInCup => Find<Item, MilkInCup>();
         public static Item VanillaIceCreamInCup => Find<Item, VanillaIceCreamInCup>();
-        public static Appliance CupProvider => Find<Appliance, CupProvider>();
 
         // Milkshakes
         public static Item ServedVanillaMilkshake => Find<Item, ServedVanillaMilkshake>();
@@ -47,8 +50,6 @@ namespace KitchenDrinksMod
         public static ItemGroup StrawberryMilkshake => Find<ItemGroup, StrawberryMilkshake>();
         public static Dish MilkshakeDish => Find<Dish, MilkshakeDish>();
         public static Process Shake => Find<Process, ShakeProcess>();
-        public static Appliance.ApplianceProcesses ShakeApplianceProcess => FindApplianceProcess<ShakeApplianceProcess>();
-        public static Appliance.ApplianceProcesses ShakeApplianceProcessFast => FindApplianceProcess<ShakeApplianceProcessFast>();
 
         // Boba
         public static Appliance TeaProvider => Find<Appliance, BobaTeaProvider>();
@@ -64,9 +65,6 @@ namespace KitchenDrinksMod
         public static Process DispenseBlackTea => Find<Process, DispenseBlackTea>();
         public static Process DispenseMatchaTea => Find<Process, DispenseMatchaTea>();
         public static Process DispenseTaroTea => Find<Process, DispenseTaroTea>();
-        public static Appliance.ApplianceProcesses DispenseBlackTeaApplianceProcess => FindApplianceProcess<DispenseBlackTeaApplianceProcess>();
-        public static Appliance.ApplianceProcesses DispenseMatchaTeaApplianceProcess => FindApplianceProcess<DispenseMatchaTeaApplianceProcess>();
-        public static Appliance.ApplianceProcesses DispenseTaroTeaApplianceProcess => FindApplianceProcess<DispenseTaroTeaApplianceProcess>();
         public static Item UncookedBoba => Find<Item, UncookedBoba>();
         public static Item CookedBoba => Find<Item, CookedBoba>();
         public static Item BobaBag => Find<Item, BobaBag>();
@@ -83,9 +81,6 @@ namespace KitchenDrinksMod
         public static Process DispenseRedSoda => Find<Process, DispenseRedSoda>();
         public static Process DispenseGreenSoda => Find<Process, DispenseGreenSoda>();
         public static Process DispenseBlueSoda => Find<Process, DispenseBlueSoda>();
-        public static Appliance.ApplianceProcesses DispenseRedSodaApplianceProcess => FindApplianceProcess<DispenseRedSodaApplianceProcess>();
-        public static Appliance.ApplianceProcesses DispenseGreenSodaApplianceProcess => FindApplianceProcess<DispenseGreenSodaApplianceProcess>();
-        public static Appliance.ApplianceProcesses DispenseBlueSodaApplianceProcess => FindApplianceProcess<DispenseBlueSodaApplianceProcess>();
         public static Dish SodaDish => Find<Dish, SodaDish>();
 
         // Floats

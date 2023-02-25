@@ -1,5 +1,5 @@
-﻿using KitchenData;
-using KitchenDrinksMod.Customs;
+﻿using ApplianceLib.Customs.GDO;
+using KitchenData;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 
@@ -44,9 +44,9 @@ namespace KitchenDrinksMod.Soda
         {
             { Locale.English, "Dispense desired flavor of soda into a cup" }
         };
-        public override IDictionary<Locale, UnlockInfo> LocalisedInfo => new Dictionary<Locale, UnlockInfo>
+        public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            { Locale.English, LocalisationUtils.CreateUnlockInfo("Soda", "Adds fountain drinks as a starter", "Offers three flavours of soda") }
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Soda", "Adds fountain drinks as a starter", "Offers three flavours of soda"))
         };
     }
 }

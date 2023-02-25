@@ -1,5 +1,5 @@
-﻿using KitchenData;
-using KitchenDrinksMod.Customs;
+﻿using ApplianceLib.Customs.GDO;
+using KitchenData;
 using KitchenDrinksMod.Util;
 using UnityEngine;
 
@@ -10,15 +10,15 @@ namespace KitchenDrinksMod.Boba
         public override string UniqueNameID => "Cup - Boba - Dirty";
         public override GameObject Prefab => Prefabs.Find("DirtyBobaCupPrefab");
 
-        protected override void Modify(Item item)
+        protected override void SetupPrefab(GameObject prefab)
         {
-            Prefab
+            prefab
                .ApplyMaterialToChild("Cup", "BobaCup")
                .ApplyMaterialToChild("Liquid1", "Milk")
                .ApplyMaterialToChild("Lid", "CookedBoba")
                .ApplyMaterialToChild("Straw", "Straw");
 
-            Prefab.GetChildFromPath("Boba").ApplyMaterialToChildren("Boba", "CookedBoba");
+            prefab.GetChildFromPath("Boba").ApplyMaterialToChildren("Boba", "CookedBoba");
         }
     }
 }

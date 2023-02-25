@@ -1,6 +1,5 @@
-﻿using Kitchen;
+﻿using ApplianceLib.Customs.GDO;
 using KitchenData;
-using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
 using System.Collections.Generic;
 using UnityEngine;

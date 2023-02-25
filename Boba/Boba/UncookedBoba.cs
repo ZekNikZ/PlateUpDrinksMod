@@ -1,4 +1,4 @@
-﻿using KitchenDrinksMod.Customs;
+﻿using ApplianceLib.Customs.GDO;
 
 namespace KitchenDrinksMod.Boba
 {

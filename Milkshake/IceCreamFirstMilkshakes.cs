@@ -1,12 +1,12 @@
-﻿using Kitchen;
+﻿using ApplianceLib.Customs.GDO;
+using Kitchen;
 using KitchenData;
 using KitchenDrinksMod.Cups;
-using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KitchenDrinksMod.Milkshake
+namespace KitchenDrinksMod.Milkshakes
 {
     public class ChocolateMilkshake : BaseMilkshake<ServedChocolateMilkshake, ChocolateIceCreamInCup>
     {
@@ -110,13 +110,13 @@ namespace KitchenDrinksMod.Milkshake
             }
         };
 
-        protected override void Modify(ItemGroup itemGroup)
+        protected override void SetupPrefab(GameObject prefab)
         {
-            Prefab.SetupMaterialsLikeMilkshake("Milk", IceCreamMaterial);
-            Prefab.GetChildFromPath("MilkshakeCup/Straw").SetActive(false);
-            Prefab.GetChildFromPath("MilkshakeCup/LiquidFull").SetActive(false);
+            prefab.SetupMaterialsLikeMilkshake("Milk", IceCreamMaterial);
+            prefab.GetChildFromPath("MilkshakeCup/Straw").SetActive(false);
+            prefab.GetChildFromPath("MilkshakeCup/LiquidFull").SetActive(false);
 
-            Prefab.GetComponent<MilkshakeItemGroupView>()?.Setup(Prefab, Refs.Find<Item, I>(), ColorblindLabel);
+            prefab.GetComponent<MilkshakeItemGroupView>()?.Setup(prefab, Refs.Find<Item, I>(), ColorblindLabel);
         }
     }
 }

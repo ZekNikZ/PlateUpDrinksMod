@@ -1,6 +1,8 @@
-﻿using Kitchen;
+﻿using ApplianceLib.Api;
+using ApplianceLib.Api.Prefab;
+using ApplianceLib.Customs.GDO;
+using Kitchen;
 using KitchenData;
-using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
 using KitchenLib.Utils;
 using System.Collections.Generic;
@@ -9,39 +11,42 @@ using UnityEngine;
 
 namespace KitchenDrinksMod.Soda
 {
-    public class SodaProvider : ModAppliance
+    public class SodaProvider : ModAppliance, IVariableProcessAppliance
     {
         public override string UniqueNameID => "Soda - Source";
-        public override string Name => "Fountain Drinks";
         public override PriceTier PriceTier => PriceTier.Medium;
         public override bool SellOnlyAsDuplicate => true;
         public override bool IsPurchasable => true;
         public override ShoppingTags ShoppingTags => ShoppingTags.Cooking | ShoppingTags.Misc;
         public override GameObject Prefab => Prefabs.Find("SodaProvider", "Base");
-        public override IDictionary<Locale, ApplianceInfo> LocalisedInfo => new Dictionary<Locale, ApplianceInfo>()
+        public override List<(Locale, ApplianceInfo)> InfoList => new()
         {
-            { Locale.English, LocalisationUtils.CreateApplianceInfo("Fountain Drinks", "Provides soda", new(), new()) }
+            (Locale.English, LocalisationUtils.CreateApplianceInfo("Fountain Drinks", "Provides soda", new(), new()))
         };
         public override List<IApplianceProperty> Properties => new()
         {
             new CItemHolder(),
             new CVariableProcessContainer()
             {
-                Current = 0,
-                Max = 3
+                Current = 0
             }
         };
-        public override List<VariableApplianceProcess> VariableApplianceProcesses => new()
+        public List<Appliance.ApplianceProcesses> VariableApplianceProcesses => new()
         {
-            new VariableApplianceProcess
+            new()
             {
-                Items = new ItemList(Refs.Cup.ID, Refs.VanillaIceCreamInCup.ID),
-                Processes = new()
-                {
-                    Refs.DispenseRedSodaApplianceProcess,
-                    Refs.DispenseGreenSodaApplianceProcess,
-                    Refs.DispenseBlueSodaApplianceProcess
-                }
+                Process = Refs.DispenseRedSoda,
+                Speed = 1.25f
+            },
+            new()
+            {
+                Process = Refs.DispenseGreenSoda,
+                Speed = 1.25f
+            },
+            new()
+            {
+                Process = Refs.DispenseBlueSoda,
+                Speed = 1.25f
             }
         };
 
@@ -57,14 +62,19 @@ namespace KitchenDrinksMod.Soda
                     prefab.GetChildFromPath("HoldPoint2").transform,
                     prefab.GetChildFromPath("HoldPoint3").transform,
                 };
-                HoldPointContainer.HoldPoint = HoldPoints.First();
             }
         }
 
         protected override void Modify(Appliance appliance)
         {
-            Prefab.SetupMaterialsLikeCounter();
-            GameObject dispenser = Prefab.GetChildFromPath("SodaDispenser");
+            NotActuallyProviders.RemoveProvidersFrom(appliance);
+        }
+
+        protected override void SetupPrefab(GameObject prefab)
+        {
+            prefab.AttachCounter(CounterType.Drawers);
+
+            GameObject dispenser = prefab.GetChildFromPath("SodaDispenser");
             dispenser.ApplyMaterialToChild("Back", "DMBlackPlastic", "MetalLight", "MetalDark")
                 .ApplyMaterialToChild("Base", "DMBlackPlastic", "MetalDark")
                 .ApplyMaterialToChild("BumpOut", "MetalLight", "DMBlackPlastic");
@@ -77,9 +87,9 @@ namespace KitchenDrinksMod.Soda
                 dispenser.ApplyMaterialToChild($"Nozzle{i}", "DMBlackPlastic");
             }
 
-            Prefab.AddComponent<HoldPointContainer>();
-            var view = Prefab.AddComponent<SodaProviderProcessView>();
-            view.Setup(Prefab);
+            prefab.AddComponent<HoldPointContainer>();
+            var view = prefab.AddComponent<SodaProviderProcessView>();
+            view.Setup(prefab);
         }
     }
 }

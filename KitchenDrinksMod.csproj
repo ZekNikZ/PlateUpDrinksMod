@@ -32,19 +32,21 @@
   
 	<ItemGroup>
 		<PackageReference Include="MessagePack.Annotations" Version="2.4.59" />
-		<PackageReference Include="Yariazen.PlateUp.ModBuildUtilities" Version="1.5.6" />
+		<PackageReference Include="Yariazen.PlateUp.ModBuildUtilities" Version="1.6.16" />
 	
 		<Reference Include="KitchenLib">
 			<HintPath>$(PlateUpGameFolder)\Mods\KitchenLib\content\KitchenLib-Workshop.dll</HintPath>
 		</Reference>
 
-		<Reference Include="0Harmony">
-			<HintPath>$(PlateUpGameFolder)\Mods\KitchenUnityExplorer\0Harmony.dll</HintPath>
+		<Reference Include="ApplianceLib">
+			<HintPath>$(PlateUpGameFolder)\Mods\ApplianceLib\content\ApplianceLib-Workshop.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 
 	<Target Name="BundleWorkshop" AfterTargets="Build" Condition="$(EnableModDeployLocal) == 'true'">
 		<Copy SourceFiles="$(TargetDir)$(MSBuildProjectName)-Workshop.dll" DestinationFolder="$(WorkshopDir)" />
+		<Copy SourceFiles="$(ProjectDir)ExternalDLLs\0ApplianceLibRequired-Workshop.dll" DestinationFolder="$(WorkshopDir)" />
+		<Copy SourceFiles="$(ProjectDir)ExternalDLLs\0ApplianceLibRequired-Workshop.dll" DestinationFolder="$(PlateUpGameFolder)\Mods\$(MSBuildProjectName)\content" />
 		<Exec Condition="'$(Configuration)' == 'Upload'" Command="start &quot;$(GamePath)\PlateUp_Data\ModUploader.exe&quot;" WorkingDirectory="$(ProjectDir)" />
 	</Target>
 </Project>

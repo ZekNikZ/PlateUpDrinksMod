@@ -1,9 +1,9 @@
-﻿using KitchenData;
-using KitchenDrinksMod.Customs;
+﻿using ApplianceLib.Customs.GDO;
+using KitchenData;
 using KitchenDrinksMod.Util;
 using UnityEngine;
 
-namespace KitchenDrinksMod.Milkshake
+namespace KitchenDrinksMod.Milkshakes
 {
     public class ServedChocolateMilkshake : BaseServedMilkshake
     {
@@ -37,13 +37,13 @@ namespace KitchenDrinksMod.Milkshake
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemValue ItemValue => ItemValue.SideLarge;
 
-        protected override void Modify(Item item)
+        protected override void SetupPrefab(GameObject prefab)
         {
-            Prefab.SetupMaterialsLikeMilkshake(LiquidMaterial);
-            Prefab.GetChildFromPath("MilkshakeCup/LiquidHalf").SetActive(false);
-            Prefab.GetChildFromPath("MilkshakeCup/IceCream1").SetActive(false);
-            Prefab.GetChildFromPath("MilkshakeCup/IceCream2").SetActive(false);
-            Prefab.GetChildFromPath("MilkshakeCup/IceCream3").SetActive(false);
+            prefab.SetupMaterialsLikeMilkshake(LiquidMaterial);
+            prefab.GetChildFromPath("MilkshakeCup/LiquidHalf").SetActive(false);
+            prefab.GetChildFromPath("MilkshakeCup/IceCream1").SetActive(false);
+            prefab.GetChildFromPath("MilkshakeCup/IceCream2").SetActive(false);
+            prefab.GetChildFromPath("MilkshakeCup/IceCream3").SetActive(false);
         }
     }
 }
