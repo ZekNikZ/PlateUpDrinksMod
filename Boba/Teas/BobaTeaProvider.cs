@@ -6,7 +6,6 @@ using KitchenData;
 using KitchenDrinksMod.Util;
 using KitchenLib.Utils;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace KitchenDrinksMod.Boba
@@ -68,6 +67,7 @@ namespace KitchenDrinksMod.Boba
         protected override void Modify(Appliance appliance)
         {
             NotActuallyProviders.RemoveProvidersFrom(appliance);
+            AutomatableAppliances.MakeAutomatable(AutomatableAppliances.Automator.Portioner, this);
         }
 
         protected override void SetupPrefab(GameObject prefab)

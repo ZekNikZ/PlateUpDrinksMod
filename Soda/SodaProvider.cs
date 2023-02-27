@@ -68,6 +68,7 @@ namespace KitchenDrinksMod.Soda
         protected override void Modify(Appliance appliance)
         {
             NotActuallyProviders.RemoveProvidersFrom(appliance);
+            AutomatableAppliances.MakeAutomatable(AutomatableAppliances.Automator.Portioner, this);
         }
 
         protected override void SetupPrefab(GameObject prefab)
