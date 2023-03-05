@@ -67,12 +67,12 @@ namespace KitchenDrinksMod.Boba
             }
         };
 
-        protected override void Modify(ItemGroup itemGroup)
+        protected override void SetupPrefab(GameObject prefab)
         {
-            Prefab.SetupMaterialsLikePot();
-            Prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("Ball", "UncookedBoba");
+            prefab.SetupMaterialsLikePot();
+            prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("Ball", "UncookedBoba");
 
-            Prefab.GetComponent<UncookedBobaPotView>()?.Setup(Prefab);
+            prefab.GetComponent<UncookedBobaPotView>()?.Setup(prefab);
         }
     }
 }

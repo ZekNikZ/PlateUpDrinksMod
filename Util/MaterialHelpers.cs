@@ -147,7 +147,7 @@ namespace KitchenDrinksMod.Util
                 .ApplyMaterialToChild("Liquid1", liquidMaterial)
                 .ApplyMaterialToChild("Liquid2", liquidMaterial)
                 .ApplyMaterialToChild("Lid", lidMaterial)
-                .ApplyMaterialToChild("Straw", "Straw");
+                .ApplyMaterialToChild("Straw", ApplianceLib.Api.References.MaterialReferences.CupStraw);
 
             gameObject.GetChildFromPath("Boba").ApplyMaterialToChildren("Boba", "CookedBoba");
 
@@ -159,7 +159,7 @@ namespace KitchenDrinksMod.Util
             gameObject
                 .ApplyMaterialToChild("Model/Cup", "CupBase")
                 .ApplyMaterialToChild("Model/Liquid", liquidMaterial)
-                .ApplyMaterialToChild("Model/Straw", "Straw");
+                .ApplyMaterialToChild("Model/Straw", ApplianceLib.Api.References.MaterialReferences.CupStraw);
 
             return gameObject;
         }
@@ -170,7 +170,7 @@ namespace KitchenDrinksMod.Util
                 .ApplyMaterialToChild("MilkshakeCup/Cup", "BobaCup")
                 .ApplyMaterialToChild("MilkshakeCup/LiquidFull", liquidMaterial)
                 .ApplyMaterialToChild("MilkshakeCup/LiquidHalf", liquidMaterial)
-                .ApplyMaterialToChild("MilkshakeCup/Straw", "Straw")
+                .ApplyMaterialToChild("MilkshakeCup/Straw", ApplianceLib.Api.References.MaterialReferences.CupStraw)
                 .ApplyMaterialToChild("MilkshakeCup/IceCream1", iceCreamMaterial)
                 .ApplyMaterialToChild("MilkshakeCup/IceCream2", iceCreamMaterial)
                 .ApplyMaterialToChild("MilkshakeCup/IceCream3", iceCreamMaterial);

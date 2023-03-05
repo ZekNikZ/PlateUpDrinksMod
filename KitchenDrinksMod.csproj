@@ -45,8 +45,6 @@
 
 	<Target Name="BundleWorkshop" AfterTargets="Build" Condition="$(EnableModDeployLocal) == 'true'">
 		<Copy SourceFiles="$(TargetDir)$(MSBuildProjectName)-Workshop.dll" DestinationFolder="$(WorkshopDir)" />
-		<Copy SourceFiles="$(ProjectDir)ExternalDLLs\0ApplianceLibRequired-Workshop.dll" DestinationFolder="$(WorkshopDir)" />
-		<Copy SourceFiles="$(ProjectDir)ExternalDLLs\0ApplianceLibRequired-Workshop.dll" DestinationFolder="$(PlateUpGameFolder)\Mods\$(MSBuildProjectName)\content" />
 		<Exec Condition="'$(Configuration)' == 'Upload'" Command="start &quot;$(GamePath)\PlateUp_Data\ModUploader.exe&quot;" WorkingDirectory="$(ProjectDir)" />
 	</Target>
 </Project>

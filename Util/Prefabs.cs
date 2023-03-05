@@ -14,11 +14,30 @@ namespace KitchenDrinksMod
             return (GDOUtils.GetExistingGDO(id) as IHasPrefab)?.Prefab;
         }
 
+        internal static GameObject Create(string name)
+        {
+            if (!PrefabCache.ContainsKey($"{name}Empty"))
+            {
+                var parent = GameObject.Find("Prefabs");
+                if (parent == null)
+                {
+                    parent = new GameObject("Prefabs");
+                    parent.transform.localPosition = Vector3.positiveInfinity;
+                }
+
+                var copy = new GameObject(name);
+                copy.transform.parent = parent.transform;
+                PrefabCache.Add($"{name}Empty", copy);
+            }
+
+            return PrefabCache[$"{name}Empty"];
+        }
+
         public static GameObject Find(string name, string copyName = "")
         {
             if (!PrefabCache.ContainsKey(name + copyName))
             {
-                var prefab = Mod.Bundle.LoadAsset<GameObject>(name);
+                var prefab = Mod.Bundle?.LoadAsset<GameObject>(name);
                 if (prefab == null)
                 {
                     Mod.LogWarning($"Mod prefab with name \"{name}\" not found in asset bundle.");

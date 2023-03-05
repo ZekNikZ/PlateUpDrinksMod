@@ -61,7 +61,8 @@ namespace KitchenDrinksMod.Milkshakes
                 IsMandatory = true,
                 Items = new List<Item>
                 {
-                    Refs.MilkInCup
+                    Refs.MilkInCup,
+                    Refs.Find<Item>("The Modded Kitchen", "Milk Glass") ?? Refs.MilkInCup
                 }
             }
         };
@@ -82,7 +83,7 @@ namespace KitchenDrinksMod.Milkshakes
             prefab.GetChildFromPath("MilkshakeCup/LiquidFull").SetActive(false);
             prefab.GetChildFromPath("MilkshakeCup/Straw").SetActive(false);
 
-            prefab.GetComponent<MilkshakeItemGroupView>()?.Setup(prefab, BaseIceCream, ColorblindLabel, Refs.MilkInCup);
+            prefab.GetComponent<MilkshakeItemGroupView>()?.Setup(prefab, BaseIceCream, ColorblindLabel, Refs.Find<Item>("The Modded Kitchen", "Milk Glass") ?? Refs.MilkInCup);
         }
     }
 }

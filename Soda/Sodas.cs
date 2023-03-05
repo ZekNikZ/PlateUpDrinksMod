@@ -1,4 +1,5 @@
-﻿using ApplianceLib.Customs.GDO;
+﻿using ApplianceLib.Api.Prefab;
+using ApplianceLib.Customs.GDO;
 using KitchenData;
 using KitchenDrinksMod.Util;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace KitchenDrinksMod.Soda
         protected abstract string LiquidMaterial { get; }
 
         public override string UniqueNameID => $"Soda - {Name}";
-        public override GameObject Prefab => Prefabs.Find("SodaCupPrefab", $"{Name}");
+        public override GameObject Prefab => Prefabs.Create($"Soda{Name}");
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemValue ItemValue => ItemValue.Small;
@@ -49,9 +50,9 @@ namespace KitchenDrinksMod.Soda
             }
         };
 
-        protected override void Modify(Item item)
+        protected override void SetupPrefab(GameObject prefab)
         {
-            Prefab.SetupMaterialsLikeSodaCup(LiquidMaterial);
+            prefab.AttachCup(MaterialHelpers.GetMaterialArray(LiquidMaterial)[0], true);
         }
     }
 }

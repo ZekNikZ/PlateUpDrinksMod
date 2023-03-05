@@ -18,7 +18,7 @@ namespace KitchenDrinksMod
     {
         public const string MOD_GUID = "io.zkz.plateup.drinks";
         public const string MOD_NAME = "Drinks";
-        public const string MOD_VERSION = "0.4.3";
+        public const string MOD_VERSION = "0.4.6";
         public const string MOD_AUTHOR = "ZekNikZ";
         public const string MOD_GAMEVERSION = ">=1.1.3";
 
@@ -104,6 +104,7 @@ namespace KitchenDrinksMod
 
             Events.BuildGameDataEvent += (s, args) =>
             {
+                // Add dispense processes to cup
                 Refs.Cup.DerivedProcesses.AddRange(new List<Item.ItemProcess>()
                 {
                     new Item.ItemProcess()
@@ -143,6 +144,9 @@ namespace KitchenDrinksMod
                         Duration = 1f
                     }
                 }.ToList());
+
+                // Add dispense processes to Modded Kitchen milk glass
+                Refs.Find<Item>("The Modded Kitchen", "Milk Glass")?.DerivedProcesses?.AddRange(Refs.MilkInCup.DerivedProcesses);
             };
         }
         #region Logging

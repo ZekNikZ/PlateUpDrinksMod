@@ -1,4 +1,5 @@
-﻿using ApplianceLib.Customs.GDO;
+﻿using ApplianceLib.Api.Prefab;
+using ApplianceLib.Customs.GDO;
 using KitchenData;
 using KitchenDrinksMod.Util;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace KitchenDrinksMod.Cups
         public override string UniqueNameID => "MilkInCup";
         public override string ColourBlindTag => "Mi";
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
-        public override GameObject Prefab => Prefabs.Find("SodaCupPrefab", "Milk");
+        public override GameObject Prefab => Prefabs.Create("MilkCup");
         protected override Vector3 ColorblindLabelPosition => new(0, 0.7f, 0);
         protected override bool AddColorblindLabel => false;
 
@@ -51,10 +52,9 @@ namespace KitchenDrinksMod.Cups
             }
         };
 
-        protected override void Modify(ItemGroup item)
+        protected override void SetupPrefab(GameObject prefab)
         {
-            Prefab.SetupMaterialsLikeSodaCup("Milk");
-            Prefab.GetChild("Model/Straw").SetActive(false);
+            prefab.AttachCup(MaterialHelpers.GetMaterialArray("Milk")[0]);
         }
     }
 }

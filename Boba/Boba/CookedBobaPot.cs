@@ -35,18 +35,15 @@ namespace KitchenDrinksMod.Boba
         public override bool PreventExplicitSplit => true;
         public override Item DisposesTo => Refs.Pot;
 
-        protected override void Modify(Item item)
+        protected override void SetupPrefab(GameObject prefab)
         {
-            Prefab.SetupMaterialsLikePot();
-            Prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("Ball", "CookedBoba");
+            prefab.SetupMaterialsLikePot();
+            prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("Ball", "CookedBoba");
 
-            Prefab.GetChildFromPath("BobaBalls").SetActive(true);
+            prefab.GetChildFromPath("BobaBalls").SetActive(true);
 
-            if (!Prefab.HasComponent<BobaPotItemView>())
-            {
-                var view = Prefab.AddComponent<BobaPotItemView>();
-                view.Setup(Prefab);
-            }
+            var view = prefab.AddComponent<BobaPotItemView>();
+            view.Setup(prefab);
         }
     }
 }

@@ -6,7 +6,6 @@ using KitchenData;
 using KitchenDrinksMod.Util;
 using KitchenLib.Utils;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace KitchenDrinksMod.Soda

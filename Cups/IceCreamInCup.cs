@@ -114,14 +114,14 @@ namespace KitchenDrinksMod.Cups
             }
         };
 
-        protected override void Modify(ItemGroup itemGroup)
+        protected override void SetupPrefab(GameObject prefab)
         {
-            Prefab.SetupMaterialsLikeMilkshake("Milk", IceCreamMaterial);
-            Prefab.GetChildFromPath("MilkshakeCup/Straw").SetActive(false);
-            Prefab.GetChildFromPath("MilkshakeCup/LiquidHalf").SetActive(false);
-            Prefab.GetChildFromPath("MilkshakeCup/LiquidFull").SetActive(false);
+            prefab.SetupMaterialsLikeMilkshake("Milk", IceCreamMaterial);
+            prefab.GetChildFromPath("MilkshakeCup/Straw").SetActive(false);
+            prefab.GetChildFromPath("MilkshakeCup/LiquidHalf").SetActive(false);
+            prefab.GetChildFromPath("MilkshakeCup/LiquidFull").SetActive(false);
 
-            Prefab.GetComponent<IceCreamInCupItemGroupView>()?.Setup(Prefab, BaseIceCream, ColorblindLabel);
+            prefab.GetComponent<IceCreamInCupItemGroupView>()?.Setup(prefab, BaseIceCream, ColorblindLabel);
         }
     }
 }
