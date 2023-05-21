@@ -1,15 +1,14 @@
 ﻿using ApplianceLib.Api.Prefab;
-using ApplianceLib.Customs.GDO;
 using Kitchen;
 using KitchenData;
-using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace KitchenDrinksMod.Boba
 {
-    public class BobaProvider : ModAppliance
+    public class BobaProvider : CustomAppliance
     {
         public override string UniqueNameID => "Boba - Source";
         public override PriceTier PriceTier => PriceTier.Medium;
@@ -27,14 +26,14 @@ namespace KitchenDrinksMod.Boba
             KitchenPropertiesUtils.GetCItemProvider(Refs.BobaBag.ID, 1, 1, false, false, true, false, false, true, false)
         };
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
             prefab.AttachCounter(CounterType.DoubleDoors);
 
             prefab.ApplyMaterialToChild("HoldPoint/BobaBagPrefab/BobaBag", "BobaBag");
-            prefab.GetChildFromPath("HoldPoint/BobaBagPrefab/BobaBalls").ApplyMaterialToChildren("Ball", "UncookedBoba");
+            prefab.GetChild("HoldPoint/BobaBagPrefab/BobaBalls").ApplyMaterialToChildren("Ball", "UncookedBoba");
 
-            var holdTransform = prefab.GetChildFromPath("HoldPoint").transform;
+            var holdTransform = prefab.GetChild("HoldPoint").transform;
             var holdPoint = prefab.AddComponent<HoldPointContainer>();
             holdPoint.HoldPoint = holdTransform;
             var sourceView = prefab.AddComponent<LimitedItemSourceView>();

@@ -1,11 +1,11 @@
-﻿using ApplianceLib.Customs.GDO;
-using KitchenData;
-using KitchenDrinksMod.Util;
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
 using UnityEngine;
 
 namespace KitchenDrinksMod.Boba
 {
-    public class BobaBag : ModItem
+    public class BobaBag : CustomItem
     {
         public override string UniqueNameID => "Boba Bag";
         public override bool IsIndisposable => true;
@@ -16,10 +16,10 @@ namespace KitchenDrinksMod.Boba
         public override bool PreventExplicitSplit => true;
         public override GameObject Prefab => Prefabs.Find("BobaBagPrefab", "Base");
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
             prefab.ApplyMaterialToChild("BobaBag", "BobaBag");
-            prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("Ball", "UncookedBoba");
+            prefab.GetChild("BobaBalls").ApplyMaterialToChildren("Ball", "UncookedBoba");
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using ApplianceLib.Customs.GDO;
-using KitchenData;
+﻿using KitchenData;
 using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -114,7 +114,7 @@ namespace KitchenDrinksMod.Boba
         }
     }
 
-    public abstract class BaseServedBobaTea<T> : ModItemGroup<ServedBobaView> where T : BobaTea
+    public abstract class BaseServedBobaTea<T> : CustomItemGroup<ServedBobaView>, IColorblindLabelPositionOverride where T : BobaTea
     {
         protected abstract string Name { get; }
         protected abstract string LiquidMaterial { get; }
@@ -123,7 +123,7 @@ namespace KitchenDrinksMod.Boba
 
         public override string UniqueNameID => $"Boba Tea - {Name} - Serving";
         public override GameObject Prefab => Prefabs.Find("BobaCupPrefab", $"{Name}Served");
-        protected override Vector3 ColorblindLabelPosition => new(0, 0.2f, 0);
+        public Vector3 ColorblindLabelPosition => new(0, 0.2f, 0);
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemValue ItemValue => ItemValue.Large;
@@ -153,7 +153,7 @@ namespace KitchenDrinksMod.Boba
             }
         };
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
             prefab.SetupMaterialsLikeBobaCup(LiquidMaterial, LidMaterial);
 

@@ -1,13 +1,13 @@
-﻿using ApplianceLib.Customs.GDO;
-using KitchenData;
+﻿using KitchenData;
 using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace KitchenDrinksMod.Boba
 {
-    public class BobaDish : ModDish
+    public class BobaDish : CustomDish
     {
         public override string UniqueNameID => "Boba Dish";
         public override DishType Type => DishType.Base;
@@ -15,6 +15,9 @@ namespace KitchenDrinksMod.Boba
         public override GameObject IconPrefab => Prefabs.Find("BobaCupIconPrefab");
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.LargeIncrease;
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
+        public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
+        public override bool IsUnlockable => true;
+        public override bool RequiredNoDishItem => true;
         public override bool IsAvailableAsLobbyOption => true;
         public override List<string> StartingNameSet => new()
         {
@@ -67,9 +70,9 @@ namespace KitchenDrinksMod.Boba
             (Locale.English, LocalisationUtils.CreateUnlockInfo("Boba Tea", "Adds boba teas as a main", "Offers three types of boba teas to enjoy"))
         };
 
-        protected override void SetupDisplayPrefab(GameObject prefab)
+        public override void SetupDisplayPrefab(GameObject prefab)
         {
-            prefab.GetChildFromPath("BobaCupPrefab").SetupMaterialsLikeBobaCup("BlackTeaLiquid", "BlackIndicator");
+            prefab.GetChild("BobaCupPrefab").SetupMaterialsLikeBobaCup("BlackTeaLiquid", "BlackIndicator");
         }
     }
 }

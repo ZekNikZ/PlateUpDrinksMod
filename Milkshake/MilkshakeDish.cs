@@ -1,16 +1,19 @@
-﻿using ApplianceLib.Customs.GDO;
-using KitchenData;
+﻿using KitchenData;
+using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 
 namespace KitchenDrinksMod.Milkshakes
 {
-    public class MilkshakeDish : ModDish
+    public class MilkshakeDish : CustomDish
     {
         public override string UniqueNameID => "Milkshake Dish";
         public override DishType Type => DishType.Dessert;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
+        public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
+        public override bool IsUnlockable => true;
+        public override bool RequiredNoDishItem => true;
         public override HashSet<Item> MinimumIngredients => new()
         {
             Refs.IceCreamVanilla,

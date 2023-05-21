@@ -1,7 +1,7 @@
 ﻿using ApplianceLib.Api;
-using ApplianceLib.Customs.GDO;
 using KitchenData;
 using KitchenDrinksMod.Soda;
+using KitchenLib.Customs;
 
 namespace KitchenDrinksMod.Floats
 {
@@ -20,9 +20,14 @@ namespace KitchenDrinksMod.Floats
         public override string UniqueNameID => "Cup - Ice Cream - Blue";
     }
 
-    public abstract class BaseDummyFloat<T1, T2> : ModItem where T1 : BaseSoda where T2 : BaseFloat<T1>
+    public class RootBeerWithIceCream : BaseDummyFloat<RootBeer, RootBeerFloat>
     {
-        protected override void Modify(Item item)
+        public override string UniqueNameID => "Cup - Ice Cream - RootBeer";
+    }
+
+    public abstract class BaseDummyFloat<T1, T2> : CustomItem where T1 : BaseSoda where T2 : BaseFloat<T1>
+    {
+        public override void OnRegister(Item item)
         {
             DummyItemConversions.AddItemConversion(item, Refs.Find<Item, T2>(), new ItemList(Refs.Find<Item, T1>().ID, Refs.IceCreamVanilla.ID));
         }

@@ -1,16 +1,19 @@
-﻿using ApplianceLib.Customs.GDO;
-using KitchenData;
+﻿using KitchenData;
+using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 
 namespace KitchenDrinksMod.Soda
 {
-    public class SodaDish : ModDish
+    public class SodaDish : CustomDish
     {
         public override string UniqueNameID => "Soda Dish";
         public override DishType Type => DishType.Starter;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
+        public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
+        public override bool IsUnlockable => true;
+        public override bool RequiredNoDishItem => true;
         public override HashSet<Item> MinimumIngredients => new()
         {
             Refs.RedSoda,

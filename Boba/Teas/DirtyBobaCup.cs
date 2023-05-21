@@ -1,23 +1,22 @@
-﻿using ApplianceLib.Customs.GDO;
-using KitchenDrinksMod.Util;
+﻿using KitchenLib.Customs;
+using KitchenLib.Utils;
 using UnityEngine;
 
 namespace KitchenDrinksMod.Boba
 {
-    public class DirtyBobaCup : ModItem
+    public class DirtyBobaCup : CustomItem
     {
         public override string UniqueNameID => "Cup - Boba - Dirty";
         public override GameObject Prefab => Prefabs.Find("DirtyBobaCupPrefab");
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
-            prefab
-               .ApplyMaterialToChild("Cup", "BobaCup")
-               .ApplyMaterialToChild("Liquid1", "Milk")
-               .ApplyMaterialToChild("Lid", "CookedBoba")
-               .ApplyMaterialToChild("Straw", "Straw");
+            prefab.ApplyMaterialToChild("Cup", "BobaCup");
+            prefab.ApplyMaterialToChild("Liquid1", "Milk");
+            prefab.ApplyMaterialToChild("Lid", "CookedBoba");
+            prefab.ApplyMaterialToChild("Straw", "Straw");
 
-            prefab.GetChildFromPath("Boba").ApplyMaterialToChildren("Boba", "CookedBoba");
+            prefab.GetChild("Boba").ApplyMaterialToChildren("Boba", "CookedBoba");
         }
     }
 }

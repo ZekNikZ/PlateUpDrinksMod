@@ -32,15 +32,16 @@
   
 	<ItemGroup>
 		<PackageReference Include="MessagePack.Annotations" Version="2.4.59" />
-		<PackageReference Include="Yariazen.PlateUp.ModBuildUtilities" Version="1.6.16" />
-	
-		<Reference Include="KitchenLib">
-			<HintPath>$(PlateUpGameFolder)\Mods\KitchenLib\content\KitchenLib-Workshop.dll</HintPath>
-		</Reference>
-
-		<Reference Include="ApplianceLib">
-			<HintPath>$(PlateUpGameFolder)\Mods\ApplianceLib\content\ApplianceLib-Workshop.dll</HintPath>
-		</Reference>
+		<PackageReference Include="Yariazen.PlateUp.ModBuildUtilities" Version="1.8.3" />
+		<PackageReference Include="Krafs.Publicizer" Version="2.2.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<Publicize Include="Kitchen.Common:Kitchen.ItemGroupView.SubviewPrefab" />
+		<Publicize Include="Kitchen.Common:Kitchen.ItemGroupView.SubviewContainer" />
+		<Publicize Include="Kitchen.Common:Kitchen.ItemGroupView.AddComponent" />
+		<Publicize Include="Kitchen.Common:Kitchen.ItemGroupView.ColourblindLabel" />
+		<Publicize Include="Kitchen.Common:Kitchen.ItemGroupView.Setup" />
+		<Publicize Include="KitchenMode:Kitchen.ItemCollectionView.DrawnItems" />
 	</ItemGroup>
 
 	<Target Name="BundleWorkshop" AfterTargets="Build" Condition="$(EnableModDeployLocal) == 'true'">

@@ -1,16 +1,15 @@
 ﻿using ApplianceLib.Api;
 using ApplianceLib.Api.Prefab;
-using ApplianceLib.Customs.GDO;
 using Kitchen;
 using KitchenData;
-using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace KitchenDrinksMod.Soda
 {
-    public class SodaProvider : ModAppliance, IVariableProcessAppliance
+    public class SodaProvider : CustomAppliance, IVariableProcessAppliance
     {
         public override string UniqueNameID => "Soda - Source";
         public override PriceTier PriceTier => PriceTier.Medium;
@@ -57,27 +56,27 @@ namespace KitchenDrinksMod.Soda
                 HoldPointContainer = prefab.GetComponent<HoldPointContainer>();
                 HoldPoints = new()
                 {
-                    prefab.GetChildFromPath("HoldPoint1").transform,
-                    prefab.GetChildFromPath("HoldPoint2").transform,
-                    prefab.GetChildFromPath("HoldPoint3").transform,
+                    prefab.GetChild("HoldPoint1").transform,
+                    prefab.GetChild("HoldPoint2").transform,
+                    prefab.GetChild("HoldPoint3").transform,
                 };
             }
         }
 
-        protected override void Modify(Appliance appliance)
+        public override void OnRegister(Appliance appliance)
         {
             NotActuallyProviders.RemoveProvidersFrom(appliance);
             AutomatableAppliances.MakeAutomatable(AutomatableAppliances.Automator.Portioner, this);
         }
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
             prefab.AttachCounter(CounterType.Drawers);
 
-            GameObject dispenser = prefab.GetChildFromPath("SodaDispenser");
-            dispenser.ApplyMaterialToChild("Back", "DMBlackPlastic", "MetalLight", "MetalDark")
-                .ApplyMaterialToChild("Base", "DMBlackPlastic", "MetalDark")
-                .ApplyMaterialToChild("BumpOut", "MetalLight", "DMBlackPlastic");
+            GameObject dispenser = prefab.GetChild("SodaDispenser");
+            dispenser.ApplyMaterialToChild("Back", "DMBlackPlastic", "MetalLight", "MetalDark");
+            dispenser.ApplyMaterialToChild("Base", "DMBlackPlastic", "MetalDark");
+            dispenser.ApplyMaterialToChild("BumpOut", "MetalLight", "DMBlackPlastic");
 
             var indicatorMats = new string[] { "RedLiquid", "GreenLiquid", "BlueLiquid" };
             for (int i = 1; i <= 3; i++)

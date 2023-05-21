@@ -1,16 +1,15 @@
 ﻿using ApplianceLib.Api;
 using ApplianceLib.Api.Prefab;
-using ApplianceLib.Customs.GDO;
 using Kitchen;
 using KitchenData;
-using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace KitchenDrinksMod.Boba
 {
-    public class BobaTeaProvider : ModAppliance, IVariableProcessAppliance
+    public class BobaTeaProvider : CustomAppliance, IVariableProcessAppliance
     {
         public override string UniqueNameID => "Boba Tea - Source";
         public override PriceTier PriceTier => PriceTier.Medium;
@@ -57,20 +56,20 @@ namespace KitchenDrinksMod.Boba
                 HoldPointContainer = prefab.GetComponent<HoldPointContainer>();
                 HoldPoints = new()
                 {
-                    prefab.GetChildFromPath("TeaDispenser1/HoldPoint1").transform,
-                    prefab.GetChildFromPath("TeaDispenser2/HoldPoint2").transform,
-                    prefab.GetChildFromPath("TeaDispenser3/HoldPoint3").transform,
+                    prefab.GetChild("TeaDispenser1/HoldPoint1").transform,
+                    prefab.GetChild("TeaDispenser2/HoldPoint2").transform,
+                    prefab.GetChild("TeaDispenser3/HoldPoint3").transform,
                 };
             }
         }
 
-        protected override void Modify(Appliance appliance)
+        public override void OnRegister(Appliance appliance)
         {
             NotActuallyProviders.RemoveProvidersFrom(appliance);
             AutomatableAppliances.MakeAutomatable(AutomatableAppliances.Automator.Portioner, this);
         }
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
             prefab.AttachCounter(CounterType.Drawers);
 

@@ -1,7 +1,8 @@
-﻿using ApplianceLib.Customs.GDO;
-using Kitchen;
+﻿using Kitchen;
 using KitchenData;
 using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,16 +60,16 @@ namespace KitchenDrinksMod.Cups
             {
                 new()
                 {
-                    GameObject = prefab.GetChildFromPath("MilkshakeCup/Cup"),
+                    GameObject = prefab.GetChild("MilkshakeCup/Cup"),
                     Item = Refs.Cup
                 },
                 new()
                 {
                     Objects = new()
                     {
-                        prefab.GetChildFromPath("MilkshakeCup/IceCream1"),
-                        prefab.GetChildFromPath("MilkshakeCup/IceCream2"),
-                        prefab.GetChildFromPath("MilkshakeCup/IceCream3")
+                        prefab.GetChild("MilkshakeCup/IceCream1"),
+                        prefab.GetChild("MilkshakeCup/IceCream2"),
+                        prefab.GetChild("MilkshakeCup/IceCream3")
                     },
                     DrawAll = true,
                     Item = baseIceCream
@@ -86,7 +87,7 @@ namespace KitchenDrinksMod.Cups
         }
     }
 
-    public abstract class BaseIceCreamInCup : ModItemGroup<IceCreamInCupItemGroupView>
+    public abstract class BaseIceCreamInCup : CustomItemGroup<IceCreamInCupItemGroupView>, IColorblindLabelPositionOverride
     {
         protected abstract string Name { get; }
         protected abstract string IceCreamMaterial { get; }
@@ -95,7 +96,7 @@ namespace KitchenDrinksMod.Cups
 
         public override string UniqueNameID => $"Ice Cream In Cup - {Name}";
         public override GameObject Prefab => Prefabs.Find("Milkshake", $"{Name}InCup");
-        protected override Vector3 ColorblindLabelPosition => new(0, 0.7f, 0);
+        public Vector3 ColorblindLabelPosition => new(0, 0.7f, 0);
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
 
@@ -114,12 +115,12 @@ namespace KitchenDrinksMod.Cups
             }
         };
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
             prefab.SetupMaterialsLikeMilkshake("Milk", IceCreamMaterial);
-            prefab.GetChildFromPath("MilkshakeCup/Straw").SetActive(false);
-            prefab.GetChildFromPath("MilkshakeCup/LiquidHalf").SetActive(false);
-            prefab.GetChildFromPath("MilkshakeCup/LiquidFull").SetActive(false);
+            prefab.GetChild("MilkshakeCup/Straw").SetActive(false);
+            prefab.GetChild("MilkshakeCup/LiquidHalf").SetActive(false);
+            prefab.GetChild("MilkshakeCup/LiquidFull").SetActive(false);
 
             prefab.GetComponent<IceCreamInCupItemGroupView>()?.Setup(prefab, BaseIceCream, ColorblindLabel);
         }

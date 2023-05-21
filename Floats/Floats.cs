@@ -1,8 +1,8 @@
-﻿using ApplianceLib.Customs.GDO;
-using KitchenData;
+﻿using KitchenData;
 using KitchenDrinksMod.Customs;
 using KitchenDrinksMod.Soda;
 using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +28,12 @@ namespace KitchenDrinksMod.Floats
         protected override string LiquidMaterial => "BlueLiquid";
         protected override string ColorblindLabel => "B";
     }
+    public class RootBeerFloat : BaseFloat<RootBeer>
+    {
+        protected override string Name => "RootBeer";
+        protected override string LiquidMaterial => "drinkup:root_beer_liquid";
+        protected override string ColorblindLabel => "RB";
+    }
 
     public class FloatItemGroupView : CompletableItemGroupView
     {
@@ -37,16 +43,16 @@ namespace KitchenDrinksMod.Floats
             {
                 new()
                 {
-                    GameObject = prefab.GetChildFromPath("MilkshakeCup/LiquidFull"),
+                    GameObject = prefab.GetChild("MilkshakeCup/LiquidFull"),
                     Item = sodaItem
                 },
                 new()
                 {
                     Objects = new()
                     {
-                        prefab.GetChildFromPath("MilkshakeCup/IceCream1"),
-                        prefab.GetChildFromPath("MilkshakeCup/IceCream2"),
-                        prefab.GetChildFromPath("MilkshakeCup/IceCream3")
+                        prefab.GetChild("MilkshakeCup/IceCream1"),
+                        prefab.GetChild("MilkshakeCup/IceCream2"),
+                        prefab.GetChild("MilkshakeCup/IceCream3")
                     },
                     DrawAll = true,
                     Item = Refs.IceCreamVanilla
@@ -96,7 +102,7 @@ namespace KitchenDrinksMod.Floats
         }
     }
 
-    public abstract class BaseFloat<T> : ModItemGroup<FloatItemGroupView> where T : BaseSoda
+    public abstract class BaseFloat<T> : CustomItemGroup<FloatItemGroupView>, IColorblindLabelPositionOverride where T : BaseSoda
     {
         protected abstract string Name { get; }
         protected abstract string ColorblindLabel { get; }
@@ -104,7 +110,7 @@ namespace KitchenDrinksMod.Floats
 
         public override string UniqueNameID => $"Float - {Name}";
         public override GameObject Prefab => Prefabs.Find("Milkshake", Name);
-        protected override Vector3 ColorblindLabelPosition => new(0, 0.45f, 0);
+        public Vector3 ColorblindLabelPosition => new(0, 0.45f, 0);
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemValue ItemValue => ItemValue.SideMedium;
@@ -124,10 +130,10 @@ namespace KitchenDrinksMod.Floats
             }
         };
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
             prefab.SetupMaterialsLikeMilkshake(LiquidMaterial);
-            prefab.GetChildFromPath("MilkshakeCup/LiquidHalf").SetActive(false);
+            prefab.GetChild("MilkshakeCup/LiquidHalf").SetActive(false);
 
             prefab.GetComponent<FloatItemGroupView>()?.Setup(prefab, ColorblindLabel, Refs.Find<Item, T>());
         }

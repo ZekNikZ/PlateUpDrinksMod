@@ -1,8 +1,9 @@
-﻿using ApplianceLib.Customs.GDO;
-using Kitchen;
+﻿using Kitchen;
 using KitchenData;
 using KitchenDrinksMod.Cups;
 using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,17 +37,17 @@ namespace KitchenDrinksMod.Milkshakes
             {
                 new()
                 {
-                    GameObject = prefab.GetChildFromPath("MilkshakeCup/LiquidHalf"),
+                    GameObject = prefab.GetChild("MilkshakeCup/LiquidHalf"),
                     Item = milkIngredient ?? Refs.MilkIngredient
                 },
                 new()
                 {
                     Objects = new()
                     {
-                        prefab.GetChildFromPath("MilkshakeCup/Cup"),
-                        prefab.GetChildFromPath("MilkshakeCup/IceCream1"),
-                        prefab.GetChildFromPath("MilkshakeCup/IceCream2"),
-                        prefab.GetChildFromPath("MilkshakeCup/IceCream3")
+                        prefab.GetChild("MilkshakeCup/Cup"),
+                        prefab.GetChild("MilkshakeCup/IceCream1"),
+                        prefab.GetChild("MilkshakeCup/IceCream2"),
+                        prefab.GetChild("MilkshakeCup/IceCream3")
                     },
                     DrawAll = true,
                     Item = iceCreamInCup
@@ -74,7 +75,7 @@ namespace KitchenDrinksMod.Milkshakes
         }
     }
 
-    public abstract class BaseMilkshake<T, I> : ModItemGroup<MilkshakeItemGroupView> where T : BaseServedMilkshake where I : BaseIceCreamInCup
+    public abstract class BaseMilkshake<T, I> : CustomItemGroup<MilkshakeItemGroupView>, IColorblindLabelPositionOverride where T : BaseServedMilkshake where I : BaseIceCreamInCup
     {
         protected abstract string Name { get; }
         protected abstract string IceCreamMaterial { get; }
@@ -82,7 +83,7 @@ namespace KitchenDrinksMod.Milkshakes
 
         public override string UniqueNameID => $"Milkshake - {Name}";
         public override GameObject Prefab => Prefabs.Find("Milkshake", Name);
-        protected override Vector3 ColorblindLabelPosition => new(0, 0.7f, 0);
+        public Vector3 ColorblindLabelPosition => new(0, 0.7f, 0);
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
 
@@ -110,11 +111,11 @@ namespace KitchenDrinksMod.Milkshakes
             }
         };
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
             prefab.SetupMaterialsLikeMilkshake("Milk", IceCreamMaterial);
-            prefab.GetChildFromPath("MilkshakeCup/Straw").SetActive(false);
-            prefab.GetChildFromPath("MilkshakeCup/LiquidFull").SetActive(false);
+            prefab.GetChild("MilkshakeCup/Straw").SetActive(false);
+            prefab.GetChild("MilkshakeCup/LiquidFull").SetActive(false);
 
             prefab.GetComponent<MilkshakeItemGroupView>()?.Setup(prefab, Refs.Find<Item, I>(), ColorblindLabel);
         }

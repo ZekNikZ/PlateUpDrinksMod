@@ -1,6 +1,6 @@
 ﻿using ApplianceLib.Api;
-using ApplianceLib.Customs.GDO;
 using KitchenData;
+using KitchenLib.Customs;
 
 namespace KitchenDrinksMod.Boba
 {
@@ -19,9 +19,9 @@ namespace KitchenDrinksMod.Boba
         public override string UniqueNameID => "Boba Tea - Taro - Milk";
     }
 
-    public abstract class BaseDummyTea<T1, T2> : ModItem where T1 : BobaTea where T2 : BaseServedBobaTea<T1>
+    public abstract class BaseDummyTea<T1, T2> : CustomItem where T1 : BobaTea where T2 : BaseServedBobaTea<T1>
     {
-        protected override void Modify(Item item)
+        public override void OnRegister(Item item)
         {
             DummyItemConversions.AddItemConversion(item, Refs.Find<Item, T2>(), new ItemList(Refs.Find<Item, T1>().ID, Refs.MilkIngredient.ID));
         }

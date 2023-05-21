@@ -1,12 +1,12 @@
 ﻿using ApplianceLib.Api;
-using ApplianceLib.Customs.GDO;
 using KitchenData;
+using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 
 namespace KitchenDrinksMod.Milkshakes
 {
-    public class ShakeProcess : ModProcess
+    public class ShakeProcess : CustomProcess
     {
         public override string UniqueNameID => "Shake Process";
         public override GameDataObject BasicEnablingAppliance => Refs.Counter;
@@ -18,7 +18,7 @@ namespace KitchenDrinksMod.Milkshakes
             (Locale.English, LocalisationUtils.CreateProcessInfo("Shake", "<sprite name=\"knead\">"))
         };
 
-        protected override void Modify(Process process)
+        public override void OnRegister(Process process)
         {
             ApplianceGroups.AddProcessToGroup(ApplianceGroup.AllCounters, new()
             {

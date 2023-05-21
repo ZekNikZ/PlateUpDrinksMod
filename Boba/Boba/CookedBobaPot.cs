@@ -1,7 +1,7 @@
-﻿using ApplianceLib.Customs.GDO;
-using Kitchen;
+﻿using Kitchen;
 using KitchenData;
 using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +23,7 @@ namespace KitchenDrinksMod.Boba
         }
     }
 
-    public class CookedBobaPot : ModItem
+    public class CookedBobaPot : CustomItem
     {
         public override string UniqueNameID => "Boba - Pot - Cooked";
         public override GameObject Prefab => Prefabs.Find("BobaPot", "Cooked");
@@ -35,12 +35,12 @@ namespace KitchenDrinksMod.Boba
         public override bool PreventExplicitSplit => true;
         public override Item DisposesTo => Refs.Pot;
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
             prefab.SetupMaterialsLikePot();
-            prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("Ball", "CookedBoba");
+            prefab.GetChild("BobaBalls").ApplyMaterialToChildren("Ball", "CookedBoba");
 
-            prefab.GetChildFromPath("BobaBalls").SetActive(true);
+            prefab.GetChild("BobaBalls").SetActive(true);
 
             var view = prefab.AddComponent<BobaPotItemView>();
             view.Setup(prefab);

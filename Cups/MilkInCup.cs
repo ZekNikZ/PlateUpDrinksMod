@@ -1,20 +1,20 @@
 ﻿using ApplianceLib.Api.Prefab;
-using ApplianceLib.Customs.GDO;
 using KitchenData;
 using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace KitchenDrinksMod.Cups
 {
-    public class MilkInCup : ModItemGroup
+    public class MilkInCup : CustomItemGroup, IColorblindLabelPositionOverride
     {
         public override string UniqueNameID => "MilkInCup";
         public override string ColourBlindTag => "Mi";
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override GameObject Prefab => Prefabs.Create("MilkCup");
-        protected override Vector3 ColorblindLabelPosition => new(0, 0.7f, 0);
-        protected override bool AddColorblindLabel => false;
+        public Vector3 ColorblindLabelPosition => new(0, 0.7f, 0);
 
         public override List<ItemGroup.ItemSet> Sets => new()
         {
@@ -52,9 +52,9 @@ namespace KitchenDrinksMod.Cups
             }
         };
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
-            prefab.AttachCup(MaterialHelpers.GetMaterialArray("Milk")[0]);
+            prefab.AttachCup(MaterialUtils.GetMaterialArray("Milk")[0]);
         }
     }
 }

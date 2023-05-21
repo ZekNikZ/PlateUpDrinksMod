@@ -1,6 +1,6 @@
-﻿using ApplianceLib.Customs.GDO;
-using Kitchen;
+﻿using Kitchen;
 using KitchenData;
+using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using Unity.Collections;
@@ -8,7 +8,7 @@ using Unity.Entities;
 
 namespace KitchenDrinksMod.Boba
 {
-    public class ThrowOutCupsCard : ModUnlockCard
+    public class ThrowOutCupsCard : CustomUnlockCard
     {
         public const RestaurantStatus RestaurantStatus = (RestaurantStatus)(-628800);
 
@@ -16,6 +16,7 @@ namespace KitchenDrinksMod.Boba
         public override string UniqueNameID => "ThrowOutCupsCard";
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
+        public override bool IsUnlockable => true;
 
         public override List<UnlockEffect> Effects => new()
         {

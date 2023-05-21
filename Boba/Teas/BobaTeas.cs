@@ -1,6 +1,7 @@
-﻿using ApplianceLib.Customs.GDO;
-using KitchenData;
+﻿using KitchenData;
 using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ namespace KitchenDrinksMod.Boba
         public override string ColourBlindTag => "T";
     }
 
-    public abstract class BobaTea : ModItem
+    public abstract class BobaTea : CustomItem
     {
         protected abstract string Name { get; }
         protected abstract string LiquidMaterial { get; }
@@ -49,7 +50,7 @@ namespace KitchenDrinksMod.Boba
             }
         };
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
             prefab.SetupMaterialsLikeBobaCup(LiquidMaterial);
 
@@ -62,7 +63,7 @@ namespace KitchenDrinksMod.Boba
             };
             foreach (var childPath in disabledChildObjects)
             {
-                prefab.GetChildFromPath(childPath).SetActive(false);
+                prefab.GetChild(childPath).SetActive(false);
             }
         }
     }

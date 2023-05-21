@@ -1,5 +1,5 @@
-﻿using ApplianceLib.Customs.GDO;
-using KitchenData;
+﻿using KitchenData;
+using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 
@@ -20,7 +20,13 @@ namespace KitchenDrinksMod.Soda
         protected override string Name => "Blue";
     }
 
-    public abstract class DispenseSodaProcess : ModProcess
+    public class DispenseRootBeer : DispenseSodaProcess
+    {
+        protected override string Name => "RootBeer";
+        public override GameDataObject BasicEnablingAppliance => Refs.RootBeerProvider;
+    }
+
+    public abstract class DispenseSodaProcess : CustomProcess
     {
         protected abstract string Name { get; }
         public override string UniqueNameID => $"Dispense {Name} Soda Process";

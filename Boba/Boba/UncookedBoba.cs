@@ -1,9 +1,11 @@
-﻿using ApplianceLib.Customs.GDO;
+﻿using KitchenData;
+using KitchenLib.Customs;
 
 namespace KitchenDrinksMod.Boba
 {
-    public class UncookedBoba : ModItem<BobaProvider>
+    public class UncookedBoba : CustomItem
     {
         public override string UniqueNameID => "Boba - Uncooked";
+        public override Appliance DedicatedProvider => Refs.BobaProvider;
     }
 }

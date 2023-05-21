@@ -8,6 +8,7 @@ namespace KitchenDrinksMod
     internal class Prefabs
     {
         private static readonly Dictionary<string, GameObject> PrefabCache = new();
+        private static GameObject parent;
 
         public static GameObject Find(int id)
         {
@@ -18,11 +19,13 @@ namespace KitchenDrinksMod
         {
             if (!PrefabCache.ContainsKey($"{name}Empty"))
             {
-                var parent = GameObject.Find("Prefabs");
+                //var parent = GameObject.Find("Prefabs");
                 if (parent == null)
                 {
                     parent = new GameObject("Prefabs");
-                    parent.transform.localPosition = Vector3.positiveInfinity;
+                    //parent.transform.localPosition = Vector3.positiveInfinity;
+                    parent.transform.localPosition = Vector3.zero;
+                    parent.SetActive(false);
                 }
 
                 var copy = new GameObject(name);
@@ -46,11 +49,13 @@ namespace KitchenDrinksMod
 
                 if (copyName != "")
                 {
-                    var parent = GameObject.Find("Prefabs");
+                    //var parent = GameObject.Find("Prefabs");
                     if (parent == null)
                     {
                         parent = new GameObject("Prefabs");
-                        parent.transform.localPosition = Vector3.positiveInfinity;
+                        //parent.transform.localPosition = Vector3.positiveInfinity;
+                        parent.transform.localPosition = Vector3.zero;
+                        parent.SetActive(false);
                     }
 
                     var copy = Object.Instantiate(prefab, parent.transform);

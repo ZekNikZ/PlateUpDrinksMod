@@ -1,7 +1,7 @@
 ﻿using ApplianceLib.Api.Prefab;
-using ApplianceLib.Customs.GDO;
 using KitchenData;
-using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +28,15 @@ namespace KitchenDrinksMod.Soda
         public override string ColourBlindTag => "B";
     }
 
-    public abstract class BaseSoda : ModItem
+    public class RootBeer : BaseSoda
+    {
+        protected override string Name => "RootBeer";
+        protected override string LiquidMaterial => "drinkup:root_beer_liquid";
+        public override string ColourBlindTag => "RB";
+        public override Appliance DedicatedProvider => Refs.RootBeerProvider;
+    }
+
+    public abstract class BaseSoda : CustomItem
     {
         protected abstract string Name { get; }
         protected abstract string LiquidMaterial { get; }
@@ -50,9 +58,9 @@ namespace KitchenDrinksMod.Soda
             }
         };
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
-            prefab.AttachCup(MaterialHelpers.GetMaterialArray(LiquidMaterial)[0], true);
+            prefab.AttachCup(MaterialUtils.GetMaterialArray(LiquidMaterial)[0], true);
         }
     }
 }

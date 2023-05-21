@@ -1,7 +1,8 @@
-﻿using ApplianceLib.Customs.GDO;
-using Kitchen;
+﻿using Kitchen;
 using KitchenData;
 using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ namespace KitchenDrinksMod.Boba
         }
     }
 
-    public class UncookedBobaPot : ModItemGroup<UncookedBobaPotView>
+    public class UncookedBobaPot : CustomItemGroup<UncookedBobaPotView>
     {
         public override string UniqueNameID => "Boba - Pot - Uncooked";
         public override GameObject Prefab => Prefabs.Find("BobaPot", "Uncooked");
@@ -67,10 +68,10 @@ namespace KitchenDrinksMod.Boba
             }
         };
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
             prefab.SetupMaterialsLikePot();
-            prefab.GetChildFromPath("BobaBalls").ApplyMaterialToChildren("Ball", "UncookedBoba");
+            prefab.GetChild("BobaBalls").ApplyMaterialToChildren("Ball", "UncookedBoba");
 
             prefab.GetComponent<UncookedBobaPotView>()?.Setup(prefab);
         }

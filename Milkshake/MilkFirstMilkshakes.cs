@@ -1,6 +1,7 @@
-﻿using ApplianceLib.Customs.GDO;
-using KitchenData;
+﻿using KitchenData;
 using KitchenDrinksMod.Util;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ namespace KitchenDrinksMod.Milkshakes
         protected override Item BaseIceCream => Refs.IceCreamVanilla;
     }
 
-    public abstract class BaseMilkFirstMilkshake<T> : ModItemGroup<MilkshakeItemGroupView> where T : BaseServedMilkshake
+    public abstract class BaseMilkFirstMilkshake<T> : CustomItemGroup<MilkshakeItemGroupView>, IColorblindLabelPositionOverride where T : BaseServedMilkshake
     {
         protected abstract string Name { get; }
         protected abstract string IceCreamMaterial { get; }
@@ -39,7 +40,7 @@ namespace KitchenDrinksMod.Milkshakes
 
         public override string UniqueNameID => $"Milkshake - {Name} (Milk First)";
         public override GameObject Prefab => Prefabs.Find("Milkshake", Name + "MilkFirst");
-        protected override Vector3 ColorblindLabelPosition => new(0, 0.7f, 0);
+        public Vector3 ColorblindLabelPosition => new(0, 0.7f, 0);
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
 
@@ -77,11 +78,11 @@ namespace KitchenDrinksMod.Milkshakes
             }
         };
 
-        protected override void SetupPrefab(GameObject prefab)
+        public override void SetupPrefab(GameObject prefab)
         {
             prefab.SetupMaterialsLikeMilkshake("Milk", IceCreamMaterial);
-            prefab.GetChildFromPath("MilkshakeCup/LiquidFull").SetActive(false);
-            prefab.GetChildFromPath("MilkshakeCup/Straw").SetActive(false);
+            prefab.GetChild("MilkshakeCup/LiquidFull").SetActive(false);
+            prefab.GetChild("MilkshakeCup/Straw").SetActive(false);
 
             prefab.GetComponent<MilkshakeItemGroupView>()?.Setup(prefab, BaseIceCream, ColorblindLabel, Refs.Find<Item>("The Modded Kitchen", "Milk Glass") ?? Refs.MilkInCup);
         }
