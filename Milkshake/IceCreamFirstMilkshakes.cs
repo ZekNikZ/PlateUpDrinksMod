@@ -38,7 +38,7 @@ namespace KitchenDrinksMod.Milkshakes
                 new()
                 {
                     GameObject = prefab.GetChild("MilkshakeCup/LiquidHalf"),
-                    Item = milkIngredient ?? Refs.MilkIngredient
+                    Item = milkIngredient ?? Refs.Milk
                 },
                 new()
                 {
@@ -59,7 +59,7 @@ namespace KitchenDrinksMod.Milkshakes
                 new()
                 {
                     Text = "Mi",
-                    Item = Refs.MilkIngredient
+                    Item = Refs.Milk
                 },
                 new()
                 {
@@ -95,7 +95,7 @@ namespace KitchenDrinksMod.Milkshakes
                 Max = 2,
                 Items = new List<Item>
                 {
-                    Refs.MilkIngredient,
+                    Refs.Milk,
                     Refs.Find<ItemGroup, I>()
                 }
             }

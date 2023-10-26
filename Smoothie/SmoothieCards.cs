@@ -140,6 +140,7 @@ namespace KitchenDrinksMod.Smoothie
             public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
             public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
             public override bool IsUnlockable => true;
+            public override int Difficulty => 3;
         }
     }
 }

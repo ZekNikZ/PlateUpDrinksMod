@@ -53,9 +53,9 @@ namespace KitchenDrinksMod.Smoothie
             new SmoothieIngredient
             {
                 Name = "milk",
-                BaseItem = () => Refs.Find<Item>(IngredientLib.References.GetSplitIngredient("milk")),
+                BaseItem = () => Refs.Milk,
                 CardNumber = 0,
-                StartingIngredients = new() { () => Refs.Find<Item>(IngredientLib.References.GetIngredient("milk")) },
+                StartingIngredients = new() { () => Refs.Milk },
                 Color = MakeColor(255, 255, 255, 255),
                 ColorblindLabel = "Mi",
                 IconString = MakeIcon("milk"),
@@ -139,10 +139,10 @@ namespace KitchenDrinksMod.Smoothie
             new SmoothieIngredient
             {
                 Name = "lemons",
-                BaseItem = () => Refs.Find<Item>(IngredientLib.References.GetIngredient("chopped lemon")),
+                BaseItem = () => Refs.Find<Item>(ItemReferences.LemonSliced),
                 Instructions = "chopped lemons",
                 CardNumber = 1,
-                StartingIngredients = new() { () => Refs.Find<Item>(IngredientLib.References.GetIngredient("lemon")) },
+                StartingIngredients = new() { () => Refs.Find<Item>(ItemReferences.Lemon) },
                 Color = MakeColor(204, 187, 52, 255),
                 ColorblindLabel = "Le",
                 IconString = MakeIcon("lemon"),

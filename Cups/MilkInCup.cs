@@ -25,7 +25,7 @@ namespace KitchenDrinksMod.Cups
                 Items = new()
                 {
                     Refs.Cup,
-                    Refs.MilkIngredient
+                    Refs.Milk
                 }
             }
         };

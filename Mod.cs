@@ -252,6 +252,7 @@ namespace KitchenDrinksMod
                 });
             };
         }
+
         #region Logging
         public static void LogInfo(string _log) { Debug.Log($"[{MOD_NAME}] " + _log); }
         public static void LogWarning(string _log) { Debug.LogWarning($"[{MOD_NAME}] " + _log); }

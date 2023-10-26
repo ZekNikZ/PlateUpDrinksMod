@@ -32,7 +32,7 @@
   
 	<ItemGroup>
 		<PackageReference Include="MessagePack.Annotations" Version="2.4.59" />
-		<PackageReference Include="Yariazen.PlateUp.ModBuildUtilities" Version="1.8.3" />
+		<PackageReference Include="Yariazen.PlateUp.ModBuildUtilities" Version="1.10.21" />
 		<PackageReference Include="Krafs.Publicizer" Version="2.2.1" />
 	</ItemGroup>
 	<ItemGroup>

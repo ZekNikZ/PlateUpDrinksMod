@@ -19,6 +19,7 @@ namespace KitchenDrinksMod
         public static Item IceCreamChocolate => Find<Item>(ItemReferences.IceCreamChocolate);
         public static Item IceCreamStrawberry => Find<Item>(ItemReferences.IceCreamStrawberry);
         public static Item IceCreamServing => Find<Item>(ItemReferences.IceCreamServing);
+        public static Item Milk => Find<Item>(ItemReferences.Milk);
         public static Appliance Counter => Find<Appliance>(ApplianceReferences.Countertop);
         public static Appliance Portioner => Find<Appliance>(ApplianceReferences.Portioner);
         public static Item Water => Find<Item>(ItemReferences.Water);
@@ -28,8 +29,6 @@ namespace KitchenDrinksMod
         #endregion
 
         #region IngredientLib References
-        public static Item Milk => Find<Item>("ingredientlib", "milk");
-        public static Item MilkIngredient => Find<Item>("ingredientlib", "milk ingredient");
         #endregion
 
         #region ApplianceLib References

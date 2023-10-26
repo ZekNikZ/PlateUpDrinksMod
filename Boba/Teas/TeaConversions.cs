@@ -23,7 +23,7 @@ namespace KitchenDrinksMod.Boba
     {
         public override void OnRegister(Item item)
         {
-            DummyItemConversions.AddItemConversion(item, Refs.Find<Item, T2>(), new ItemList(Refs.Find<Item, T1>().ID, Refs.MilkIngredient.ID));
+            DummyItemConversions.AddItemConversion(item, Refs.Find<Item, T2>(), new ItemList(Refs.Find<Item, T1>().ID, Refs.Milk.ID));
         }
     }
 }

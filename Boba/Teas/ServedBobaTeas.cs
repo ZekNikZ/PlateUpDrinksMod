@@ -41,7 +41,7 @@ namespace KitchenDrinksMod.Boba
                 new()
                 {
                     Objects = new() { GameObjectUtils.GetChildObject(prefab, "Liquid2") },
-                    Item = Refs.MilkIngredient
+                    Item = Refs.Milk
                 },
                 new()
                 {
@@ -70,7 +70,7 @@ namespace KitchenDrinksMod.Boba
                 new()
                 {
                     Text = "Mi",
-                    Item = Refs.MilkIngredient
+                    Item = Refs.Milk
                 },
                 new()
                 {
@@ -100,7 +100,7 @@ namespace KitchenDrinksMod.Boba
                 {
                     foundBoba = true;
                 }
-                else if (itemId == Refs.MilkIngredient.ID)
+                else if (itemId == Refs.Milk.ID)
                 {
                     foundMilk = true;
                 }
@@ -138,7 +138,7 @@ namespace KitchenDrinksMod.Boba
                 Items = new()
                 {
                     Refs.CookedBoba,
-                    Refs.MilkIngredient
+                    Refs.Milk
                 }
             },
             new()

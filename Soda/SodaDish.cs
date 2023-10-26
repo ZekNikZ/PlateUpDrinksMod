@@ -14,6 +14,7 @@ namespace KitchenDrinksMod.Soda
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
         public override bool IsUnlockable => true;
         public override bool RequiredNoDishItem => true;
+        public override int Difficulty => 1;
         public override HashSet<Item> MinimumIngredients => new()
         {
             Refs.RedSoda,
