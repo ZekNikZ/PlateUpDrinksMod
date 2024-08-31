@@ -30,7 +30,7 @@ namespace KitchenDrinksMod.Smoothie
                     {
                         if (item.Items[j] == Refs.BlenderCup.ID)
                         {
-                            item.Items[j] = Refs.DummyBlenderCup.ID;
+                            item.Items[j] = Refs.DirtyBlenderCup.ID;
                             success = true;
                             break;
                         }
@@ -47,7 +47,7 @@ namespace KitchenDrinksMod.Smoothie
                     {
                         if (item.Items[j] == Refs.BlenderCup.ID)
                         {
-                            item.Items[j] = Refs.DummyBlenderCup.ID;
+                            item.Items[j] = Refs.DirtyBlenderCup.ID;
                             success = true;
                             break;
                         }
@@ -57,28 +57,6 @@ namespace KitchenDrinksMod.Smoothie
                         Set(entity, item);
                     }
                 }
-                else if (item.ID == Refs.DummyBlenderCup.ID)
-                {
-                    item.ID = Refs.DirtyBlenderCup.ID;
-                    Set(entity, item);
-                }
-                //else if (item.ID == Refs.ServedSmoothie.ID)
-                //{
-                //    var success = false;
-                //    for (int j = 0; j < item.Items.Count; j++)
-                //    {
-                //        if (item.Items[j] == Refs.BlenderCup.ID)
-                //        {
-                //            item.Items.RemoveAt(j);
-                //            success = true;
-                //            break;
-                //        }
-                //    }
-                //    if (success)
-                //    {
-                //        Set(entity, item);
-                //    }
-                //}
             }
         }
     }

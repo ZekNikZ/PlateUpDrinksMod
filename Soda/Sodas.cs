@@ -1,5 +1,6 @@
 ﻿using ApplianceLib.Api.Prefab;
 using KitchenData;
+using KitchenDrinksMod.Util;
 using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
@@ -31,12 +32,12 @@ namespace KitchenDrinksMod.Soda
     public class RootBeer : BaseSoda
     {
         protected override string Name => "RootBeer";
-        protected override string LiquidMaterial => "drinkup:root_beer_liquid";
+        protected override string LiquidMaterial => "drinkup_root_beer_liquid";
         public override string ColourBlindTag => "RB";
         public override Appliance DedicatedProvider => Refs.RootBeerProvider;
     }
 
-    public abstract class BaseSoda : CustomItem
+    public abstract class BaseSoda : CustomItem, IColorblindLabelPositionOverride
     {
         protected abstract string Name { get; }
         protected abstract string LiquidMaterial { get; }
@@ -48,15 +49,17 @@ namespace KitchenDrinksMod.Soda
         public override ItemValue ItemValue => ItemValue.Small;
         public override Appliance DedicatedProvider => Refs.SodaProvider;
 
-        public override List<Item.ItemProcess> Processes => new()
-        {
-            new()
-            {
-                Process = Refs.Clean,
-                Duration = 0.35f,
-                Result = Refs.Cup
-            }
-        };
+        public Vector3 ColorblindLabelPosition =>  new Vector3(0, 0.2f, 0);
+
+        //public override List<Item.ItemProcess> Processes => new()
+        //{
+        //    new()
+        //    {
+        //        Process = Refs.Clean,
+        //        Duration = 0.35f,
+        //        Result = Refs.Cup
+        //    }
+        //};
 
         public override void SetupPrefab(GameObject prefab)
         {

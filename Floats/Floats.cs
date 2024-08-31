@@ -31,7 +31,7 @@ namespace KitchenDrinksMod.Floats
     public class RootBeerFloat : BaseFloat<RootBeer>
     {
         protected override string Name => "RootBeer";
-        protected override string LiquidMaterial => "drinkup:root_beer_liquid";
+        protected override string LiquidMaterial => "drinkup_root_beer_liquid";
         protected override string ColorblindLabel => "RB";
     }
 
@@ -88,7 +88,7 @@ namespace KitchenDrinksMod.Floats
 
             foreach (var itemId in components)
             {
-                if (itemId == Refs.RedSoda.ID || itemId == Refs.GreenSoda.ID || itemId == Refs.BlueSoda.ID)
+                if (itemId == Refs.RedSoda.ID || itemId == Refs.GreenSoda.ID || itemId == Refs.BlueSoda.ID || itemId == Refs.RootBeer.ID)
                 {
                     foundSoda = true;
                 }

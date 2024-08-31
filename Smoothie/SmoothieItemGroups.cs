@@ -20,7 +20,7 @@ namespace KitchenDrinksMod.Smoothie
         public bool ColorblindLabelVisibleWhenColorblindDisabled => true;
         public Vector2 ColorblindLabelOffsetMinAdjust => new(-0.3f, 0);
         public Vector2 ColorblindLabelOffsetMaxAdjust => new(0.3f, 0);
-        public override Item DisposesTo => Refs.BlenderCup;
+        public override Item DisposesTo => Refs.DirtyBlenderCup;
 
         public override void SetupPrefab(GameObject prefab)
         {
@@ -107,7 +107,7 @@ namespace KitchenDrinksMod.Smoothie
                     Items = new()
                     {
                         Refs.BlenderCup,
-                        Refs.DummyBlenderCup
+                        Refs.DirtyBlenderCup
                     },
                     Min = 1,
                     Max = 1,
@@ -139,7 +139,7 @@ namespace KitchenDrinksMod.Smoothie
         public override string UniqueNameID => "Smoothie - Blended";
         public override bool AllowSplitMerging => true;
         public override bool SplitByComponents => true;
-        public override Item SplitByComponentsHolder => Refs.DummyBlenderCup;
+        public override Item SplitByComponentsHolder => Refs.DirtyBlenderCup;
         public override bool PreventExplicitSplit => true;
         public override bool ApplyProcessesToComponents => true;
         public override int SplitCount => 1;

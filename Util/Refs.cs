@@ -107,7 +107,6 @@ namespace KitchenDrinksMod
         public static ItemGroup ServedSmoothie => Find<ItemGroup, ServedSmoothie>();
         public static ItemGroup SmoothieRaw => Find<ItemGroup, SmoothieRaw>();
         public static ItemGroup SmoothieBlended => Find<ItemGroup, SmoothieBlended>();
-        public static Item DummyBlenderCup => Find<Item, DummyBlenderCup>();
         #endregion
 
         internal static T Find<T>(int id) where T : GameDataObject

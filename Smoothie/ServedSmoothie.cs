@@ -36,15 +36,6 @@ namespace KitchenDrinksMod.Smoothie
             },
             new ItemGroup.ItemSet
             {
-                Items = new()
-                {
-                    Refs.BlenderCup
-                },
-                Min = 0,
-                Max = 1,
-            },
-            new ItemGroup.ItemSet
-            {
                 Items = SmoothieIngredients.BaseIngredients
                     .Select(ingredient => ingredient.BlendedEquivalent)
                     .ToList(),
@@ -88,7 +79,7 @@ namespace KitchenDrinksMod.Smoothie
         public override void SetupPrefab(GameObject prefab)
         {
             PrefabBuilder.AttachCup(prefab, MaterialUtils.GetCustomMaterial("RedLiquid"), true);
-            prefab.ApplyMaterialToChild("Cup(Clone)/Model/Straw", MaterialUtils.GetMaterialArray("drinkup:orange_straw"));
+            prefab.ApplyMaterialToChild("Cup(Clone)/Model/Straw", MaterialUtils.GetMaterialArray("drinkup_orange_straw"));
 
             // Setup the ItemGroupView
             prefab.GetComponent<SmoothieItemGroupView>()?.Setup(prefab);
@@ -149,7 +140,6 @@ namespace KitchenDrinksMod.Smoothie
 
         public new void PerformUpdate(int item_id, ItemList components)
         {
-            Mod.LogInfo("yo yo yo");
             if (SubviewPrefab != null)
             {
                 if (Subview == null)

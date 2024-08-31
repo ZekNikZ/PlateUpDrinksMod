@@ -49,6 +49,12 @@ namespace KitchenDrinksMod.Cups
                 Process = Refs.DispenseBlueSoda,
                 Result = Refs.BlueSodaWithIceCream,
                 Duration = 1f
+            },
+            new Item.ItemProcess()
+            {
+                Process = Refs.DispenseRootBeer,
+                Result = Refs.RootBeerWithIceCream,
+                Duration = 1f
             }
         };
     }

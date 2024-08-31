@@ -9,7 +9,6 @@ using ApplianceLib.Customs;
 using KitchenLib.Event;
 using System.Collections.Generic;
 using KitchenData;
-using ApplianceLib.Api;
 using KitchenLib.Utils;
 using KitchenDrinksMod.Smoothie;
 using System;
@@ -24,15 +23,17 @@ namespace KitchenDrinksMod
     {
         public const string MOD_GUID = "io.zkz.plateup.drinks";
         public const string MOD_NAME = "DrinkUp!";
-        public const string MOD_VERSION = "0.5.0";
+        public const string MOD_VERSION = "0.5.1";
         public const string MOD_AUTHOR = "ZekNikZ";
-        public const string MOD_GAMEVERSION = ">=1.1.5";
+        public const string MOD_GAMEVERSION = ">=1.2.0";
 
 #if DEBUG
         public const bool DEBUG_MODE = true;
 #else
         public const bool DEBUG_MODE = false;
 #endif
+
+        public const bool SMOOTHIE_CARDS_ENABLED = false;
 
         public static AssetBundle Bundle;
         public static readonly PreferenceManager PreferenceManager = new(MOD_GUID);
@@ -54,7 +55,10 @@ namespace KitchenDrinksMod
 
             // Smoothies
             BlendedSmoothieIngredients.Create();
-            SmoothieCards.Create();
+            if (SMOOTHIE_CARDS_ENABLED)
+            {
+                SmoothieCards.Create();
+            }
 
             LogInfo("Done loading game data.");
         }
@@ -78,9 +82,8 @@ namespace KitchenDrinksMod
 
         private void SetupCustomMaterials()
         {
-            MaterialUtils.CreateFlat("drinkup:smoothie_liquid", new Color(0.5f, 0.5f, 0.5f, 1f));
-            MaterialUtils.CreateFlat("drinkup:orange_straw", new Color(1f, 0.5f, 0f, 1f));
-            MaterialUtils.CreateFlat("drinkup:root_beer_liquid", new Color(0.196f, 0.123f, 0.121f, 1f));
+            AddMaterial(MaterialUtils.CreateFlat("drinkup_orange_straw", 0xCF8702));
+            AddMaterial(MaterialUtils.CreateFlat("drinkup_root_beer_liquid", 0x321F1F));
         }
 
         /// <summary>
@@ -99,7 +102,7 @@ namespace KitchenDrinksMod
                         {
                             if (CustomGDO.GDOsByType.TryGetValue(type, out var gdo) && gdo.GameDataObject is IHasPrefab hasPrefab)
                             {
-                                var colorblind = hasPrefab.Prefab.GetChild("Colour Blind(Clone)");
+                                var colorblind = hasPrefab.Prefab.GetChild("Colour Blind");
                                 if (colorblind != null)
                                 {
                                     colorblind.transform.localPosition = ((IColorblindLabelPositionOverride)gdo).ColorblindLabelPosition;
@@ -110,7 +113,7 @@ namespace KitchenDrinksMod
                         {
                             if (CustomGDO.GDOsByType.TryGetValue(type, out var gdo) && gdo.GameDataObject is IHasPrefab hasPrefab)
                             {
-                                var colorblind = hasPrefab.Prefab.GetChild("Colour Blind(Clone)");
+                                var colorblind = hasPrefab.Prefab.GetChild("Colour Blind");
                                 var comp = colorblind?.GetComponent<ColourBlindMode>();
                                 if (comp != null)
                                 {
@@ -123,7 +126,7 @@ namespace KitchenDrinksMod
                         {
                             if (CustomGDO.GDOsByType.TryGetValue(type, out var gdo) && gdo.GameDataObject is IHasPrefab hasPrefab)
                             {
-                                var colorblind = hasPrefab.Prefab.GetChild("Colour Blind(Clone)/Title");
+                                var colorblind = hasPrefab.Prefab.GetChild("Colour Blind/Title");
                                 var transform = colorblind?.GetComponent<RectTransform>();
                                 if (transform != null)
                                 {
@@ -135,27 +138,35 @@ namespace KitchenDrinksMod
                     }
                 }
 
-                //Refs.BlackTea.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
-                //Refs.MatchaTea.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
-                //Refs.TaroTea.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
+                //Refs.BlackTea.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.1f, 0);
+                //Refs.MatchaTea.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.1f, 0);
+                //Refs.TaroTea.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.1f, 0);
 
+                //Refs.VanillaMilkshake.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
+                //Refs.ChocolateMilkshake.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
+                //Refs.StrawberryMilkshake.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
                 //Refs.ServedVanillaMilkshake.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
                 //Refs.ServedChocolateMilkshake.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
                 //Refs.ServedStrawberryMilkshake.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
+                //Refs.RedFloat.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
+                //Refs.BlueFloat.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
+                //Refs.GreenFloat.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
+                //Refs.RootBeerFloat.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.45f, 0);
 
-                //Refs.RedSoda.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
-                //Refs.GreenSoda.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
-                //Refs.BlueSoda.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
+                //Refs.RedSoda.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
+                //Refs.GreenSoda.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
+                //Refs.BlueSoda.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
+                //Refs.RootBeer.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.2f, 0);
 
                 //Refs.MilkInCup.Prefab.GetChild("Colour Blind").transform.localPosition = new Vector3(0, 0.7f, 0);
 
-                Refs.TeaProvider.Prefab.GetChild("TeaDispenser1/ColorblindLabelParent").AddApplianceColorblindLabel("Bl");
-                Refs.TeaProvider.Prefab.GetChild("TeaDispenser2/ColorblindLabelParent").AddApplianceColorblindLabel("Ma");
-                Refs.TeaProvider.Prefab.GetChild("TeaDispenser3/ColorblindLabelParent").AddApplianceColorblindLabel("T");
+                //Refs.TeaProvider.Prefab.GetChild("TeaDispenser1/ColorblindLabelParent").AddApplianceColorblindLabel("Bl");
+                //Refs.TeaProvider.Prefab.GetChild("TeaDispenser2/ColorblindLabelParent").AddApplianceColorblindLabel("Ma");
+                //Refs.TeaProvider.Prefab.GetChild("TeaDispenser3/ColorblindLabelParent").AddApplianceColorblindLabel("T");
 
-                Refs.SodaProvider.Prefab.GetChild("ColorblindLabelParent1").AddApplianceColorblindLabel("R");
-                Refs.SodaProvider.Prefab.GetChild("ColorblindLabelParent2").AddApplianceColorblindLabel("G");
-                Refs.SodaProvider.Prefab.GetChild("ColorblindLabelParent3").AddApplianceColorblindLabel("B");
+                //Refs.SodaProvider.Prefab.GetChild("ColorblindLabelParent1").AddApplianceColorblindLabel("R");
+                //Refs.SodaProvider.Prefab.GetChild("ColorblindLabelParent2").AddApplianceColorblindLabel("G");
+                //Refs.SodaProvider.Prefab.GetChild("ColorblindLabelParent3").AddApplianceColorblindLabel("B");
 
                 colorblindSetup = true;
             }
@@ -166,16 +177,14 @@ namespace KitchenDrinksMod
             // Register preferences
             PreferenceManager.Load();
 
+            // Create materials
+            SetupCustomMaterials();
+
             // Register menus
-            ModsPreferencesMenu<MainMenuAction>.RegisterMenu(MOD_NAME, typeof(PreferencesMenu<MainMenuAction>), typeof(MainMenuAction));
-            ModsPreferencesMenu<PauseMenuAction>.RegisterMenu(MOD_NAME, typeof(PreferencesMenu<PauseMenuAction>), typeof(PauseMenuAction));
-            Events.PreferenceMenu_MainMenu_CreateSubmenusEvent += (s, args) =>
+            ModsPreferencesMenu<MenuAction>.RegisterMenu(MOD_NAME, typeof(PreferencesMenu<MenuAction>), typeof(MenuAction));
+            Events.PlayerPauseView_SetupMenusEvent += (s, args) =>
             {
-                args.Menus.Add(typeof(PreferencesMenu<MainMenuAction>), new PreferencesMenu<MainMenuAction>(args.Container, args.Module_list));
-            };
-            Events.PreferenceMenu_PauseMenu_CreateSubmenusEvent += (s, args) =>
-            {
-                args.Menus.Add(typeof(PreferencesMenu<PauseMenuAction>), new PreferencesMenu<PauseMenuAction>(args.Container, args.Module_list));
+                args.addMenu.Invoke(args.instance, new object[] { typeof(PreferencesMenu<MenuAction>), new PreferencesMenu<MenuAction>(args.instance.ButtonContainer, args.module_list) });
             };
 
             LogInfo("Attempting to load asset bundle...");

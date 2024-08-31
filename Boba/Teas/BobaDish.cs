@@ -20,6 +20,7 @@ namespace KitchenDrinksMod.Boba
         public override bool RequiredNoDishItem => true;
         public override bool IsAvailableAsLobbyOption => true;
         public override int Difficulty => 2;
+        public override bool IsMainThatDoesNotNeedPlates => true;
         public override List<string> StartingNameSet => new()
         {
             "Quali-Tea Drinks",

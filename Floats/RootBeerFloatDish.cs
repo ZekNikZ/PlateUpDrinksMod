@@ -15,6 +15,7 @@ namespace KitchenDrinksMod.Floats
         public override bool IsUnlockable => true;
         public override bool RequiredNoDishItem => true;
         public override int Difficulty => 2;
+        public override bool IsMainThatDoesNotNeedPlates => true;
         public override HashSet<Item> MinimumIngredients => new()
         {
             Refs.Cup,

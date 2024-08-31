@@ -27,7 +27,7 @@ namespace KitchenDrinksMod.Milkshakes
         public override string ColourBlindTag => "V";
     }
 
-    public abstract class BaseServedMilkshake : CustomItem
+    public abstract class BaseServedMilkshake : CustomItem, IColorblindLabelPositionOverride
     {
         protected abstract string Name { get; }
         protected abstract string LiquidMaterial { get; }
@@ -37,6 +37,8 @@ namespace KitchenDrinksMod.Milkshakes
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemValue ItemValue => ItemValue.SideLarge;
+
+        public Vector3 ColorblindLabelPosition => new Vector3(0, 0.4f, 0);
 
         public override void SetupPrefab(GameObject prefab)
         {

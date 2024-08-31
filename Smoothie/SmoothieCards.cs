@@ -141,6 +141,7 @@ namespace KitchenDrinksMod.Smoothie
             public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
             public override bool IsUnlockable => true;
             public override int Difficulty => 3;
+            public override bool IsMainThatDoesNotNeedPlates => true;
         }
     }
 }
