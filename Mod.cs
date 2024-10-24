@@ -246,9 +246,6 @@ namespace KitchenDrinksMod
                     }
                 }.ToList());
 
-                // Add dispense processes to Modded Kitchen milk glass
-                Refs.Find<Item>("The Modded Kitchen", "Milk Glass")?.DerivedProcesses?.AddRange(Refs.MilkInCup.DerivedProcesses);
-
                 // Add blend processes to smoothie ingredients
                 SmoothieIngredients.AllIngredients.ForEach(ingredient =>
                 {
@@ -259,6 +256,53 @@ namespace KitchenDrinksMod
                         RequiresWrapper = true
                     });
                 });
+
+                // Fix modded kitchen
+                var mkMilk = Refs.Find<ItemGroup>("The Modded Kitchen", "Milk Glass");
+                if (mkMilk != null)
+                {
+                    mkMilk.Sets = new List<ItemGroup.ItemSet>
+                    {
+                        new ItemGroup.ItemSet()
+                        {
+                            Max = 2,
+                            Min = 2,
+                            IsMandatory = true,
+                            Items = new List<Item>()
+                            {
+                                Refs.Cup,
+                                Refs.DummyShimItem
+                            }
+                        }
+                    };
+                }
+
+                var mkMilkDish = Refs.Find<Dish>("The Modded Kitchen", "Milk Glass Dish");
+                if (mkMilkDish != null)
+                {
+                    mkMilkDish.ResultingMenuItems = new List<Dish.MenuItem>
+                    {
+                        new Dish.MenuItem
+                        {
+                            Item = Refs.MilkInCup,
+                            Phase = MenuPhase.Side,
+                            Weight = 1
+                        }
+                    };
+                }
+
+                var mkExtraMilkDish = Refs.Find<Dish>("The Modded Kitchen", "Extra Milk");
+                if (mkExtraMilkDish != null)
+                {
+                    mkExtraMilkDish.ExtraOrderUnlocks = new HashSet<Dish.IngredientUnlock>()
+                    {
+                        new Dish.IngredientUnlock
+                        {
+                            MenuItem = Refs.MilkInCup,
+                            Ingredient = Refs.MilkInCup
+                        }
+                    };
+                }
             };
         }
 

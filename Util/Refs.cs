@@ -4,6 +4,7 @@ using KitchenDrinksMod.Boba;
 using KitchenDrinksMod.Cups;
 using KitchenDrinksMod.Floats;
 using KitchenDrinksMod.Milkshakes;
+using KitchenDrinksMod.Shims;
 using KitchenDrinksMod.Smoothie;
 using KitchenDrinksMod.Soda;
 using KitchenLib.Customs;
@@ -41,7 +42,7 @@ namespace KitchenDrinksMod
 
         #region Modded References
         // Cups
-        public static Item MilkInCup => Find<Item, MilkInCup>();
+        public static ItemGroup MilkInCup => Find<ItemGroup, MilkInCup>();
         public static Item VanillaIceCreamInCup => Find<Item, VanillaIceCreamInCup>();
 
         // Milkshakes
@@ -107,6 +108,9 @@ namespace KitchenDrinksMod
         public static ItemGroup ServedSmoothie => Find<ItemGroup, ServedSmoothie>();
         public static ItemGroup SmoothieRaw => Find<ItemGroup, SmoothieRaw>();
         public static ItemGroup SmoothieBlended => Find<ItemGroup, SmoothieBlended>();
+
+        // Shims
+        public static Item DummyShimItem => Find<Item, DummyShimItem>();
         #endregion
 
         internal static T Find<T>(int id) where T : GameDataObject

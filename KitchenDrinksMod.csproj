@@ -41,6 +41,8 @@
 		<Publicize Include="Kitchen.Common:Kitchen.ItemGroupView.AddComponent" />
 		<Publicize Include="Kitchen.Common:Kitchen.ItemGroupView.ColourblindLabel" />
 		<Publicize Include="Kitchen.Common:Kitchen.ItemGroupView.Setup" />
+		<Publicize Include="Kitchen.GameData:KitchenData.ItemGroup.Sets" />
+		<Publicize Include="Kitchen.GameData:KitchenData.Dish.ResultingMenuItems" />
 		<Publicize Include="KitchenMode:Kitchen.ItemCollectionView.DrawnItems" />
 	</ItemGroup>
 
